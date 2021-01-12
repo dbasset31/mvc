@@ -21,6 +21,19 @@ class Controller{
         $controller = str_replace("_controller", "", debug_backtrace()[1]['class']);
         return new ViewInfo("vue/".$controller."/".$viewName.".php",$args);
     }
+
+    protected function CheckAdmin()
+    {
+        if (isset($_SESSION['Connected']))
+        {
+            if (!$_SESSION['Connected']->admin)
+                header('Location: /error/perdu');
+        }
+        else
+        {
+            header('Location: /error/perdu');
+        }
+    }
 }
 
 class ViewInfo {

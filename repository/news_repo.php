@@ -27,7 +27,9 @@ class News_repo
         $sql = "SELECT * FROM news WHERE id=?";
         $result = $this->bdd->Request($sql,array($args));
         $donnees = $result->fetchALL();
-        return new News_model($donnees[0]);
+        if($result->rowCount() > 0)
+            return new News_model($donnees[0]);
+        return null;
     }
 
     function modif($id, $titre, $contenu) 
@@ -45,4 +47,13 @@ class News_repo
             else
                 return array("#new_crit_fail",$new);
           }
+
+    function delete($id){
+        $db = $this->bdd;
+        $sqlDelete = "DELETE FROM news WHERE id=$id";
+        $result = $this->bdd->Request($sqlDelete);
+        if($result->rowCount() > 0)
+        return "#new_delete_succes";
+            return ("#new_delete_fail");
+    }
 }

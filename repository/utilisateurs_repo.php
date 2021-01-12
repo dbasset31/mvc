@@ -62,28 +62,59 @@ class Utilisateur_repo
         return "#register_userExist";
     } 
 
-      function modif($pseudo) 
-      {
-            $db = $this->bdd;
-            $sqlSelect = "SELECT * FROM users WHERE pseudo= ?";
-            $result = $this->bdd->Request($sqlSelect, array($pseudo));
-            $check_pseudo = $result->fetchALL();
-            if (count($check_pseudo) == 0)
-            {
-                if ($_SESSION['Connected']->SetPseudo($pseudo))
-                    return "#pseudo_modif_ok";
-                else
-                    return "#pseudo_crit_fail";
-            }
-            else {
-                return "#pseudo_exist";
-            }
+    function GetById($args)
+    {
+        $sql = "SELECT * FROM users WHERE id=?";
+        $result = $this->bdd->Request($sql,array($args));
+        $donnees = $result->fetchALL();
+        return new utilisateur_model($donnees[0]);
+    }
+
+    function modif($pseudo) 
+    {
+        $db = $this->bdd;
+        $sqlSelect = "SELECT * FROM users WHERE pseudo= ?";
+        $result = $this->bdd->Request($sqlSelect, array($pseudo));
+        $check_pseudo = $result->fetchALL();
+        if (count($check_pseudo) == 0)
+        {
+            if ($_SESSION['Connected']->SetPseudo($pseudo))
+                return "#pseudo_modif_ok";
+            else
+                return "#pseudo_crit_fail";
         }
+        else 
+        {
+            return "#pseudo_exist";
+        }
+    }
 
+    function modif_user($id, $user, $email, $pseudo, $sexe, $adm, $nom, $prenom, $naissance, $inscription, $avatar) 
+    {     
+       // var_dump($id, $user, $email, $pseudo, $sexe, $admin, $nom, $prenom, $naissance, $inscription, $avatar);
+        
+        $db = $this->bdd;
+        $sqlSelect = "SELECT * FROM users WHERE id= ?";
+        $result = $this->bdd->Request($sqlSelect, array($id));
+        $check_user = $result->fetchALL();
+       
+        if ($result->rowCount() > 0)
+        {
+           
+            $userModel = new Utilisateur_model($check_user[0]);
+            $userModel->SetUser($user, $email, $pseudo, $sexe, $adm, $nom, $prenom, $naissance, $inscription, $avatar);
+            return array("#user_modif_ok",$userModel);
+        }
+        else
+            return array("#user_crit_fail",$userModel);
+    }
 
-    //         $sqlUpdate = "UPDATE users SET pseudo= ? WHERE identifiant= ?";
-    //         $result = $db->Request($sqlUpdate,array($pseudoNew, $id));
-    //         $check_insert = $result->rowCount();
-    //         die($check_insert);
-    // }
+    function delete($id){
+        $db = $this->bdd;
+        $sqlDelete = "DELETE FROM users WHERE id=$id";
+        $result = $this->bdd->Request($sqlDelete);
+        if($result->rowCount() > 0)
+        return "#user_delete_succes";
+            return ("#user_delete_fail");
+    }
 }

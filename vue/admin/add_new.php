@@ -19,9 +19,8 @@
             
             <br>
             <label for="titre">Contenu:</label>
-            <textarea id="contenu" name="contenu">
+            <textarea id="contenu" name="contenu"></textarea>
             
-            </textarea>
 
             <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Valider</button>
             </form>

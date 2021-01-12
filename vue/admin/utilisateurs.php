@@ -11,6 +11,8 @@
         <div class="container-fluid">
           <div id="content">
             <!-- Page Heading -->
+            <?php
+            var_dump($data);?>
             <table border="1" width="100%">
               <tr>
                 <th>ID</th>
@@ -23,6 +25,8 @@
               <tr>
                 <td><?php echo $card->ID ?></td>
                 <td><?php echo $card->identifiant ?></td>
+                <td><?php echo "<a href='/admin/edit_user/".$card->ID."'>Modifier</a>"?></td>
+                <td><?php echo "<a href='/admin/delete_user/".$card->ID."' onclick='AskDelete(".$card->ID.",event)'>Supprimer</a>"?></td>
               </tr>
             
               <?php 

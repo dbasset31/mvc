@@ -4,126 +4,117 @@ include_once "repository/admin_repo.php";
 include_once "model/Utilisateur_model.php";
 include_once "repository/news_repo.php";
 include_once "model/News_model.php";
+include_once "repository/utilisateurs_repo.php";
 class Admin_controller extends controller{
     private $admin_repo=null;
     function __construct(){
         $this->admin_repo = new Admin_repo();
         $this->news_repo = new News_repo();
+        $this->utilisateur_repo = new Utilisateur_repo();
+       
+        $this->CheckAdmin();
     }
 
     function index() {
-        if (isset($_SESSION['Connected']))
-        {
-            if ($_SESSION['Connected']->admin)
-                return $this->view($_SESSION['Connected']);
-            header('Location: /error/perdu');
-        }
-        else
-        {
-            header('Location: /error/perdu');
-        }    
-        
+        return $this->view($_SESSION['Connected']);
     }
 
     function page($args) { 
-        if (isset($_SESSION['Connected']))
-        {
-            if ($_SESSION['Connected']->admin)
-            {
+        
         $user = $args==1?"Lilian" : "Dono";
         return $this->view($user);
-            }
-            header('Location: /error/perdu');
-        }
-        header('Location: /error/perdu');
+        
     }
-
     function utilisateurs($data) {
-         if (isset($_SESSION['Connected']))
-             if ($_SESSION['Connected']->admin)
-             {
+        
+
                 $result = $this->admin_repo->utilisateurs($data);
                 return $this->view($result);
-             }
-             else
-             {
-                 header('Location: /error/perdu');
-             }
-         header('Location: /error/perdu');
+
     }
 
     function edit_new($id)
     {
-        if (isset($_SESSION['Connected']))
-            if ($_SESSION['Connected']->admin)
-            {
                 $news_model = $this->news_repo->GetById($id);
                 if (isset($_POST['titre']))
                 {
                     return $this->view($this->news_repo->modif($id, $_POST['titre'], $_POST['contenu']));
                 }
                 return $this->view($news_model);
-            }
-            else
-            {
-                header('Location: /error/perdu');
-            }
-        header('Location: /error/perdu');
+    }
+
+    function edit_user($id)
+    {
+                $user_model = $this->utilisateur_repo->GetById($id);
+                if (isset($_POST['id']))
+                {
+                    return $this->view($this->utilisateur_repo->modif_user($_POST['id'], $_POST['identifiant'], $_POST['email'], $_POST['pseudo'], $_POST['sexe'], $_POST['admin'], $_POST['nom'], $_POST['prenom'], $_POST['naissance'], $_POST['date_inscription'], $_POST['avatar']));
+                }
+                return $this->view($user_model);
+    }
+
+    function delete_user($id)
+    {
+                global $txtManager;
+                if($this->utilisateur_repo->GetById($id) != null)
+                    $result = $this->utilisateur_repo->delete($id);
+                else
+                {
+                    return $this->otherView("utilisateurs",$this->admin_repo->utilisateurs());
+                }
+                
+                if ($txtManager->Compare($result,"#user_delete_succes"))
+                {                    
+                    return $this->otherView("utilisateurs", $this->admin_repo->utilisateurs($id));
+                }
+                else 
+                    return $this->otherView("utilisateurs");
+    }
+
+    function delete_new($id)
+    {
+                global $txtManager;
+                if($this->news_repo->GetById($id) != null)
+                    $result = $this->news_repo->delete($id);
+                else
+                {
+                    return $this->otherView("liste_news",$this->admin_repo->liste_news());
+                }
+                
+                if ($txtManager->Compare($result,"#new_delete_succes"))
+                {                    
+                    return $this->otherView("liste_news", array($result, $this->admin_repo->liste_news(),$id));
+                }
+                else 
+                    return $this->otherView("liste_news", $result);
     }
 
     function liste_news() {
-        if (isset($_SESSION['Connected']))
-            if ($_SESSION['Connected']->admin)
-            {
+        
                 $result = $this->admin_repo->liste_news();
                 return $this->view($result);
             }
-            else
-            {
-                header('Location: /error/perdu');
-            }
-        header('Location: /error/perdu');
-    }
+            
 
     function add_new() 
     {
-        if (isset($_SESSION['Connected']))
-        {
-            if ($_SESSION['Connected']->admin)
-            {
                 global $txtManager;
-                if (isset($_POST['titre'], ))
+                if (isset($_POST['titre']) && !empty($_POST["titre"]) && !empty($_POST["contenu"]))
                 {
-                    if(isset($_POST['contenu']))
+                    $result = $this->admin_repo->add_new($_POST['titre'],$_POST['contenu']);
+                    if ($txtManager->Compare($result,"#add_new_success"))
                     {
-                        $result = $this->admin_repo->add_new($_POST['titre'],$_POST['contenu']);
-                        if ($txtManager->Compare($result,"#add_new_success"))
-                        {
-                            return $this->otherView("liste_news", array($result,$this->admin_repo->liste_news()));
-                        }
-                        else
-                        { 
-                        return $this->view($result);
-                        }
+                        return $this->otherView("liste_news", array($result,$this->admin_repo->liste_news()));
                     }
                     else
-                    {
-                        $msg = $txtManager->DisplayText("#news_not_empty");
+                    { 
+                    return $this->view($result);
                     }
                 }
                 else
                 {
-                    return $this->view(); 
+                    return $this->view(!isset($_POST['titre']) ? null : "#news_not_empty"); 
+
                 }
-            }
-            else
-            {
-                header('Location: /error/perdu');
-            }
-        }
-        else 
-        {
-            header('Location: /error/perdu');
-        }
     }
 }

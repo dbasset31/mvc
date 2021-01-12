@@ -31,12 +31,13 @@ $controller .= "_controller";
 $controllerToCall = "controller/".$controller.".php";
 if (file_exists ($controllerToCall))
 { 
+    session_start();
     include_once $controllerToCall;
     $home = new $controller();
     
     if(method_exists($home,$methode))
     {
-        session_start();
+       
         $viewInfo = $home ->$methode($args);
         
         $vueDemandee = $viewInfo->viewName; 
@@ -59,3 +60,20 @@ else
 {
     echo "non";
 }
+
+
+
+
+?>
+
+<script>
+
+function AskDelete(id,event)
+{
+  if (confirm("Êtes-vous sur de vouloir supprimer l\'ID : "+id)) {
+    return true;
+  } else {
+   event.preventDefault();
+  }
+}
+</script>

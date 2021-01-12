@@ -45,6 +45,43 @@ class Utilisateur_model
             }
             return false;
     }
+
+    function SetUser($identifiant, $email, $pseudo, $sexe, $adm, $nom, $prenom, $naissance, $inscription, $avatar) 
+    {
+      
+        //var_dump($identifiant);
+        $userIdentifiant = $this->bdd->secure($identifiant);
+        $userEmail = $this->bdd->secure($email);
+        $userPseudo = $this->bdd->secure($pseudo);
+        $userSexe = $this->bdd->secure($sexe);        
+        $userNom = $this->bdd->secure($nom);
+        $userPrenom = $this->bdd->secure($prenom);
+        $userNaissance = $naissance;
+        $userInscription = $inscription;
+        $userAdmin = $adm;
+        $userAvatar = $avatar;
+            $db = $this->bdd;
+            $sqlUpdate = "UPDATE users SET identifiant=? , email=? , pseudo=? , sexe=? , admin=? , nom=? , prenom=? , naissance=? , date_inscription=? , avatar=? WHERE id= ?";
+            $result = $db->Request($sqlUpdate,array($userIdentifiant,$userEmail,$userPseudo,$userSexe,$adm,$userNom,$userPrenom,$userNaissance,$userInscription,$userAvatar, $this->ID));
+            $check_insert = $result->rowCount();
+            if ($check_insert > 0)
+            {
+                $this->identifiant = $userIdentifiant;
+                $this->email = $userEmail;
+                $this->nom = $userNom;
+                $this->prenom = $userPrenom;
+                $this->admin = $adm;
+                $this->sexe = $userSexe;
+                $this->pseudo = $userPseudo;
+                $this->naissance = $userNaissance;
+                $this->inscription = $userInscription;
+                $this->admin = $userAdmin;
+                $this->avatar = $userAvatar;
+                return true;
+            }
+            return false;
+    }
+
     function info()
     {
         return $this->prenom." ".$this->nom;
