@@ -46,6 +46,26 @@ class Utilisateur_model
             return false;
     }
 
+    function SetAvatar($new_avatar)
+    {
+        $avatar_new = $new_avatar;
+        $db = $this->bdd;
+        $sqlUpdate = "UPDATE users SET avatar=? WHERE id= ?";
+        if($this->avatar != "/uploads/avatars/unnamed.jpg")
+        {
+        $av = substr($this->avatar, 1);
+        unlink($av);
+        }
+        $result = $db->Request($sqlUpdate, array($avatar_new, $this->ID));
+        $check_update = $result->rowCount();
+        if ($check_update > 0)
+        {
+            $this->avatar = $avatar_new;
+            return true;
+        }
+        return false;
+    }
+
     function SetUser($identifiant, $email, $pseudo, $sexe, $adm, $nom, $prenom, $naissance, $inscription, $avatar) 
     {
       

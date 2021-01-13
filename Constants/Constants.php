@@ -85,4 +85,12 @@ $txtManager->AddTxt("#user_crit_fail", "Echec modification utilisateur !");
 $txtManager->AddTxt("#user_delete_succes", "Utilisateur supprimé avec succès !");
 $txtManager->AddTxt("#user_delete_fail", "Echec de la suppression de l'utilisateur !");
 ////////////////////////////////////////////////////////END Delete Utilisateur /////////////////////////////////////////////////////
+////////////////////////////////////////////////////////Modif Avatar Utilisateur /////////////////////////////////////////////////////
+$txtManager->AddTxt("#avatar_modif_ok ", "Avatar modifié avec succès !");
+$txtManager->AddTxt("#avatar_modif_fail", "Echec de la modification de l'avatar !");
+$txtManager->AddTxt("#size_trop_grande", "L'image dépasse 2Mo !");
+$txtManager->AddTxt("#format_not_allowed", "Le format d'image n'est pas autorisé !");
+////////////////////////////////////////////////////////END modif avatar /////////////////////////////////////////////////////
+
+
 ?>

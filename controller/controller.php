@@ -34,6 +34,14 @@ class Controller{
             header('Location: /error/perdu');
         }
     }
+
+    protected function CheckConnect()
+    {
+        if (!isset($_SESSION['Connected']))
+        {
+                header('Location: /utilisateur/login');
+        }
+    }
 }
 
 class ViewInfo {

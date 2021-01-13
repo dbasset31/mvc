@@ -9,40 +9,42 @@
         <header>
             <?php include_once "header.php";?>
         </header>
-        <div class="container-fluid d-flex " style="flex-grow:1;">
-            <div class="container">
-                <div class="card mt-5">    
-                    <div class="card-header">Nouveautés</div>
-                    <?php 
-                    foreach ($data as $card)
-                    { ?>
-                <div class="card-body">    
-                        <div class="card text-white bg-dark mb-3 mt-3" style="max-width: 100%;">
-                            <div class="card-header"> 
-                                <h4><?php echo $card->titre ?></h4>
-                            </div>
-                            <div class="card-body">
-                                <p class="card-text"><?php echo $card->contenu ?></p>
-                            </div>
-                            <p class="d-flex justify-content-end">Le : <?php echo $card->date."<br>"; ?></p>
-                            <?php 
-                            if (isset($_SESSION['Connected']))
-                            {
-                                if ($_SESSION['Connected']->admin)
+        <main>
+            <div class="container-fluid d-flex ">
+                <div class="container">
+                    <div class="card mt-5">    
+                        <div class="card-header">Nouveautés</div>
+                        <?php 
+                        foreach ($data as $card)
+                        { ?>
+                    <div class="card-body">    
+                            <div class="card text-white bg-dark mb-3 mt-3" style="max-width: 100%;">
+                                <div class="card-header"> 
+                                    <h4><?php echo $card->titre ?></h4>
+                                </div>
+                                <div class="card-body">
+                                    <p class="card-text"><?php echo $card->contenu ?></p>
+                                </div>
+                                <p class="d-flex justify-content-end">Le : <?php echo $card->date."<br>"; ?></p>
+                                <?php 
+                                if (isset($_SESSION['Connected']))
                                 {
-                                    echo "<a href='/admin/edit_new/".$card->ID."'class='lien-nav'>modifier</a>" ; 
+                                    if ($_SESSION['Connected']->admin)
+                                    {
+                                        echo "<a href='/admin/edit_new/".$card->ID."'class='lien-nav'>modifier</a>" ; 
+                                    }
                                 }
-                            }
-                            else
-                            ?>
+                                else
+                                ?>
+                            </div>
                         </div>
+                        <?php }
+                        ?>
                     </div>
-                    <?php }
-                    ?>
                 </div>
             </div>
-        </div>
-        <footer class="">
+        </main>
+        <footer class="footer mt-2">
             <?php include_once "footer.php"; ?>
         </footer>
     </body>

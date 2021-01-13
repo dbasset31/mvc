@@ -89,6 +89,18 @@ class Utilisateur_repo
         }
     }
 
+    function modif_avatar($avatar)
+    {
+        $db = $this->bdd;
+        $sqlSelect = "SELECT * FROM users WHERE avatar=?";
+        $result = $this->bdd->Request($sqlSelect, array($avatar));
+        if ($_SESSION['Connected']->SetAvatar("/".$avatar))
+                return "#avatar_modif_ok";
+            else
+                return "#avatar_modif_fail";
+    
+    }
+
     function modif_user($id, $user, $email, $pseudo, $sexe, $adm, $nom, $prenom, $naissance, $inscription, $avatar) 
     {     
        // var_dump($id, $user, $email, $pseudo, $sexe, $admin, $nom, $prenom, $naissance, $inscription, $avatar);

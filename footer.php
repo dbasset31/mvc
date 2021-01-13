@@ -1,3 +1,1 @@
-<footer class="w-100 bg-dark">
-    <p class="">Ceci est le FOOTER</p>
-</footer>
+                <span class="bg-dark d-flex w-100">Ceci est le FOOTER</span>
