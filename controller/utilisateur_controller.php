@@ -15,7 +15,7 @@ class Utilisateur_controller extends controller{
     }
     function login($data) { 
         global $txtManager;
-        if($_SESSION['Connected'])
+        if(isset($_SESSION['Connected']))
             header('Location: /utilisateur/compte');
         if (isset($_POST['login']))
         {
@@ -121,7 +121,7 @@ class Utilisateur_controller extends controller{
 
     function register() { 
         global $txtManager;
-        if($_SESSION["Connected"])
+        if(isset($_SESSION["Connected"]))
             header('Location: /utilisateur/compte');
         if (isset($_POST['login'])){
             $result = $this->utilisateurs_repo->register($_POST['login'],$_POST['password'],$_POST['conf_password'],$_POST['nom'],$_POST['prenom'],$_POST['naissance'], $_POST['email'],$_POST['pseudo'],$_POST['sexe']);
