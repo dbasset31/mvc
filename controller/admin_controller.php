@@ -11,6 +11,7 @@ class Admin_controller extends controller{
         $this->admin_repo = new Admin_repo();
         $this->news_repo = new News_repo();
         $this->utilisateur_repo = new Utilisateur_repo();
+      
        
         $this->CheckAdmin();
     }
@@ -29,7 +30,7 @@ class Admin_controller extends controller{
         
 
                 $result = $this->admin_repo->utilisateurs($data);
-                return $this->view($result);
+                return $this->view(array($_SESSION['Connected'], $result));
 
     }
 
@@ -40,7 +41,7 @@ class Admin_controller extends controller{
                 {
                     return $this->view($this->news_repo->modif($id, $_POST['titre'], $_POST['contenu']));
                 }
-                return $this->view($news_model);
+                return $this->view(array($_SESSION['connected'],$news_model));
     }
 
     function edit_user($id)

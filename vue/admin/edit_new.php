@@ -11,15 +11,19 @@
         <div class="container-fluid">
           <div id="content">
             <!-- Page Heading -->
-            <?php 
+            <br>
+            <br>
+            <br> <?php 
+
+<br>
+<br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
               $msg = "";
-              $news = $data;
-              if (is_array($data))
-              {
-                $msg= $data[0];
-                $news=$data[1];
-              }
-            ?>
+              $news = $data[1];
+              
+                     
+                     var_dump($data);?>
+    
             <?php $txtManager->DisplayText($msg); ?>
             <form method="POST" action="/admin/edit_new/<?= $news->ID ?>">
             <label for="titre">Titre:</label>

@@ -15,17 +15,20 @@
             $msg = "";
             if(count($data) == 2)
             {
+              var_dump($data);
               $msg = $data[0];
               $news = $data[1];
             }
             else if(count($data) == 3)
             {
+              var_dump($data);
                 $msg = $data[0];
                 $news = $data[1];
                 $id = $data[2];
             }
             else
             {
+              var_dump($data);
               $news = $data;
             }
             $txtManager->DisplayText($msg); echo $id;?>

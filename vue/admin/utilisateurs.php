@@ -11,18 +11,23 @@
         <div class="container-fluid">
           <div id="content">
             <!-- Page Heading -->
-            <?php
-            var_dump($data);?>
+
+            
+             <?php 
+              $news = $data[1];
+           ?>
             <table border="1" width="100%">
               <tr>
                 <th>ID</th>
                 <th>Nom utilisateur</th>
               </tr>
               <?php 
-                foreach ($data as $card)
+            
+                foreach ($news as $card)
                 { 
               ?>
               <tr>
+              
                 <td><?php echo $card->ID ?></td>
                 <td><?php echo $card->identifiant ?></td>
                 <td><?php echo "<a href='/admin/edit_user/".$card->ID."'>Modifier</a>"?></td>

@@ -11,7 +11,7 @@
         <div class="container-fluid">
           <div id="content">
             <!-- Page Heading -->
-          Wesh <?php echo $data->nom; ?>
+          <?php echo $data->nom; ?>
           </div>
         </div>
         <!-- /.container-fluid -->
