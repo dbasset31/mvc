@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <!-- include libraries(jQuery, bootstrap) -->
-<link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 
-<!-- include summernote css/js -->
-<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
-<body id="page-top">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
 
   <!-- Page Wrapper -->
   <div id="wrapper">
@@ -21,22 +21,28 @@
             
             <?php $txtManager->DisplayText($data); ?>
             <form method="POST" action="/admin/add_new/">
-            <label for="titre">Titre:</label>
+            <div class="container">
+            <label for="titre" class="center">Titre:</label>
+            <br>
             <input type="text" name="titre" value="">
             
             <br>
             <label for="titre">Contenu:</label>
             
             <textarea id="summernote" name="contenu"></textarea>
+            
             <script>
-    $(document).ready(function() {
-        $('#summernote').summernote();
-    });
-  </script>
+      $('#summernote').summernote({
+        placeholder: '',
+        tabsize: 2,
+        height: 400
+      });
+    </script>
 
             
 
             <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Valider</button>
+            </div>
             </form>
 
             <?php  ?>

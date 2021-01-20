@@ -56,5 +56,25 @@ class Admin_repo
             return "#add_new_success";
         }
     }
-   
+
+    function create_page($titre,$contenu,$url,$admin,$connect) 
+    {
+        $titre = $this->bdd->secure($titre);
+        $db = $this->bdd;
+        $contenu = htmlspecialchars($contenu);
+        $sqlInsert = "INSERT INTO pages (titre, contenu, url, admin, connected) VALUES (?,?,?,?,?)";
+        $result = $this->bdd->Request($sqlInsert,array($titre, ".$contenu.", $url, $admin, $connect));
+        $check_insert = $result->rowCount();
+                
+        if ($check_insert != 1)
+        {
+            var_dump(array($titre, ".$contenu.", $url, $admin, $connect));
+        
+            return "#page_NonInserted";
+        }
+        else
+        {
+            return "#create_page_success";
+        }
+    }
 }

@@ -22,7 +22,7 @@ class News_model
     function SetNew($new_titre, $new_contenu) 
     {
         $nouvelleTitre = $new_titre;
-        $nouvelleContenu = $new_contenu;
+        $nouvelleContenu = htmlspecialchars($new_contenu);
             $db = $this->bdd;
             $sqlUpdate = "UPDATE news SET titre= ? , contenu=? WHERE id= ?";
             $result = $db->Request($sqlUpdate,array($nouvelleTitre,$nouvelleContenu, $this->ID));

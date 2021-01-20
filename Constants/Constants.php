@@ -91,6 +91,10 @@ $txtManager->AddTxt("#avatar_modif_fail", "Echec de la modification de l'avatar 
 $txtManager->AddTxt("#size_trop_grande", "L'image dépasse 2Mo !");
 $txtManager->AddTxt("#format_not_allowed", "Le format d'image n'est pas autorisé !");
 ////////////////////////////////////////////////////////END modif avatar /////////////////////////////////////////////////////
-
+////////////////////////////////////////////////////////Create Page /////////////////////////////////////////////////////
+$txtManager->AddTxt("#create_page_success", "Nouvelle page créée avec succès !");
+$txtManager->AddTxt("#page_NonInserted", "Echec de la creation de la page !");
+$txtManager->AddTxt("#page_not_empty", "Le titre, le contenu ou l'url n'est pas rempli.");
+////////////////////////////////////////////////////////END create page /////////////////////////////////////////////////////
 
 ?>

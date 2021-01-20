@@ -20,12 +20,6 @@ class Admin_controller extends controller{
         return $this->view($_SESSION['Connected']);
     }
 
-    function page($args) { 
-        
-        $user = $args==1?"Lilian" : "Dono";
-        return $this->view($user);
-        
-    }
     function utilisateurs($data) {
         
 
@@ -118,12 +112,55 @@ class Admin_controller extends controller{
 
                 }
     }
-}
 
-function page($data) {
+    function page($data) {
         
 
-    $result = $this->admin_repo->utilisateurs($data);
-    return $this->view($result);
+        $result = $this->admin_repo->utilisateurs($data);
+        return $this->view($result);
+    
+    }
+    
+    function create_page() 
+        {
+                    global $txtManager;
+                    if (isset($_POST['titre']) && !empty($_POST["titre"]) && !empty($_POST["contenu"] && !empty($_POST["url"])))
+                    {
+                        
+                        if(isset($_POST['admin']) && isset($_POST['Connexion']))
+                        {
+                            $admin=1;
+                            $connect=1;
+                            $result = $this->admin_repo->create_page($_POST['titre'],$_POST['contenu'],$_POST['url'],$admin,$connect);
+                        }
+                        
+                        if(isset($_POST['admin']))
+                        {
+                            $admin=1;
+                            $connect=0;
+                            $result = $this->admin_repo->create_page($_POST['titre'],$_POST['contenu'],$_POST['url'],$admin,$connect);
+                        }
 
+                        if(!isset($_POST['admin']) && !isset($_POST['Connexion']))
+                        { 
+                            $admin=0;
+                            $connect=0;
+                            $result = $this->admin_repo->create_page($_POST['titre'],$_POST['contenu'],$_POST['url'],$admin,$connect);
+                        }
+
+                        if ($txtManager->Compare($result,"#create_page_success"))
+                        {
+                            return $this->view($result);
+                        }
+                        else
+                        { 
+                        return $this->view($result);
+                        }
+                    }
+                    else
+                    {
+                        return $this->view(!isset($_POST['titre']) ? null : "#news_not_empty"); 
+    
+                    }
+        }
 }

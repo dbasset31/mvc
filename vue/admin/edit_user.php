@@ -11,8 +11,7 @@
         <div class="container-fluid">
           <div id="content">
             <!-- Page Heading -->
-            <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><?php 
-            var_dump($data);
+            <?php
               $msg = "";
               $user = $data;
               if (is_array($data))

@@ -46,7 +46,7 @@
             
               <?php 
               }
-var_dump($user);              ?>
+              ?>
               </table>
           </div>
         </div>
