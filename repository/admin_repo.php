@@ -11,10 +11,10 @@ class Admin_repo
         $this->bdd = new BDD();
     }
 
-    function utilisateurs($user_fonc) 
+    function utilisateurs() 
     {
         $sql = "SELECT * FROM users";
-        $result = $this->bdd->Request($sql, array($user_fonc));
+        $result = $this->bdd->Request($sql,null);
         $donnes = $result->fetchALL();
         $objects = array();
         foreach ($donnes as $ob)

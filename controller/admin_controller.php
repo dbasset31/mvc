@@ -11,6 +11,7 @@ class Admin_controller extends controller{
         $this->admin_repo = new Admin_repo();
         $this->news_repo = new News_repo();
         $this->utilisateur_repo = new Utilisateur_repo();
+      
        
         $this->CheckAdmin();
     }
@@ -29,7 +30,7 @@ class Admin_controller extends controller{
         
 
                 $result = $this->admin_repo->utilisateurs($data);
-                return $this->view($result);
+                return $this->view(array($_SESSION['Connected'], $result));
 
     }
 
@@ -40,7 +41,7 @@ class Admin_controller extends controller{
                 {
                     return $this->view($this->news_repo->modif($id, $_POST['titre'], $_POST['contenu']));
                 }
-                return $this->view($news_model);
+                return $this->view(array($_SESSION['connected'],$news_model));
     }
 
     function edit_user($id)
@@ -65,10 +66,10 @@ class Admin_controller extends controller{
                 
                 if ($txtManager->Compare($result,"#user_delete_succes"))
                 {                    
-                    return $this->otherView("utilisateurs", $this->admin_repo->utilisateurs($id));
+                    return $this->otherView("utilisateurs",array($result, $this->admin_repo->utilisateurs()));
                 }
                 else 
-                    return $this->otherView("utilisateurs");
+                return $this->otherView("utilisateurs", $result);
     }
 
     function delete_new($id)
@@ -83,7 +84,7 @@ class Admin_controller extends controller{
                 
                 if ($txtManager->Compare($result,"#new_delete_succes"))
                 {                    
-                    return $this->otherView("liste_news", array($result, $this->admin_repo->liste_news(),$id));
+                    return $this->otherView("liste_news", array($result, $this->admin_repo->liste_news()));
                 }
                 else 
                     return $this->otherView("liste_news", $result);
@@ -104,7 +105,7 @@ class Admin_controller extends controller{
                     $result = $this->admin_repo->add_new($_POST['titre'],$_POST['contenu']);
                     if ($txtManager->Compare($result,"#add_new_success"))
                     {
-                        return $this->otherView("liste_news", array($result,$this->admin_repo->liste_news()));
+                        return $this->otherView("liste_news", array($result,$this->admin_repo->liste_news($result)));
                     }
                     else
                     { 

@@ -49,7 +49,7 @@ class Utilisateur_repo
                 $db = $this->bdd;
                 $pass_hache = password_hash($pass, PASSWORD_DEFAULT);
                 $sqlInsert = "INSERT INTO users (identifiant, mdp, email, pseudo, sexe, admin, nom, prenom, naissance, date_inscription, avatar, connected) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
-                $result = $db->Request($sqlInsert,array($identifiant, $pass_hache, $email, $pseudo, $sexe, 0, $nom, $prenom, $naissance, date("d M Y H:i:s"), '/uploads/avatars/avatar.jpg', 1));
+                $result = $db->Request($sqlInsert,array($identifiant, $pass_hache, $email, $pseudo, $sexe, 0, $nom, $prenom, $naissance, date("d M Y H:i:s"), '/uploads/avatars/unnamed.jpg', 1));
                 $check_insert = $result->rowCount();
                 if ($check_insert != 1)
                 {

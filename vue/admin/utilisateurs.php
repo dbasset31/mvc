@@ -11,18 +11,43 @@
         <div class="container-fluid">
           <div id="content">
             <!-- Page Heading -->
+<<<<<<< HEAD
             <?php
-            var_dump($data);?>
+            $msg = "";
+
+             if($data[0]=="#user_delete_succes")
+             {
+              $msg = $data[0];
+              $user = $data[1];
+            }
+            else
+            {
+              $user = $data;
+            }
+            $txtManager->DisplayText($msg);?>
+=======
+
+            
+             <?php 
+              $news = $data[1];
+           ?>
+>>>>>>> b97e55914e2360e4c9e804396466250f257ea425
             <table border="1" width="100%">
               <tr>
                 <th>ID</th>
                 <th>Nom utilisateur</th>
               </tr>
               <?php 
-                foreach ($data as $card)
+<<<<<<< HEAD
+                foreach ($user as $card)
+=======
+            
+                foreach ($news as $card)
+>>>>>>> b97e55914e2360e4c9e804396466250f257ea425
                 { 
               ?>
               <tr>
+              
                 <td><?php echo $card->ID ?></td>
                 <td><?php echo $card->identifiant ?></td>
                 <td><?php echo "<a href='/admin/edit_user/".$card->ID."'>Modifier</a>"?></td>
@@ -31,6 +56,7 @@
             
               <?php 
               }
+              var_dump($data);
               ?>
               </table>
           </div>
