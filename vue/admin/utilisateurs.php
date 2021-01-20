@@ -12,6 +12,7 @@
           <div id="content">
             <!-- Page Heading -->
 <<<<<<< HEAD
+<<<<<<< HEAD
             <?php
             $msg = "";
 
@@ -26,11 +27,16 @@
             }
             $txtManager->DisplayText($msg);?>
 =======
+=======
+>>>>>>> b97e55914e2360e4c9e804396466250f257ea425
 
             
              <?php 
               $news = $data[1];
            ?>
+<<<<<<< HEAD
+>>>>>>> b97e55914e2360e4c9e804396466250f257ea425
+=======
 >>>>>>> b97e55914e2360e4c9e804396466250f257ea425
             <table border="1" width="100%">
               <tr>
@@ -39,7 +45,12 @@
               </tr>
               <?php 
 <<<<<<< HEAD
+<<<<<<< HEAD
                 foreach ($user as $card)
+=======
+            
+                foreach ($news as $card)
+>>>>>>> b97e55914e2360e4c9e804396466250f257ea425
 =======
             
                 foreach ($news as $card)
