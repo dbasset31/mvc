@@ -41,6 +41,9 @@ class Admin_repo
     {
         $titre = $this->bdd->secure($titre);
         $db = $this->bdd;
+        $contenu = htmlspecialchars($contenu);   
+        // var_dump($contenu);
+        // die();    
         $sqlInsert = "INSERT INTO news (titre, contenu, date) VALUES (?,?,?)";
         $result = $db->Request($sqlInsert,array($titre, $contenu, date("d/m/Y")));
         $check_insert = $result->rowCount();

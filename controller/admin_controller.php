@@ -30,7 +30,7 @@ class Admin_controller extends controller{
         
 
                 $result = $this->admin_repo->utilisateurs($data);
-                return $this->view(array($_SESSION['Connected'], $result));
+                return $this->view($result);
 
     }
 
@@ -41,7 +41,7 @@ class Admin_controller extends controller{
                 {
                     return $this->view($this->news_repo->modif($id, $_POST['titre'], $_POST['contenu']));
                 }
-                return $this->view(array($_SESSION['connected'],$news_model));
+                return $this->view($news_model);
     }
 
     function edit_user($id)
@@ -56,20 +56,20 @@ class Admin_controller extends controller{
 
     function delete_user($id)
     {
-                global $txtManager;
-                if($this->utilisateur_repo->GetById($id) != null)
-                    $result = $this->utilisateur_repo->delete($id);
-                else
-                {
-                    return $this->otherView("utilisateurs",$this->admin_repo->utilisateurs());
-                }
-                
-                if ($txtManager->Compare($result,"#user_delete_succes"))
-                {                    
-                    return $this->otherView("utilisateurs",array($result, $this->admin_repo->utilisateurs()));
-                }
-                else 
-                return $this->otherView("utilisateurs", $result);
+        global $txtManager;
+        if($this->utilisateur_repo->GetById($id) != null)
+            $result = $this->utilisateur_repo->delete($id);
+        else
+        {
+            return $this->otherView("utilisateurs",$this->admin_repo->utilisateurs());
+        }
+        
+        if ($txtManager->Compare($result,"#user_delete_succes"))
+        {                    
+            return $this->otherView("utilisateurs", array($result, $this->admin_repo->utilisateurs()));
+        }
+        else 
+        header('location: /admin/utilisateurs');
     }
 
     function delete_new($id)
@@ -118,4 +118,12 @@ class Admin_controller extends controller{
 
                 }
     }
+}
+
+function page($data) {
+        
+
+    $result = $this->admin_repo->utilisateurs($data);
+    return $this->view($result);
+
 }

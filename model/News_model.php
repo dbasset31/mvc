@@ -15,14 +15,14 @@ class News_model
         $this->bdd = new BDD();
         $this->ID = $arrayInfos[0];
         $this->titre = $arrayInfos[1];
-        $this->contenu = $arrayInfos[2];
+        $this->contenu = htmlspecialchars_decode($arrayInfos[2]);
         $this->date = $arrayInfos[3];
     }
 
     function SetNew($new_titre, $new_contenu) 
     {
-        $nouvelleTitre = $this->bdd->secure($new_titre);
-        $nouvelleContenu = $this->bdd->secure($new_contenu);
+        $nouvelleTitre = $new_titre;
+        $nouvelleContenu = $new_contenu;
             $db = $this->bdd;
             $sqlUpdate = "UPDATE news SET titre= ? , contenu=? WHERE id= ?";
             $result = $db->Request($sqlUpdate,array($nouvelleTitre,$nouvelleContenu, $this->ID));
