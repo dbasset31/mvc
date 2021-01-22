@@ -29,14 +29,6 @@ class Style
 $dataStyle = new Style();
 $styles = $dataStyle->style();
 ?>
-<style>
-h1{color:<?php echo $styles[0]->couleur_h1 ?> !important;}
-h2{color: <?php echo $styles[0]->couleur_h2 ?> !important;}
-h3{color:<?php echo $styles[0]->couleur_h3 ?> !important;}
-h4{color:<?php echo $styles[0]->couleur_h4 ?> !important;}
-.date-news{color:<?php echo $styles[0]->couleur_h4 ?> !important;}
- a{color: <?php echo $styles[0]->couleur_lien ?> !important;} 
-</style>
 <?php
 $url = $_SERVER['REQUEST_URI'];
 $testurl = explode("/", $url);
