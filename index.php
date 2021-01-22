@@ -1,11 +1,43 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
 <link rel="stylesheet" href="/vendor/css/style.css">
-
-
 <?php
 include_once "config/bdd.php";
 include_once "controller/controller.php";
 include_once "Constants/Constants.php";
+include_once "model/settings_model.php";
+class Style 
+{
+    private $bdd;
+    function __construct()
+    {
+        $this->bdd = new BDD();
+    }
+    function style()
+    {
+        
+        $sqlStyle = "SELECT * FROM settings";
+        $resultStyle = $this->bdd->Request($sqlStyle);
+        $donneesStyle = $resultStyle->fetchALL();
+        $objectsStyles = array();
+        foreach ($donneesStyle as $objStyle)
+        {
+            array_push($objectsStyles, new Settings_model($objStyle));
+        }
+        return $objectsStyles;
+    }
+}
+$dataStyle = new Style();
+$styles = $dataStyle->style();
+?>
+<style>
+h1{color:<?php echo $styles[0]->couleur_h1 ?> !important;}
+h2{color: <?php echo $styles[0]->couleur_h2 ?> !important;}
+h3{color:<?php echo $styles[0]->couleur_h3 ?> !important;}
+h4{color:<?php echo $styles[0]->couleur_h4 ?> !important;}
+.date-news{color:<?php echo $styles[0]->couleur_h4 ?> !important;}
+ a{color: <?php echo $styles[0]->couleur_lien ?> !important;} 
+</style>
+<?php
 $url = $_SERVER['REQUEST_URI'];
 $testurl = explode("/", $url);
 $methode = "index";
@@ -62,19 +94,15 @@ else
     echo "non";
 }
 
-
-
-
 ?>
 
 <script>
-
-function AskDelete(id,event)
-{
-  if (confirm("Êtes-vous sur de vouloir supprimer l\'ID : "+id)) {
-    return true;
-  } else {
-   event.preventDefault();
-  }
-}
+    function AskDelete(id,event)
+    {
+        if (confirm("Êtes-vous sur de vouloir supprimer l\'ID : "+id)) {
+            return true;
+        } else {
+        event.preventDefault();
+        }
+    }
 </script>

@@ -27,7 +27,7 @@
   <input type="submit" value="Upload Image" name="submit">
 </form>
 <?php $txtManager->DisplayText($data);
-phpinfo(); ?>
+ ?>
 
             <!-- Bibliothèque JavaScript jquery -->
             <script src="bootstrap/js/jquery.min.js"></script>

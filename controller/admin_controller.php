@@ -5,19 +5,33 @@ include_once "model/Utilisateur_model.php";
 include_once "repository/news_repo.php";
 include_once "model/News_model.php";
 include_once "repository/utilisateurs_repo.php";
+include_once "repository/settings_repo.php";
+include_once "model/settings_model.php";
+
 class Admin_controller extends controller{
     private $admin_repo=null;
     function __construct(){
         $this->admin_repo = new Admin_repo();
         $this->news_repo = new News_repo();
         $this->utilisateur_repo = new Utilisateur_repo();
+        $this->settings_repo = new Settings_repo();
       
        
         $this->CheckAdmin();
     }
 
     function index() {
-        return $this->view($_SESSION['Connected']);
+        if(isset($_POST['nbNews'])){
+            $result= $this->settings_repo->modif($_POST['nbNews']);
+           
+            return $this->view(array($_SESSION['Connected'],$this->settings_repo->GetAllSettings()));
+        }
+        if(isset($_POST['h1'])){
+            $result= $this->settings_repo->modifColor($_POST['h1'],$_POST['h2'],$_POST['h3'],$_POST['h4'],$_POST['text'],$_POST['lien']);
+           
+            return $this->view(array($_SESSION['Connected'],$this->settings_repo->GetAllSettings()));
+        }
+        return $this->view(array($_SESSION['Connected'],$this->settings_repo->GetAllSettings()));
     }
 
     function utilisateurs($data) {
@@ -111,6 +125,16 @@ class Admin_controller extends controller{
                     return $this->view(!isset($_POST['titre']) ? null : "#news_not_empty"); 
 
                 }
+    }
+
+    function nb_news()
+    {
+        $setting_model = $this->settings_repo->GetAllSettings();
+                if (isset($_POST['nb']))
+                {
+                    return $this->otherView("index", $this->settings_repo->modif($_POST['nb']));
+                }
+                return $this->otherView("index",$setting_model);
     }
 
     function page($data) {

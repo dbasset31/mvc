@@ -30,7 +30,7 @@
             
             <br>
             <label for="titre">Contenu:</label>
-            <textarea id="summernote" name="contenu"><?= $news->contenu ?></textarea>
+            <textarea id="summernote" name="contenu"><?= htmlspecialchars($news->contenu); ?></textarea>
             <script>
     $(document).ready(function() {
         $('#summernote').summernote();

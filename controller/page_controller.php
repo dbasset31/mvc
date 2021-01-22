@@ -23,7 +23,21 @@ class Page_controller extends controller
         if(empty($args))
             header('location: /error/perdu');
         $page_model = $this->page_repo->GetByUrl($args);
-        
+        if(isset($_SESSION['Connected']))
+        {
+            $utilisateur_model = $this->utilisateur_repo->GetById($_SESSION['Connected']->ID);
+        }
+
+        if($page_model->admin)
+        {
+            $this->CheckAdmin();
+            return $this->view($page_model);
+        }
+        if($page_model->connected)
+        {
+            $this->CheckConnect();
+            return $this->view($page_model);
+        }
         return $this->view($page_model);
     }
 }

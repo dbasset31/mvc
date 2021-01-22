@@ -1,4 +1,19 @@
 <?php 
+
+class ConstantVariables
+{
+    public static $NbNews;
+
+   static function Init()
+    {
+        $bdd = new BDD();
+        ConstantVariables::$NbNews = $bdd->getBDD()->query("SELECT nbNews from settings")->fetch()[0];
+        //echo "NbNews define to ".ConstantVariables::$NbNews;
+    }
+}
+
+ConstantVariables::Init();
+
 global $id;
 class TextManager
 {

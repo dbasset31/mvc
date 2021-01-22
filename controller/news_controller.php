@@ -8,8 +8,8 @@ class News_controller extends controller{
     function __construct(){
         $this->news_repo = new News_repo();
     }
-    function index($data) {
-        $result = $this->news_repo->index($data);
+    function index($args=null) {
+        $result = $this->news_repo->index($args);
         return $this->view($result);
     }
 

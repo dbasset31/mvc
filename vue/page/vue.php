@@ -12,14 +12,9 @@
             <?php include_once "header.php";?>
         </header>
         <main class="container-fluid d-flex">
-            <div>
+            <div class="container">
                 <h2><?php echo $data->titre; ?></h2>
-            </div>
-                <div class="container">
-                    
-                    </div>
-                    <?php echo $data->contenu; ?>
-                </div>
+                <?php echo $data->contenu; ?>
             </div>
         </main>
         <footer class="footer mt-2">

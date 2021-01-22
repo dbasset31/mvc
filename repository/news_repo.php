@@ -10,17 +10,36 @@ class News_repo
         $this->bdd = new BDD();
     }
 
-    function index()
+    function index($id)
     {
-        $sql = "SELECT * FROM news ORDER BY id DESC";
+        $newsPerPage = ConstantVariables::$NbNews;
+        $sqlPagi = "SELECT COUNT(id) AS nb FROM news";
+        $res = $this->bdd->Request($sqlPagi);
+        $donnePagi = $res->fetch();
+        $nb= $donnePagi['nb'];
+        $nbActu= $nb;
+        $pPage = ConstantVariables::$NbNews;
+        $nbPage = ceil($nb/$pPage);
+        
+        $nbNews = $id == null ? 1 : $id;
+        if($nbNews == 1)
+        {
+            $nbNews = 0;
+        }
+        else {
+           $nbNews =  $id * $newsPerPage -$newsPerPage;
+        }
+        
+        $sql = "SELECT id, titre, contenu, date FROM news ORDER BY date DESC LIMIT ".$nbNews.",$newsPerPage";
         $result = $this->bdd->Request($sql);
         $donnes = $result->fetchALL();
         $objects = array();
+
         foreach ($donnes as $ob)
         {
             array_push($objects, new News_model($ob));
         }
-        return $objects;
+        return array($objects,$nb,$nbActu, $pPage,$nbPage);
     }
     function GetById($args)
     {
