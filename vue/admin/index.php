@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html>
+<div id="wrapper">
+<?php include_once "vue/admin/menu.php" ?>
 <body id="page-top">
   <!-- Page Wrapper -->
-  <div id="wrapper">
-    <?php include_once "vue/admin/menu.php" ?>
+  
+    
       <!-- Begin Page Content -->
       <div class="container-fluid">
       <h1>Admin Panel</h1>

@@ -1,39 +1,25 @@
-<?php
-	include_once 'header.php';
-?>
 <!DOCTYPE html>
- <html>
+<html lang="en">
     <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Modifier Avatar</title>
-
-        <!-- CSS de Bootstrap -->
-        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
-        <!-- Notre style CSS -->
-        <link href="bootstrap/css/style.css" rel="stylesheet">
+        <?php include "head.php";?>
     </head>
     <body>
+        <header>
+            <?php include_once "header.php";?>
+        </header>
         <main>
-        <div class = "container">
-            <br />
-            <div class="text-center">
-                <h2>Modifier Avatar</h2>
+            <div class = "container">
+                <br />
+                <div class="text-center">
+                    <h2>Modifier Avatar</h2>
+                </div>
+                <form action="/utilisateur/avatar" method="post" enctype="multipart/form-data">
+                    <p>Selectionnez l'image à upload:</p>
+                    <input type="file" name="fileToUpload" id="fileToUpload">
+                    <input type="submit" value="Upload Image" name="submit">
+                </form>
+                <?php $txtManager->DisplayText($data);?>
             </div>
-            <form action="/utilisateur/avatar" method="post" enctype="multipart/form-data">
-  Select image to upload:
-  <input type="file" name="fileToUpload" id="fileToUpload">
-  <input type="submit" value="Upload Image" name="submit">
-</form>
-<?php $txtManager->DisplayText($data);
- ?>
-
-            <!-- Bibliothèque JavaScript jquery -->
-            <script src="bootstrap/js/jquery.min.js"></script>
-            
-            <!-- JavaScript de Bootstrap -->
-            <script src="bootstrap/js/bootstrap.min.js"></script>
         </main>
         <footer class="">
             <?php include_once "footer.php"; ?>

@@ -1,5 +1,3 @@
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-<link rel="stylesheet" href="/vendor/css/style.css">
 <?php
 include_once "config/bdd.php";
 include_once "controller/controller.php";
@@ -88,13 +86,3 @@ else
 
 ?>
 
-<script>
-    function AskDelete(id,event)
-    {
-        if (confirm("Êtes-vous sur de vouloir supprimer l\'ID : "+id)) {
-            return true;
-        } else {
-        event.preventDefault();
-        }
-    }
-</script>

@@ -59,8 +59,14 @@
       <!-- Footer -->
      <?php include_once "vue/admin/footer.php" ?>
 </body>
-
-
-
-
 </html>
+<script>
+    function AskDelete(id,event)
+    {
+        if (confirm("Êtes-vous sur de vouloir supprimer l\'ID : "+id)) {
+            return true;
+        } else {
+        event.preventDefault();
+        }
+    }
+</script>

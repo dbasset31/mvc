@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Accueil</title>
+        <?php include "head.php";?>
     </head>
     <body>
         <header>
             <?php include_once "header.php";?>
+
         </header>
         <main>
             <div class="container-fluid d-flex ">
@@ -31,7 +30,7 @@
                                         {
                                             if ($_SESSION['Connected']->admin)
                                             {
-                                                echo "<a href='/admin/edit_new/".$card->ID."'class='lien-nav'>modifier</a>" ; 
+                                                echo "<a href='/admin/edit_new/".$card->ID."' class='lien-nav'>modifier</a>" ; 
                                             }
                                         }
                                         else
@@ -54,7 +53,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
         </main>
         <footer class="footer mt-2">
             <?php include_once "footer.php"; ?>

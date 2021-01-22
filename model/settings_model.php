@@ -13,6 +13,7 @@ class Settings_model
     public $couleur_h4;
     public $couleur_input;
     public $nbNews;
+    public $label;
 
 
     function __construct($arrayInfos)
@@ -29,7 +30,10 @@ class Settings_model
         $this->couleur_h4 = $arrayInfos[7];
         $this->couleur_input = $arrayInfos[8];
         $this->nbNews = $arrayInfos[9];
+        $this->label = $arrayInfos[10];
     }
+    
 }
+
 
 ?>
