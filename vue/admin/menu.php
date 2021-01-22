@@ -17,6 +17,8 @@
             h4{color:<?php echo $styles[0]->couleur_h4 ?> !important;}
             .date-news{color:<?php echo $styles[0]->couleur_h4 ?> !important;}
             a{color: <?php echo $styles[0]->couleur_lien ?> !important;} 
+            p{color: <?php echo $styles[0]->couleur_text ?> !important;}
+            label{color: <?php echo $styles[0]->label ?> !important;}
       </style>
 <title>Admin Panel - Accueil</title>
 

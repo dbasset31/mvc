@@ -2,7 +2,7 @@
 $data2 = new Header();
 $menus = $data2->menu();
 ?>
-<div class="container-fluid nav-bar d-flex align-content-center align-items-center justify-content-between bg-dark lien-menu d-flex justify-content-around w-100">
+<div class="container-fluid nav-bar d-flex align-content-center align-items-center justify-content-between lien-menu d-flex justify-content-around w-100">
             <img src="/vendor/img/logo-17.svg" />
 <?php
     foreach ($menus as $menu)

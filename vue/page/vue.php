@@ -1,15 +1,12 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title><?php echo $data->titre; ?></title>
+        <?php include "head.php";?>
     </head>
     <body>
         <header>
             <?php include_once "header.php";?>
+            
         </header>
         <main class="container-fluid d-flex">
             <div class="container">

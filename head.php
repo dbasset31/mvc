@@ -11,6 +11,8 @@
             .date-news{color:<?php echo $styles[0]->couleur_h4 ?> !important;}
             a{color: <?php echo $styles[0]->couleur_lien ?> !important;} 
             p{color: <?php echo $styles[0]->couleur_text ?> !important;}
+            label{color: <?php echo $styles[0]->label ?> !important;}
+            header{background-color: <?php echo $styles[0]->header_color ?> !important;}
         </style>
 <?php include_once "config/bdd.php";
 include_once "model/Menu_model.php";
