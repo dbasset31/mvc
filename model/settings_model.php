@@ -15,6 +15,7 @@ class Settings_model
     public $nbNews;
     public $label;
     public $header_color;
+    public $nb_point;
 
 
     function __construct($arrayInfos)
@@ -33,6 +34,7 @@ class Settings_model
         $this->nbNews = $arrayInfos[9];
         $this->label = $arrayInfos[10];
         $this->header_color = $arrayInfos[11];
+        $this->nb_point = $arrayInfos[12];
 
     }
     

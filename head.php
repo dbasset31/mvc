@@ -27,7 +27,7 @@ class Header
     function menu()
     {
         
-        $sqlHead = "SELECT * FROM elements_menu";
+        $sqlHead = "SELECT * FROM elements_menu ORDER BY ordre ASC";
         $result = $this->bdd->Request($sqlHead);
         $donnees = $result->fetchALL();
         $objects = array();

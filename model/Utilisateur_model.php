@@ -14,6 +14,7 @@ class Utilisateur_model
     public $naissance;
     public $admin;
     public $avatar;
+    public $solde;
 
     function __construct($arrayInfos)
     {
@@ -29,6 +30,7 @@ class Utilisateur_model
         $this->inscription = $arrayInfos[10];
         $this->admin = $arrayInfos[6] == 1 ? true : false;
         $this->avatar = $arrayInfos[11];
+        $this->solde = $arrayInfos[13];
     }
     
     function SetPseudo($new_pseudo) 

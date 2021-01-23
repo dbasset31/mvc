@@ -25,6 +25,7 @@
                         <p>Date de naissance : <b><?php echo date_format($date, "d M Y");?></b></p>
                         <p>Email : <b><?php echo $data->email;?></b></p>
                         <p>Vous êtes inscrit depuis le : <b><?php echo $data->inscription;?></b></p>
+                        <p>Le solde de votre compte est de : <b><?php echo $data->solde;?> €.</b></p>
                         <p>info : <?php echo $data->info(); ?>
                     </div>
                     <div class="col-md-6 avatar-compte d-flex align-items-center justify-content-center">

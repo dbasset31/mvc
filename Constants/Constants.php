@@ -111,5 +111,9 @@ $txtManager->AddTxt("#create_page_success", "Nouvelle page créée avec succès 
 $txtManager->AddTxt("#page_NonInserted", "Echec de la creation de la page !");
 $txtManager->AddTxt("#page_not_empty", "Le titre, le contenu ou l'url n'est pas rempli.");
 ////////////////////////////////////////////////////////END create page /////////////////////////////////////////////////////
-
+////////////////////////////////////////////////////////Update Solde /////////////////////////////////////////////////////
+$txtManager->AddTxt("#update_solde_ok", "Achat réussi, votre nouveau solde est de : ");
+$txtManager->AddTxt("#update_solde_fail", "Echec de l'achat, veuillez contacter un administrateur.");
+$txtManager->AddTxt("#code_fail", " est erroné ou déjà utilisé. Si ce n'est pas le cas, contactez un administrateur.");
+////////////////////////////////////////////////////////END Update Solde /////////////////////////////////////////////////////
 ?>

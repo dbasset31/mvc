@@ -7,6 +7,7 @@ class Menu_model
     public $nom;
     public $lien;
     public $permission;
+    public $ordre;
 
     function __construct($arrayInfos)
     {
@@ -15,6 +16,7 @@ class Menu_model
         $this->nom = $arrayInfos[1];
         $this->lien = $arrayInfos[2];
         $this->permission = $arrayInfos[3];
+        $this->ordre = $arrayInfos[4];
 
     }
 

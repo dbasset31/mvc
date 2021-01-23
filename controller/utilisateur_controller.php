@@ -136,4 +136,27 @@ class Utilisateur_controller extends controller{
         }
             return $this->view();
     }
+    function credit_point()
+    {
+        global $txtManager;
+        if(isset($_POST['code1']))
+        {
+            $result = $this->utilisateurs_repo->CheckCode($_POST['idd'],$_POST['idp'],$_POST['DATAS'],$_POST['code1']);
+            
+            if ($result[0] == "#code_ok")
+            {
+                $maj = $this->utilisateurs_repo->UpdateSolde($_SESSION['Connected']->ID,$result);
+                if ($maj[1] == "#update_solde_ok")
+                {
+                    return $this->view($maj);
+                }
+                return $this->view($maj);
+            }
+            else 
+            {
+                return $this->view($result);
+            }
+        }
+        return $this->view();
+    }
 }
