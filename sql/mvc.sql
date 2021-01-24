@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 80018
 File Encoding         : 65001
 
-Date: 2021-01-23 20:40:20
+Date: 2021-01-24 22:11:02
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -38,6 +38,28 @@ INSERT INTO `elements_menu` VALUES ('4', 'Admin', '/admin', '2', '5');
 INSERT INTO `elements_menu` VALUES ('5', 'Déconnexion', '/utilisateur/logout', '1', '5');
 INSERT INTO `elements_menu` VALUES ('6', 'Connexion', '/utilisateur/login', '0', '5');
 INSERT INTO `elements_menu` VALUES ('8', 'Crediter Compte', '/utilisateur/credit_point', '1', '4');
+
+-- ----------------------------
+-- Table structure for `message`
+-- ----------------------------
+DROP TABLE IF EXISTS `message`;
+CREATE TABLE `message` (
+  `id_message` int(11) NOT NULL AUTO_INCREMENT,
+  `autheur` varchar(255) NOT NULL,
+  `message` varchar(255) NOT NULL,
+  `date` varchar(255) NOT NULL,
+  PRIMARY KEY (`id_message`)
+) ENGINE=MyISAM AUTO_INCREMENT=32 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of message
+-- ----------------------------
+INSERT INTO `message` VALUES ('26', 'alert(&quot;test&quot;)', 'bonjour, comment vas tu ?', '24/01/21 18:12');
+INSERT INTO `message` VALUES ('27', 'alert(&quot;test&quot;)', 'gfhgfcgfvcgg', '24/01/21 18:16');
+INSERT INTO `message` VALUES ('28', 'alert(&quot;test&quot;)', 'cbvcvcnvc', '24/01/21 18:16');
+INSERT INTO `message` VALUES ('29', 'alert(&quot;test&quot;)', 'bfvcbvcn', '24/01/21 18:16');
+INSERT INTO `message` VALUES ('30', 'alert(&quot;test&quot;)', 'cbvcbvcbvn', '24/01/21 18:16');
+INSERT INTO `message` VALUES ('31', 'alert(&quot;test&quot;)', 'cbnvcnvcn', '24/01/21 18:16');
 
 -- ----------------------------
 -- Table structure for `news`
@@ -105,7 +127,7 @@ CREATE TABLE `settings` (
 -- ----------------------------
 -- Records of settings
 -- ----------------------------
-INSERT INTO `settings` VALUES ('', '', '#c0c0c0', '#ff8800', '#096209', '#9eac3e', '#cfcfcf', '#b8b6d2', '', '2', '#00ff2a', '#50b73e', '1.5');
+INSERT INTO `settings` VALUES ('', '', '#c0c0c0', '#ff8800', '#096209', '#9eac3e', '#cfcfcf', '#b8b6d2', '', '2', '#00ff2a', '#632ec7', '1.5');
 
 -- ----------------------------
 -- Table structure for `users`
@@ -127,11 +149,12 @@ CREATE TABLE `users` (
   `connected` int(11) NOT NULL DEFAULT '0',
   `solde` decimal(65,1) NOT NULL DEFAULT '0.0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=90 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=91 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of users
 -- ----------------------------
 INSERT INTO `users` VALUES ('72', 'admin', '$2y$10$hpqW.kejgehLDFoBZb9hneD5eUrJ.UW9Yq0i/FMvjsPOy8HfM3EaG', 'admin@topheberge.fr', 'Darkmoi1474', 'Homme', '1', 'anonyme', 'Anonymesc', '1995-08-31', '16 Nov 2020 16:43:34', '/uploads/avatars/pedobear_inside_by_xquatrox_d3e03f6-fullview.png', '1', '0.0');
-INSERT INTO `users` VALUES ('88', 'test', '$2y$10$dI11c9t00YBhPQVfaZnYnu/1YY9pfKvWXOEtZVvf4IrjPw853KFPG', 'qdqd@dqzszsq.fr', 'Eric', 'Homme', '0', 'dsf', 'dqd', '2001-01-01', '21 Jan 2021 08:31:02', '/uploads/avatars/Qiroar.jpg', '1', '27.0');
+INSERT INTO `users` VALUES ('88', 'test', '$2y$10$dI11c9t00YBhPQVfaZnYnu/1YY9pfKvWXOEtZVvf4IrjPw853KFPG', 'qdqd@dqzszsq.fr', 'alert(&quot;test&quot;)', 'Homme', '0', 'dsf', 'dqd', '2001-01-01', '21 Jan 2021 08:31:02', '/uploads/avatars/20210111_091211.jpg', '1', '43.5');
 INSERT INTO `users` VALUES ('89', 'EricGallaire', '$2y$10$UDMrpSVrCUyJ0GAr3dlugOs9neNYlCRbR/ZESwmBBgkHsKmdS4UD.', 'info@expert-ecommerce.fr', 'EricG', 'Homme', '0', 'GALLAIRE', 'Eric', '1999-01-22', '22 Jan 2021 08:43:09', '/uploads/avatars/unnamed.jpg', '1', '0.0');
+INSERT INTO `users` VALUES ('90', 'alert(&quot;test&quot;)', '$2y$10$WT6BcLWne8kbIm6ML5rA6ettLCRP2OCWVqi.UwhBkRPph.g30ou6i', '<script>alert(\"test@\")</script>', '<script>alert(\"test@\")</script>', 'Homme', '0', '<script>alert(\"test\")</script>', '<script>alert(\"test\")</script>', '2021-01-23', '23 Jan 2021 22:47:45', '/uploads/avatars/unnamed.jpg', '1', '1.5');

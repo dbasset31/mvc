@@ -17,9 +17,5 @@ class Menu_model
         $this->lien = $arrayInfos[2];
         $this->permission = $arrayInfos[3];
         $this->ordre = $arrayInfos[4];
-
     }
-
-    
-    
 }
