@@ -2,14 +2,16 @@
 $data2 = new Header();
 $menus = $data2->menu();
 ?>
-<div class="container-fluid nav-bar d-flex align-content-center align-items-center justify-content-between lien-menu d-flex justify-content-around w-100">
+<div class="container-fluid nav-bar d-flex ">
             <img src="/vendor/img/logo-17.svg" />
-<?php
+
+            <div class="row align-items-center justify-content-between lien-menu d-flex justify-content-around w-100"><?php
+
     foreach ($menus as $menu)
     { 
         if($menu->permission == -1)
         {
-            echo "            <a href='$menu->lien'>$menu->nom</a>";
+            echo "<a href='$menu->lien'>$menu->nom</a>";
         }
         if(isset($_SESSION["Connected"]))
         {
@@ -32,5 +34,6 @@ $menus = $data2->menu();
             }
     } 
     ?>
+    </div>
 
             </div>

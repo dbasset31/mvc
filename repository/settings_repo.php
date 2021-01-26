@@ -27,10 +27,10 @@ class Settings_repo
           $sqlUpdate = "UPDATE settings SET nbNews=?";
           $result = $this->bdd->Request($sqlUpdate,array($nbNews));
           }
-    function modifColor($h1,$h2,$h3,$h4,$text,$lien,$label,$header_color) 
+    function modifColor($h1,$h2,$h3,$h4,$text,$lien,$label,$header_color,$footer_color) 
     {     
           $db = $this->bdd;
-          $sqlUpdate = "UPDATE settings SET couleur_h1=?,couleur_h2=?,couleur_h3=?,couleur_h4=?,couleur_text=?,couleur_lien=?,couleur_label=?,header_color=?";
-          $result = $this->bdd->Request($sqlUpdate,array($h1,$h2,$h3,$h4,$text,$lien,$label,$header_color));
+          $sqlUpdate = "UPDATE settings SET couleur_h1=?,couleur_h2=?,couleur_h3=?,couleur_h4=?,couleur_text=?,couleur_lien=?,couleur_label=?,header_color=?,footer_color=?";
+          $result = $this->bdd->Request($sqlUpdate,array($h1,$h2,$h3,$h4,$text,$lien,$label,$header_color, $footer_color));
           }
     }

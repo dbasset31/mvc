@@ -23,7 +23,7 @@
             <?php $txtManager->DisplayText($data); ?>
             <a href="/utilisateur/compte">Retour...</a>
         </div>
-        <footer>
+        <footer class="footer">
             <?php include_once "footer.php"; ?>
         </footer>
     </body>

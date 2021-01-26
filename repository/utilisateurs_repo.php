@@ -40,6 +40,14 @@ class Utilisateur_repo
     function register($identifiant,$pass,$pass_conf,$nom,$prenom,$naissance, $email,$pseudo, $sexe) 
     {
         $identifiant = $this->bdd->secure($identifiant);
+        $pass = $this->bdd->secure($pass);
+        $pass_conf = $this->bdd->secure($pass_conf);
+        $nom = $this->bdd->secure($nom);
+        $prenom = $this->bdd->secure($prenom);
+        $naissance = $this->bdd->secure($naissance);
+        $email = $this->bdd->secure($email);
+        $pseudo = $this->bdd->secure($pseudo);
+        $sexe = $this->bdd->secure($sexe);
         $sqlSelect = "SELECT * FROM users WHERE identifiant= ?";
         $result = $this->bdd->Request($sqlSelect, array($identifiant));
         $check_user = $result->fetchALL();
@@ -216,6 +224,7 @@ class Utilisateur_repo
             $UpdatePoint = "UPDATE users SET solde=? WHERE id=?";
             $result = $this->bdd->Request($UpdatePoint,array($newSolde,$idUser));
             $user->solde = $newSolde;
+            $_SESSION['Connected']->solde = $user->solde;
             return array($user->solde,"#update_solde_ok");
         }
         else

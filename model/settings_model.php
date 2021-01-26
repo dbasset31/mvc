@@ -16,6 +16,7 @@ class Settings_model
     public $label;
     public $header_color;
     public $nb_point;
+    public $footer_color;
 
 
     function __construct($arrayInfos)
@@ -35,6 +36,7 @@ class Settings_model
         $this->label = $arrayInfos[10];
         $this->header_color = $arrayInfos[11];
         $this->nb_point = $arrayInfos[12];
+        $this->footer_color = $arrayInfos[13];
 
     }
     

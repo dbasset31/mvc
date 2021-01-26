@@ -11,17 +11,16 @@
         <main>
             <div class="container-fluid">
                 <div class="row justify-content-around">
-                    <div class="card mt-5 col-lg-7 col-md-12">
-                            
-                        <div class="card-header">
-                            <h2>Nouveautés</h2>
+                    <div class="card pr-0 pl-0 mt-5 mb-5 col-lg-7 col-md-12">
+                        <div class="container-fluid w-100 card-header">
+                            <h2>News</h2>
                         </div>
                         <?php 
                         foreach ($data[0] as $card)
                         { ?>
                         <div class="card-body">    
                             <div class="card text-white bg-dark mb-3 mt-3" style="max-width: 100%;">
-                                <div class="card-header"> 
+                                <div class="card-header text-center"> 
                                     <h4><?php echo $card->titre ?></h4>
                                 </div>
                                 <div class="card-body">
@@ -52,7 +51,7 @@
                             echo "</div>";
                             }?>
                     </div>
-                    <div class="col-lg-2 col-md-12">
+                    <div class="col-lg-3 col-md-12 mb-5">
                     <?php include "tchat.php"; ?>
                     </div>                      
                 </div>                    

@@ -27,7 +27,7 @@ class Admin_controller extends controller{
             return $this->view(array($_SESSION['Connected'],$this->settings_repo->GetAllSettings()));
         }
         if(isset($_POST['h1'])){
-            $result= $this->settings_repo->modifColor($_POST['h1'],$_POST['h2'],$_POST['h3'],$_POST['h4'],$_POST['text'],$_POST['lien'],$_POST['label'],$_POST['header_color']);
+            $result= $this->settings_repo->modifColor($_POST['h1'],$_POST['h2'],$_POST['h3'],$_POST['h4'],$_POST['text'],$_POST['lien'],$_POST['label'],$_POST['header_color'],$_POST['footer_color']);
            
             return $this->view(array($_SESSION['Connected'],$this->settings_repo->GetAllSettings()));
         }

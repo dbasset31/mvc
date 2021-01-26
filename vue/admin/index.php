@@ -23,20 +23,20 @@
               </fieldset>
             </form>
             </div>
-            <div id="content" class="col-md-6">
+            <div id="content" class="col-md-8">
               
                 <form method="POST" action="/admin">
                   <fieldset class="border p-2">
                     <legend  class="w-auto">Couleurs</legend>
                     <div class="row">
                       <div class="col-md-6">
-                      <label>Couleur des titre principaux : </label>
+                      <label>Couleur des titres H1 : </label>
                       <input type="color" id="h1" name="h1" value="<?php echo $data[1]->couleur_h1; ?>">
-                      <label>Couleur des titre secondaire :</label>
+                      <label>Couleur des titres H2 :</label>
                       <input type="color" id="h2" name="h2" value="<?php echo $data[1]->couleur_h2; ?>">
-                      <label>Couleur des titre tertiaire :</label>
+                      <label>Couleur des titres H3 :</label>
                       <input type="color" id="h3" name="h3" value="<?php echo $data[1]->couleur_h3; ?>">
-                      <label>Couleur des titre h4 :</label>
+                      <label>Couleur des titres H4 :</label>
                       <input type="color" id="h4" name="h4" value="<?php echo $data[1]->couleur_h4; ?>">
                       </div>
                       <div class="col-md-6">
@@ -48,6 +48,8 @@
                       <input type="color" id="label" name="label" value="<?php echo $data[1]->label; ?>"><br>
                       <label>Couleur du header :</label>
                       <input type="color" id="header_color" name="header_color" value="<?php echo $data[1]->header_color; ?>">
+                      <label>Couleur du footer :</label>
+                      <input type="color" id="footer_color" name="footer_color" value="<?php echo $data[1]->footer_color; ?>">
                       </div>
                     </div>
                     <button type="submit" >Valider</button>

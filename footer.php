@@ -1,1 +1,1 @@
-                <span class="bg-dark d-flex w-100">Ceci est le FOOTER</span>
+                <p class=" d-flex w-100">Ceci est le FOOTER</span>

@@ -44,7 +44,8 @@ class Utilisateur_controller extends controller{
     
     function compte() { 
         $this->CheckConnect();
-            return $this->view($_SESSION['Connected']);
+        $user = $this->utilisateurs_repo->GetById($_SESSION['Connected']->ID);
+            return $this->view($user);
     }
     
      function modifier() {

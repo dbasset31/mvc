@@ -1,6 +1,6 @@
      /* * {
     border: 1px dashed red !important;
-}      */
+}       */
 
 body {
 	margin: 0;
@@ -14,9 +14,8 @@ main {
     flex: 1;
 }
 
-.footer {
+footer {
     width: 100%;
-    color: blue !important;
 }
 
 .liens {
@@ -85,3 +84,17 @@ main {
     color : white;
     background-color: #343a40;
 }
+
+@media screen and (max-width: 640px) {
+    .menu_e {
+      display:none;
+      
+    }
+  }
+
+  @media screen and (min-width: 641px) {
+    .li_menu {
+      display:none;
+      
+    }
+  }
