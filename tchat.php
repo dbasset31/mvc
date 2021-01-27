@@ -7,11 +7,11 @@ if(isset($_POST["message"]) && !empty($_POST["message"]))
 }
 ?>
 
-<div class="card mt-5">    
+<div class="card mt-5 tchat">    
     <div class="card-header">
         <h2>TchatBox</h2>
     </div>
-    <div class="message">
+    <div id="message">
         <?php foreach ($Mess as $message) { ?>
             <div class="card-header container ">
                 <div class="bg-dark card-header">
@@ -40,7 +40,7 @@ if(isset($_POST["message"]) && !empty($_POST["message"]))
         <div class="container">
         <div class="container mt-4 ">
             <form method="post" class=" d-flex  column">
-            <textarea id="content" name="message" maxlength="255" placeholder="Vous devez être connecter pour poster un message !!""></textarea>
+            <textarea id="content" name="message" maxlength="255" placeholder="Vous devez être connecter pour poster un message !!" readonly></textarea>
             <p><span id="counterBlock"> </span> / 255 Characters</p>
             </form>
         </div>
@@ -48,7 +48,7 @@ if(isset($_POST["message"]) && !empty($_POST["message"]))
     <?php } ?>
 </div>
 <script>
-// On selectionne l'element textarea(id #content) et l'élement #counterBlock
+// selection de l'element textarea(id #content) et l'élement #counterBlock
 var textarea = document.querySelector('#content');
 var blockCount = document.getElementById('counterBlock');
 
@@ -62,5 +62,9 @@ function count() {
 // On déclenche la fonction count quand l'évènement se produit et au chargement de la page
 textarea.addEventListener('keyup', count);
 count();
+
+//scrollbar tchat en bas
+element = document.getElementById('message');
+element.scrollTop = element.scrollHeight;
 </script>
-  
+

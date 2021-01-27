@@ -11,8 +11,8 @@
         <main>
             <div class="container-fluid">
                 <div class="row justify-content-around">
-                    <div class="card pr-0 pl-0 mt-5 mb-5 col-lg-7 col-md-12">
-                        <div class="container-fluid w-100 card-header">
+                    <div class="card pr-0 pl-0 mt-5 mb-5 col-lg-7 col-md-12 box">
+                        <div class="w-100 card-header">
                             <h2>News</h2>
                         </div>
                         <?php 
