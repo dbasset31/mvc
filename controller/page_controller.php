@@ -27,7 +27,9 @@ class Page_controller extends controller
         {
             $utilisateur_model = $this->utilisateur_repo->GetById($_SESSION['Connected']->ID);
         }
-
+        if($page_model == null){
+            return $this->otherviewandcontroller("error","perdu", $args);
+        }
         if($page_model->admin)
         {
             $this->CheckAdmin();
@@ -39,5 +41,6 @@ class Page_controller extends controller
             return $this->view($page_model);
         }
         return $this->view($page_model);
+
     }
 }

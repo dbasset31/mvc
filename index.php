@@ -70,18 +70,18 @@ if (file_exists ($controllerToCall))
             include_once $vueDemandee;
         }
         else {
-            echo "eh bah la vue elle existe pas d'abord !";
+            header('location: /error/perdu');
         }
     }
     else 
     {
-        echo "la méthode : ".$methode." n'éxiste pas";
+        header('location: /error/perdu');
     }
     
 }
 else 
 {
-    echo "non";
+    header('location: /error/perdu');
 }
 
 ?>
