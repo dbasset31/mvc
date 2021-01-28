@@ -88,8 +88,8 @@
       <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item">
         <a class="nav-link" href="/admin/utilisateurs" aria-expanded="true" aria-controls="collapseTwo">
-          <i class="fas fa-fw fa-cog"></i>
-          <span>Utilisateurs</span>
+        <i class="fas fa-list-ol"></i>
+          <span>Gerer les utilisateurs</span>
         </a>
       </li>
 
@@ -103,8 +103,12 @@
 
 <!-- Nav Item - Pages Collapse Menu -->
 <li class="nav-item">
+<a class="nav-link" href="/admin/liste_page" aria-expanded="true" aria-controls="collapseTwo">
+<i class="fas fa-list-ol"></i>
+    <span>Liste des pages</span>
+  </a>
   <a class="nav-link" href="/admin/create_page" aria-expanded="true" aria-controls="collapseTwo">
-    <i class="fas fa-fw fa-cog"></i>
+  <i class="fas fa-folder-plus"></i>
     <span>Créer une page</span>
   </a>
 </li>
