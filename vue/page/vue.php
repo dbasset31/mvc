@@ -8,14 +8,27 @@
             <?php include_once "header.php";?>
             
         </header>
-        <main class="container-fluid d-flex">
-            <div class="container">
-                <h2><?php echo $data->titre; ?></h2>
-                <?php echo $data->contenu; ?>
+        <main>
+            <div class="row justify-content-around">
+                <div class = "pr-0 pl-0 mt-5 col-lg-7 col-md-12 mb-5 ">
+                    <div class="ombre">
+                        <div class="carte-head w-100">
+                        <h1><?php echo $data->titre; ?></h1>
+                        </div>
+                        <div class="carte pt-2 d-flex column">
+                            <?php echo $data->contenu; ?>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-12 mb-0">
+                    <?php include "tchat.php"; ?>
+                </div>
             </div>
+        
         </main>
-        <footer class="footer mt-2">
+        <footer class="footer">
             <?php include_once "footer.php"; ?>
         </footer>
     </body>
-</html>
+ </html>

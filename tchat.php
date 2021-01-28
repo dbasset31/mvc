@@ -7,18 +7,17 @@ if(isset($_POST["message"]) && !empty($_POST["message"]))
 }
 ?>
 
-<div class="card mt-5 tchat">    
+<div class="card mt-5 tchat ombre">    
     <div class="card-header">
         <h2>TchatBox</h2>
     </div>
     <div id="message">
         <?php foreach ($Mess as $message) { ?>
-            <div class="card-header container ">
-                <div class="bg-dark card-header">
+            <div class="carte-head container ">
+                <div class="bg-dark carte-head p-0">
                     <p><?php echo $message->autheur; ?> dit : </p>
-                    <p class="d-flex bg-message justify-content-start card-body"><?php echo $message->message; ?></p>
+                    <p class="d-flex bg-message justify-content-start w-100 flex-wrap carte-mess" style=""><?php echo $message->message; ?></p>
                     <p class="d-flex justify-content-end"><?php echo "à : ".$message->date; ?></p>
-                    
                 </div>
             </div>
             <?php } ?>
@@ -28,7 +27,7 @@ if(isset($_POST["message"]) && !empty($_POST["message"]))
     <div class="container">
         <div class="container mt-4 ">
             <form method="post" class=" d-flex  column">
-            <textarea id="content" name="message" maxlength="255"></textarea>
+            <textarea id="content" wrap="hard" cols="32" name="message" maxlength="255"></textarea>
             <p><span id="counterBlock"> </span> / 255 Characters</p>
             <input type="submit" class="w-50 ml-auto mb-2" value="Envoyer !" />
             </form>
@@ -40,7 +39,7 @@ if(isset($_POST["message"]) && !empty($_POST["message"]))
         <div class="container">
         <div class="container mt-4 ">
             <form method="post" class=" d-flex  column">
-            <textarea id="content" name="message" maxlength="255" placeholder="Vous devez être connecter pour poster un message !!" readonly></textarea>
+            <textarea id="content" name="message" maxlength="255" placeholder="Vous devez être connecter pour poster un message !!" disabled></textarea>
             <p><span id="counterBlock"> </span> / 255 Characters</p>
             </form>
         </div>

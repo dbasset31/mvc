@@ -14,9 +14,10 @@
             <div class="row">
               <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
                 <div class="card card-signin my-5">
-                  <div class="card-body">
+                  <div class="card-body ombre">
                     <h4 class="card-title text-center">Sign In</h4>
-                    <p class="error"><?php $txtManager->DisplayText($data); ?></p>
+                    <?php if($data == "#register_success") { ?><p class="so_succ"><?php $txtManager->DisplayText($data)?></p>
+                      <?php } else { ?><p class="so_fail"><?php $txtManager->DisplayText($data);};?></p>
                     <form class="form-signin" method="post" action="/utilisateur/login">
                       <div class="form-label-group">
                         <label for="inputEmail">Nom de compte :</label>

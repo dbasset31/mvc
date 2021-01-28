@@ -1,6 +1,11 @@
-     /* * {
-    border: 1px dashed red !important;
-}        */
+@font-face {
+    font-family: "Internet Regular";
+    src: url("/vendor/font/LTInternet-Regular.ttf");
+  }
+    * :not(.fas, .far, .fa) {
+    /* border: 1px dashed red !important; */
+    font-family: "Internet Regular" !important;
+}
 
 body {
 	margin: 0;
@@ -87,14 +92,61 @@ footer {
 
 @media screen and (max-width: 640px) {
     .menu_e {
-      display:none;
+      display:none !important;
       
     }
-  }
+}
 
-  @media screen and (min-width: 641px) {
+@media screen and (min-width: 641px) {
     .li_menu {
-      display:none;
+      display:none !important;
       
     }
-  }
+}
+
+.carte-head {
+    border: 1px solid rgba(0,0,0,.125) !important;
+    padding : .75rem 1.25rem;
+    border-radius: calc(.25rem - 1px) calc(.25rem - 1px) 0 0;
+    background-color: rgba(0,0,0,.03);
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+}
+
+.carte {
+    border: 1px solid rgba(0,0,0,.125) !important;
+    border-top: none !important;
+    padding : .75rem 1.25rem;
+    border-radius:  0 0 calc(.45rem - 2px) calc(.45rem - 2px);
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+    
+}
+
+.carte-mess {
+    border: 1px solid rgba(0,0,0,.125) !important;
+    border-top: none !important;
+    overflow-x: hidden !important;
+    padding : .75rem 1.25rem;
+    border-radius:  calc(4rem - 8px) calc(4rem - 8px) calc(4rem - 8px) calc(4rem - 8px);
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+}
+
+.so_succ {
+    color: #3bff79 !important;
+    font-size: 22px !important;
+    font-weight: bold !important;
+}
+
+.so_fail {
+    color: red !important;
+    font-size: 22px !important;
+    font-weight: bold !important;
+}
+.ombre
+{
+    -webkit-box-shadow: 7px 5px 52px 6px rgba(145,140,145,1);
+    -moz-box-shadow: 7px 5px 52px 6px rgba(145,140,145,1);
+    box-shadow: 7px 5px 52px 6px rgba(145,140,145,1);
+}
+#content{
+    resize: none !important;
+}

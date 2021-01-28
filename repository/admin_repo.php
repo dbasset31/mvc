@@ -2,6 +2,7 @@
 include_once "config/bdd.php";
 include_once "model/Utilisateur_model.php";
 include_once "model/News_model.php";
+include_once "model/Pages_model.php";
 
 class Admin_repo
 {
@@ -63,7 +64,7 @@ class Admin_repo
         $db = $this->bdd;
         $contenu = htmlspecialchars($contenu);
         $sqlInsert = "INSERT INTO pages (titre, contenu, url, admin, connected) VALUES (?,?,?,?,?)";
-        $result = $this->bdd->Request($sqlInsert,array($titre, ".$contenu.", $url, $admin, $connect));
+        $result = $this->bdd->Request($sqlInsert,array($titre, $contenu, $url, $admin, $connect));
         $check_insert = $result->rowCount();
                 
         if ($check_insert != 1)
@@ -76,5 +77,17 @@ class Admin_repo
         {
             return "#create_page_success";
         }
+    }
+    function liste_page() 
+    {
+        $sql = "SELECT * FROM pages";
+        $result = $this->bdd->Request($sql,null);
+        $donnes = $result->fetchALL();
+        $objects = array();
+        foreach ($donnes as $ob)
+        {
+            array_push($objects, new Pages_model($ob));
+        }
+        return $objects;
     }
 }

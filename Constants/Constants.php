@@ -68,7 +68,7 @@ $txtManager = new TextManager();
 $txtManager->AddTxt("#register_userNonInserted", "Il y a eu une problème lors de la création du compte");
 $txtManager->AddTxt("#register_success", "Compte créer avec succès");
 $txtManager->AddTxt("#register_passwordDoesntMatch", "les mots de passe ne correspondent pas.");
-$txtManager->AddTxt("#register_userExist", "L'utilisateur existe déjà");
+$txtManager->AddTxt("#register_userExist", "Le nom de compte est déjà utilisé");
 ////////////////////////////////////////////////////////////END REGISTER////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////LOGIN////////////////////////////////////////////////////////
 $txtManager->AddTxt("#login_userNotEx", "L'utilisateur n'existe pas.");
@@ -77,7 +77,7 @@ $txtManager->AddTxt("#login_pwdFail", "le mot de passe est incorrecte.");
 //////////////////////////////////////////////////////////Modif Profil//////////////////////////////////////////////////
 $txtManager->AddTxt("#pseudo_modif_ok", "Pseudo modifié avec succès !.");
 $txtManager->AddTxt("#pseudo_crit_fail", "Impossible de modifier le pseudo, veuillez réessayer, si le problème persiste, contactez un administrateur.");
-$txtManager->AddTxt("#pseudo_exist", "Le pseudonyme existe déjà.");
+$txtManager->AddTxt("#pseudo_exist", "Le pseudonyme est déjà pris.");
 ////////////////////////////////////////////////////////END MODIF PROFIL////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////Modif nouvelle /////////////////////////////////////////////////////
 $txtManager->AddTxt("#new_modif_ok", "Nouvelle modifiée avec succès !");
@@ -116,4 +116,9 @@ $txtManager->AddTxt("#update_solde_ok", "Achat réussi, votre nouveau solde est 
 $txtManager->AddTxt("#update_solde_fail", "Echec de l'achat, veuillez contacter un administrateur.");
 $txtManager->AddTxt("#code_fail", " est erroné ou déjà utilisé. Si ce n'est pas le cas, contactez un administrateur.");
 ////////////////////////////////////////////////////////END Update Solde /////////////////////////////////////////////////////
+////////////////////////////////////////////////////////Delete Page /////////////////////////////////////////////////////
+$txtManager->AddTxt("#page_delete_succes", "Page supprimée avec succès ! ");
+$txtManager->AddTxt("#page_delete_fail", "Echec de la suppression !");
+////////////////////////////////////////////////////////END Delete Page /////////////////////////////////////////////////////
+
 ?>

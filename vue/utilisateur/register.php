@@ -12,9 +12,9 @@
           <div class="row">
             <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
               <div class="card card-signin my-5">
-                <div class="card-body text-center">
+                <div class="card-body text-center ombre">
                   <h5 class="card-title text-center">Register</h5>
-                  <p class="error w-100"><?php $txtManager->DisplayText($data); ?></p>
+                  <p class="so_fail"><?php $txtManager->DisplayText($data);?></p>
                   <form class="form-register" method="post" action="/utilisateur/register">
                     <div class="form-label-group">
                     <label for="inputEmail">Nom de compte</label>
@@ -62,7 +62,7 @@
 
                     <div class="form-label-group">
                     <label for="pet-select">Choisissez votre sexe :</label><br>
-                    <select name="sexe" id="Sexe-select" form-control required>
+                    <select name="sexe" id="Sexe-select" class="form-control" required>
                     <option value="">--Veuillez selectionner votre sexe--</option>
                     <option value="Homme">Homme</option>
                     <option value="Femme">Femme</option>

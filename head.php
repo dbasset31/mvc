@@ -14,8 +14,9 @@
             p{color: <?php echo $styles[0]->couleur_text ?> !important;}
             label{color: <?php echo $styles[0]->label ?> !important;}
             header{background-color: <?php echo $styles[0]->header_color ?> !important;}
-            .bg-message{background-color: rgba(83, 160, 39, 0.63);}
-            .tchat{max-height: 50vh;}
+            .bg-message{background-color: #DCDCDC;
+            color : #212529 !important;}
+            .tchat{max-height: 70vh;}
             #message{ overflow: auto;}
             footer{background-color: <?php echo $styles[0]->footer_color ?> !important}
         </style>

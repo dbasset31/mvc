@@ -7,6 +7,7 @@ include_once "model/News_model.php";
 include_once "repository/utilisateurs_repo.php";
 include_once "repository/settings_repo.php";
 include_once "model/settings_model.php";
+include_once "repository/page_repo.php";
 
 class Admin_controller extends controller{
     private $admin_repo=null;
@@ -15,6 +16,7 @@ class Admin_controller extends controller{
         $this->news_repo = new News_repo();
         $this->utilisateur_repo = new Utilisateur_repo();
         $this->settings_repo = new Settings_repo();
+        $this->page_repo = new Pages_repo();
       
        
         $this->CheckAdmin();
@@ -187,4 +189,27 @@ class Admin_controller extends controller{
     
                     }
         }
+        function liste_page() {
+        
+            $result = $this->admin_repo->liste_page();
+            return $this->view($result);
+        }
+
+        function delete_page($id)
+    {
+                global $txtManager;
+                if($this->page_repo->GetById($id) != null)
+                    $result = $this->page_repo->delete($id);
+                else
+                {
+                    return $this->otherView("liste_page",$this->admin_repo->liste_page());
+                }
+                
+                if ($txtManager->Compare($result,"#page_delete_succes"))
+                {                    
+                    return $this->otherView("liste_page", array($result, $this->admin_repo->liste_page()));
+                }
+                else 
+                    return $this->otherView("liste_page", $result);
+    }
 }

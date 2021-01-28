@@ -25,8 +25,8 @@
               $user = $data;
             }
             $txtManager->DisplayText($msg);?>            
-
-            <table border="1" width="100%">
+            <div class="table-responsive">
+            <table border="1" class="table table-dark table-hover" width="100%">
               <tr>
                 <th>ID</th>
                 <th>Nom utilisateur</th>
@@ -40,8 +40,8 @@
               
                 <td><?php echo $card->ID ?></td>
                 <td><?php echo $card->identifiant ?></td>
-                <td><?php echo "<a href='/admin/edit_user/".$card->ID."'>Modifier</a>"?></td>
-                <td><?php echo "<a href='/admin/delete_user/".$card->ID."' onclick='AskDelete(".$card->ID.",event)'>Supprimer</a>"?></td>
+                <td><?php echo "<a href='/admin/edit_user/".$card->ID."'><i class='fas li_menu fa-pencil-alt'></i><span class='menu_e'>Modifier</span></a>"?></td>
+                <td><?php echo "<a href='/admin/delete_user/".$card->ID."' onclick='AskDelete(".$card->ID.",event)'><i class='far li_menu fa-trash-alt'></i><span class='menu_e'>Supprimer</span></a>"?></td>
               </tr>
             
               <?php 

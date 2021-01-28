@@ -9,15 +9,14 @@
             
         </header>
         <main>
-        
             <div class="row justify-content-around">
-                <div class = "card pr-0 pl-0 mt-5 mb-5 col-lg-7 col-md-12 box">
-                    <div class="card-header w-100">
+                <div class = "pr-0 pl-0 mt-5 col-lg-7 col-md-12 mb-5 ombre">
+                    <div class="carte-head w-100">
                         <h2>Mon espace membre</h2>
                     </div>
                     <?php $date = date_create($data->naissance); ?>
-                    <div class="row d-flex align-items-center mt-5 ">
-                        <div class="col-md-8 align-items-center justify-content-center ml-5">
+                    <div class="row d-flex  mr-0 ml-0 pl-0 pr-0 align-items-center carte">
+                        <div class="col-md-8  mt-3 align-items-center justify-content-center ml-3">
                             <p>Bienvenue dans votre compte <b><?php echo strtoupper($data->nom); echo " ".$data->prenom." !";?></b> Voici vos informations</p>
                             <p>Nom : <b><?php echo $data->nom;?></b></p>
                             <p>Prénom : <b><?php echo $data->prenom;?></b></p>
@@ -28,7 +27,7 @@
                             <p>Vous êtes inscrit depuis le : <b><?php echo $data->inscription;?></b></p>
                             <p>Le solde de votre compte est de : <b><?php echo $data->solde;?> €.</b></p>
                             <!-- <p>info : <?php //echo $data->info(); ?> -->
-                            <p class="pt-5"><a class = "btn btn-sm btn-success" href = "modifier"><i class = "glyphicon glyphicon-edit"></i> Modifier votre profil</a>
+                            <p class="pt-3"><a class = "btn btn-sm btn-success" href = "modifier"><i class = "glyphicon glyphicon-edit"></i> Modifier votre profil</a>
                                 <a class = "btn btn-sm btn-info" href = "logout"><i class = "glyphicon glyphicon-off"></i> Déconnexion</a></p>
                         </div>
                         <div class="col-md-3 avatar-compte d-flex justify-content-end">

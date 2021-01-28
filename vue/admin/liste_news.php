@@ -26,29 +26,30 @@
               
              }
             $txtManager->DisplayText($msg);?>
-
-            <table border="1" width="100%">
-              <tr>
-                <th>ID</th>
-                <th>Titre</th>
-                <th>Contenu</th>
-              </tr>
-              <?php 
-                foreach ($news as $card)
-                { 
-              ?>
-              <tr>
-                <td><?php echo $card->ID ?></td>
-                <td><?php echo $card->titre ?></td>
-                <td><?php echo $card->contenu ?></td>
-                <td><?php echo "<a href='/admin/edit_new/".$card->ID."'class='lien-nav'>modifier</a>" ?>
-                <td><?php echo "<a href='/admin/delete_new/".$card->ID."'class='lien-nav' onclick='AskDelete(".$card->ID.",event)'>Supprimer</a>" ?>
-              </tr>
-            
-              <?php 
-              }
-              ?>
+            <div class="table-responsive">
+              <table border="1" width="100%" class="table table-hover table-dark">
+                <tr>
+                  <th >ID</th>
+                  <th >Titre</th>
+                  <th >Contenu</th>
+                </tr>
+                <?php 
+                  foreach ($news as $card)
+                  { 
+                ?>
+                <tr>
+                  <td ><?php echo $card->ID ?></td>
+                  <td ><?php echo $card->titre ?></td>
+                  <td ><?php echo $card->contenu ?></td>
+                  <td ><?php echo "<a href='/admin/edit_new/".$card->ID."'class='lien-nav'><i class='fas li_menu fa-pencil-alt'></i><span class='menu_e'>Modifier</span></a>" ?>
+                  <td ><?php echo "<a href='/admin/delete_new/".$card->ID."'class='lien-nav' onclick='AskDelete(".$card->ID.",event)'><i class='far li_menu fa-trash-alt'></i><span class='menu_e'>Supprimer</span></a>" ?>
+                </tr>
+              
+                <?php 
+                }
+                ?>
               </table>
+            </div>
           </div>
         </div>
         <!-- /.container-fluid -->
