@@ -1,5 +1,6 @@
 <?php
-$dataMess = new Tchat();
+include_once "controller/tchat_controller.php";
+$dataMess = new Tchat_controller();
 $Mess = $dataMess->message();
 if(isset($_POST["message"]) && !empty($_POST["message"]))
 {
@@ -12,24 +13,16 @@ if(isset($_POST["message"]) && !empty($_POST["message"]))
         <h2>TchatBox</h2>
     </div>
     <div id="message">
-        <?php foreach ($Mess as $message) { ?>
-            <div class="carte-head container ">
-                <div class="bg-dark carte-head p-0">
-                    <p><?php echo $message->autheur; ?> dit : </p>
-                    <p class="d-flex bg-message justify-content-start w-100 flex-wrap carte-mess" style=""><?php echo $message->message; ?></p>
-                    <p class="d-flex justify-content-end"><?php echo "à : ".$message->date; ?></p>
-                </div>
-            </div>
-            <?php } ?>
+        
     </div>
     <?php if(isset($_SESSION['Connected']))
     { ?>
     <div class="container">
         <div class="container mt-4 ">
-            <form method="post" class=" d-flex  column">
+            <form method="post" id="form-tchat" class=" d-flex  column">
             <textarea id="content" wrap="hard" cols="32" name="message" maxlength="255"></textarea>
             <p><span id="counterBlock"> </span> / 255 Characters</p>
-            <input type="submit" class="w-50 ml-auto mb-2" value="Envoyer !" />
+            <input type="submit" class="w-50 ml-auto mb-2" id="submitmsg" onclick="envoi(event)" value="Envoyer !" />
             </form>
         </div>
     </div>
@@ -46,7 +39,7 @@ if(isset($_POST["message"]) && !empty($_POST["message"]))
     </div>
     <?php } ?>
 </div>
-<script>
+<script type="text/javascript">
 // selection de l'element textarea(id #content) et l'élement #counterBlock
 var textarea = document.querySelector('#content');
 var blockCount = document.getElementById('counterBlock');
@@ -62,8 +55,70 @@ function count() {
 textarea.addEventListener('keyup', count);
 count();
 
-//scrollbar tchat en bas
-element = document.getElementById('message');
-element.scrollTop = element.scrollHeight;
+function envoi(e) {
+    e.preventDefault();
+    let data = $("#form-tchat").serialize();
+    $.ajax(
+        {
+            url: "/envoiTchat.php",
+            method: "POST",
+            data: data,
+            success: function(data,textStatus,xhr)
+            {
+               refresh(data);
+                //scrollbar tchat en bas
+                element = document.getElementById('message');
+                element.scrollTop = element.scrollHeight;
+                $("#content").val("");
+            },
+            error: function(xhr,textStatus,error)
+            {
+                alert("error");
+            }
+        }
+    );
+    //  alert(data);
+}
+
+function refresh(data){
+    
+    $("#message").html(data)
+}
+function init() 
+{
+    setInterval(() => {
+        $.ajax(
+        {
+            url: "/getChat.php",
+            method: "GET",
+            success: function(data,textStatus,xhr)
+            {
+               refresh(data);
+                //scrollbar tchat en bas
+                element = document.getElementById('message');
+                element.scrollTop = element.scrollHeight;
+            },
+            error: function(xhr,textStatus,error)
+            {
+                alert("error");
+            }
+        }
+    );
+    }, 1000);
+    }
+
+$("#content").keypress(function (e) {
+    if(e.which == 13)
+    {
+        if(!e.shiftKey) {        
+            envoi(e);
+        }
+        else{
+            // $("#content").val($("#content").val()+"\r\n");
+        }
+        // e.preventDefault();
+    }
+});
+init();
 </script>
 

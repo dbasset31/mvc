@@ -75,13 +75,13 @@ if (file_exists ($controllerToCall))
     }
     else 
     {
-        header('location: /error/perdu');
+        // header('location: /error/perdu');
     }
     
 }
 else 
 {
-    header('location: /error/perdu');
+    // header('location: /error/perdu');
 }
 
 ?>

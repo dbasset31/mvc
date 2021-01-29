@@ -20,5 +20,28 @@ class Pages_model
         $this->admin = $arrayInfos[4];
         $this->connected = $arrayInfos[5];
     }
+
+    function SetNew($page_titre, $page_contenu, $page_url, $page_connect,$page_admin) 
+    {
+        $pageTitre = $page_titre;
+        $pageContenu = htmlspecialchars($page_contenu);
+        $pageurl = $page_url;
+        $pageAdmin = $page_admin;
+        $pageConnect = $page_connect;
+            $db = $this->bdd;
+            $sqlUpdate = "UPDATE page SET titre= ? , contenu=?, url=?, admin=?,connected=? WHERE id= ?";
+            $result = $db->Request($sqlUpdate,array($pageTitre,$pageContenu,$pageurl,$pageAdmin,$pageConnect, $this->ID));
+            $check_insert = $result->rowCount();
+            if ($check_insert > 0)
+            {
+                $this->titre = $pageTitre;
+                $this->contenu = $pageContenu;
+                $this->url = $pageurl;
+                $this->admin = $pageAdmin;
+                $this->connected = $pageConnect;
+                return true;
+            }
+            return false;
+    }
     
 }

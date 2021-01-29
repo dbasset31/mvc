@@ -9,6 +9,7 @@
             
         </header>
         <main>
+        <?php //session_destroy(); header("location: /utilisateur/login"); ?>
             <p>Deconnexion</p>
         </main>
     </body>

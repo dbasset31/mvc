@@ -22,13 +22,14 @@
                             {
                                 if($data == "#update_solde_fail")
                                 {
-                                    $txtManager->DisplayText($data);
+                                    echo "<p class='so_fail'>";
+                                    $txtManager->DisplayText($data); echo "</p>";
                                 }
                             }
                             else {
                                 if($data[1] == "#code_fail")
                                 {
-                                    echo "<p class='error'>Le code : ".$data[0]."";
+                                    echo "<p class='so_fail'>Le code : ".$data[0]."";
                                     $txtManager->DisplayText($data[1]); echo "</p>";
                                 }
                                 else {

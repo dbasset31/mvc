@@ -212,4 +212,23 @@ class Admin_controller extends controller{
                 else 
                     return $this->otherView("liste_page", $result);
     }
+
+    function edit_page($id)
+    {
+
+                $page_model = $this->page_repo->GetById($id);
+                if (isset($_POST['titre']))
+                {
+                    if($_POST['Connexion'] == "on")
+                        $connect=1;
+                    else 
+                        $connect=0;
+                    if($_POST['admin'] == "on")
+                        $admin=1;
+                        else 
+                            $admin=0;
+                    return $this->view($this->page_repo->modif($id, $_POST['titre'], $_POST['contenu'],$_POST['url'],$admin,$connect));
+                }
+                return $this->view($page_model);
+    }
 }

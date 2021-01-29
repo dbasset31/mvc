@@ -16,9 +16,15 @@
                             <h2>Modifier Avatar</h2>
                         </div>
                         <div class="carte">
-                            <?php if($data == "#avatar_modif_ok"){ ?>
-                                <p class="so_succ"><?php $txtManager->DisplayText($data);}else {?></p>
-                                <p class="so_fail"><?php $txtManager->DisplayText($data);}?></p>
+                            <?php if(isset($data)){
+                                    if($data == "#avatar_modif_ok")
+                                    { ?>
+                                    <p class="so_succ"><?php $txtManager->DisplayText($data);
+                                    }else 
+                                    {?></p>
+                                        <p class="so_fail"><?php $txtManager->DisplayText($data);}?></p>
+                                        <?php 
+                            }?>
                             <form action="/utilisateur/avatar" method="post" enctype="multipart/form-data">
                                 <p>Selectionnez l'image à upload:</p>
                                 <input type="file" name="fileToUpload" id="fileToUpload">

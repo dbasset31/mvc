@@ -49,6 +49,7 @@ class Utilisateur_controller extends controller{
     }
     
      function modifier() {
+        $this->CheckConnect();
         if (isset($_SESSION['Connected']))
         {
              if (isset($_POST['pseudo']))
@@ -59,82 +60,88 @@ class Utilisateur_controller extends controller{
             return $this->otherView("login");
      }
 
-     function avatar() {
+    function avatar() 
+    {
+        $this->CheckConnect();
         $idUser = $this->utilisateurs_repo->GetById($_SESSION['Connected']->ID);
         $t = microtime(true);
         $micro = sprintf("%06d",($t - floor($t)) * 1000000);
         $d = new DateTime( date('Y-m-d H:i:s.'.$micro, $t) );
-        if (isset($_SESSION['Connected']))
+        if (isset($_POST["submit"]))
         {
-            if (!empty($_POST["submit"]))
+            if (!empty($_FILES["fileToUpload"]['name']))
             {
-                if (isset($_POST["submit"]))
-                {
-                    $target_dir = "uploads/avatars/";
-                    $target_file = $target_dir .$idUser->ID."_".$d->format("d-m-Y_H-i-s_u")."-".rand(1465,9894)."-". basename(str_replace(" ","_",$_FILES["fileToUpload"]["name"]));
+                $target_dir = "uploads/avatars/";
+                $target_file = $target_dir .$idUser->ID."_".$d->format("d-m-Y_H-i-s_u")."-".rand(1465,9894)."-". basename(str_replace(" ","_",$_FILES["fileToUpload"]["name"]));
 
-                    $uploadOk = 1;
-                    $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
-                    // Vérification s'il s'agit d'une vrai image
-                    if(isset($_POST["submit"])) 
+                $uploadOk = 1;
+                $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+                // Vérification s'il s'agit d'une vrai image
+                if(isset($_POST["submit"])) 
+                {
+                    if(!empty($_FILES["fileToUpload"]["tmp_name"]))
                     {
-                        if(!empty($_FILES["fileToUpload"]["tmp_name"]))
-                        {
-                            $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
-                            if($check !== false) {
-                                $uploadOk = 1;
-                            } else {
-                                $uploadOk = 0;
-                                $result = "#unknow_img";
-                                return $this->view($result);
-                            }
+                        $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
+                        if($check !== false) {
+                            $uploadOk = 1;
+                        } else {
+                            $uploadOk = 0;
+                            $result = "#unknow_img";
+                            return $this->view($result);
                         }
                     }
-                    // Vérification si le fichier existe
-                    if (file_exists($target_file)) {
-                    $uploadOk = 0;
-                    }
-
-                    // Verification de la taille
-                    if ($_FILES["fileToUpload"]["size"] > 8000000) {
-                    $uploadOk = 0;
-                    $result = "#size_trop_grande";
-                    return $this->view($result);
-                    }
-
-                    // Autorisation format JPG PNG GIF
-                    if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-                    && $imageFileType != "gif" ) {
-                    $uploadOk = 0;
-                    $result = "#format_not_allowed";
-                    return $this->view($result);
-                    }
-
-                    // Verification si $uploadOD est à 0
-                    if ($uploadOk == 0) {
-                    return $this->view("#avatar_modif_fail");
-                    // Si tout est ok, on upload
-                    } else {
-                    if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-                        $retour = "#avatar_modif_ok";
-                        return $this->view($this->utilisateurs_repo->modif_avatar($target_file));
-                    } else { //Sinon on upload pas et on donne une erreur
-                        return $this->view("#avatar_modif_fail");
-                    }
-                    }
                 }
-                else
-                return $this->view();
+                // Vérification si le fichier existe
+                if (file_exists($target_file)) {
+                $uploadOk = 0;
+                }
+
+                // Verification de la taille
+                if ($_FILES["fileToUpload"]["size"] > 8000000) {
+                $uploadOk = 0;
+                $result = "#size_trop_grande";
+                return $this->view($result);
+                }
+
+                // Autorisation format JPG PNG GIF
+                if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+                && $imageFileType != "gif" ) {
+                $uploadOk = 0;
+                $result = "#format_not_allowed";
+                return $this->view($result);
+                }
+
+                // Verification si $uploadOD est à 0
+                if ($uploadOk == 0) {
+                return $this->view("#avatar_modif_fail");
+                // Si tout est ok, on upload
+                } else {
+                if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+                    $retour = "#avatar_modif_ok";
+                    return $this->view($this->utilisateurs_repo->modif_avatar($target_file));
+                } else { //Sinon on upload pas et on donne une erreur
+                    return $this->view("#avatar_modif_fail");
+                }
+                }
             }
-            $result = "#empty_avatar";
-            return $this->view($result);
+            else
+            {
+                $result = "#empty_avatar";
+                return $this->view($result);
+            }
         }
-        header('Location: /utilisateur/login');
+        else
+        {
+            return $this->view();
+        }
     }
 
-    function logout() { 
+    function logout() 
+    { 
+        $this->CheckConnect();
         session_destroy();
-        header('Location: /utilisateur/login');
+        header("location: /utilisateur/login");
+        return $this->otherview("login");
     }
 
     function register() { 
