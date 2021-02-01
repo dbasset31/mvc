@@ -30,11 +30,28 @@
             
             <br>
             <label for="titre">Contenu:</label>
-            <textarea id="summernote" name="contenu"><?= htmlspecialchars($news->contenu); ?></textarea>
+            <textarea id="summernote" name="contenu"><?= $news->contenu; ?></textarea>
             <script>
-    $(document).ready(function() {
-        $('#summernote').summernote();
-    });
+    $('#summernote').summernote({
+        placeholder: '',
+        tabsize: 2,
+        height: 400,
+        // toolbar
+      toolbar: [
+        ['style', ['style']],
+        ['font', ['bold', 'italic', 'underline', 'clear']],
+        // ['font', ['bold', 'italic', 'underline', 'strikethrough', 'superscript', 'subscript', 'clear']],
+        ['fontname', ['fontname']],
+        ['fontsize', ['fontsize']],
+        ['color', ['color']],
+        ['para', ['ul', 'ol', 'paragraph']],
+        ['height', ['height']],
+        ['table', ['table']],
+        ['insert', ['link', 'picture', 'hr']],
+        ['view', ['fullscreen']],
+        ['help', ['help']]
+      ],
+      });
   </script>
             <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Valider</button>
             </form>

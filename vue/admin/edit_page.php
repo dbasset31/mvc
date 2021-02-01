@@ -46,7 +46,7 @@
             </div>
             <label for="titre">Contenu:</label>
             
-            <textarea id="summernote" name="contenu"><?=  htmlspecialchars_decode($page->contenu) ?></textarea>
+            <textarea id="summernote" name="contenu"><?=  $page->contenu ?></textarea>
 
             <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Valider</button>
             </div>
@@ -68,7 +68,22 @@
       $('#summernote').summernote({
         placeholder: '',
         tabsize: 2,
-        height: 400
+        height: 400,
+        // toolbar
+      toolbar: [
+        ['style', ['style']],
+        ['font', ['bold', 'italic', 'underline', 'clear']],
+        // ['font', ['bold', 'italic', 'underline', 'strikethrough', 'superscript', 'subscript', 'clear']],
+        ['fontname', ['fontname']],
+        ['fontsize', ['fontsize']],
+        ['color', ['color']],
+        ['para', ['ul', 'ol', 'paragraph']],
+        ['height', ['height']],
+        ['table', ['table']],
+        ['insert', ['link', 'picture', 'hr']],
+        ['view', ['fullscreen']],
+        ['help', ['help']]
+      ],
       });
     </script>
 </html>

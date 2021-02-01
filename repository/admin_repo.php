@@ -40,9 +40,10 @@ class Admin_repo
 
     function add_new($titre,$contenu) 
     {
-        $titre = $this->bdd->secure($titre);
+        
         $db = $this->bdd;
-        $contenu = htmlspecialchars($contenu);   
+        $titre = $this->bdd->secure($titre);
+        $contenu = $this->bdd->secure($contenu);   
         // var_dump($contenu);
         // die();    
         $sqlInsert = "INSERT INTO news (titre, contenu, date) VALUES (?,?,?)";
@@ -60,17 +61,19 @@ class Admin_repo
 
     function create_page($titre,$contenu,$url,$admin,$connect) 
     {
-        $titre = $this->bdd->secure($titre);
+        $titre = $titre;
         $db = $this->bdd;
-        $contenu = htmlspecialchars($contenu);
+        $titre = $this->bdd->secure($titre);
+        $contenu = $this->bdd->secure($contenu);
+        $url = $this->bdd->secure($url);
+        $admin = $this->bdd->secure($admin);
+        $connect = $this->bdd->secure($connect);
         $sqlInsert = "INSERT INTO pages (titre, contenu, url, admin, connected) VALUES (?,?,?,?,?)";
         $result = $this->bdd->Request($sqlInsert,array($titre, $contenu, $url, $admin, $connect));
         $check_insert = $result->rowCount();
                 
         if ($check_insert != 1)
         {
-            var_dump(array($titre, ".$contenu.", $url, $admin, $connect));
-        
             return "#page_NonInserted";
         }
         else

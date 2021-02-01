@@ -12,7 +12,7 @@ class Utilisateur_repo
     }
     function login($identifiant,$pass) 
     {
-        $identifiant = $this->bdd->secure($identifiant);
+        $identifiant = $identifiant;
         $sql = "SELECT * FROM users WHERE identifiant= ?";
         $result = $this->bdd->Request($sql, array($identifiant));
         $check_user = $result->fetchALL();
@@ -76,6 +76,7 @@ class Utilisateur_repo
         $sql = "SELECT * FROM users WHERE id=?";
         $result = $this->bdd->Request($sql,array($args));
         $donnees = $result->fetchALL();
+
         return new utilisateur_model($donnees[0]);
     }
 
@@ -118,11 +119,13 @@ class Utilisateur_repo
         $sqlSelect = "SELECT * FROM users WHERE id= ?";
         $result = $this->bdd->Request($sqlSelect, array($id));
         $check_user = $result->fetchALL();
-       
+        $tabSearch = array("&lt;p&gt;&amp;lt;script&amp;gt;","&amp;lt;/script&amp;gt;&lt;br&gt;&lt;/p&gt;","<script>","</script>","&lt;script&gt;","&lt;/script&gt;");
+        $tabRepl = array("[REMOVED]","[/REMOVED]","[REMOVED]","[/REMOVED]","[REMOVED]","[/REMOVED]");
+        $users = str_replace($tabSearch, $tabRepl, $check_user[0]);
         if ($result->rowCount() > 0)
         {
-           
-            $userModel = new Utilisateur_model($check_user[0]);
+           var_dump($check_user[0]);
+            $userModel = new Utilisateur_model($users);
             $userModel->SetUser($user, $email, $pseudo, $sexe, $adm, $nom, $prenom, $naissance, $inscription, $avatar);
             return array("#user_modif_ok",$userModel);
         }

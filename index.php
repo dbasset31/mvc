@@ -31,7 +31,7 @@ $styles = $dataStyle->style();
 $url = $_SERVER['REQUEST_URI'];
 $testurl = explode("/", $url);
 $methode = "index";
-$controller = "News";
+$controller = "news";
 $args = "";
 unset($testurl[0]);
 if (count($testurl) >= 1){

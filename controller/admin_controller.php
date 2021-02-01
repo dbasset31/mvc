@@ -52,7 +52,11 @@ class Admin_controller extends Controller{
                 $news_model = $this->news_repo->GetById($id);
                 if (isset($_POST['titre']))
                 {
-                    return $this->view($this->news_repo->modif($id, $_POST['titre'], $_POST['contenu']));
+                    $tabSearch = array("&lt;p&gt;&amp;lt;script&amp;gt;","&amp;lt;/script&amp;gt;&lt;br&gt;&lt;/p&gt;","<script>","</script>","&lt;script&gt;","&lt;/script&gt;");
+                    $tabRepl = array("[REMOVED]","[/REMOVED]","[REMOVED]","[/REMOVED]","[REMOVED]","[/REMOVED]");
+                    $nouvelleTitre = str_replace($tabSearch, $tabRepl, $_POST['titre']);
+                    $nouvelleContenu = str_replace($tabSearch, $tabRepl, $_POST['contenu']);
+                    return $this->view($this->news_repo->modif($id, $nouvelleTitre, $nouvelleContenu));
                 }
                 return $this->view($news_model);
     }
@@ -60,9 +64,9 @@ class Admin_controller extends Controller{
     function edit_user($id)
     {
                 $user_model = $this->utilisateur_repo->GetById($id);
-                if (isset($_POST['id']))
+                if (isset($_POST['identifiant']))
                 {
-                    return $this->view($this->utilisateur_repo->modif_user($_POST['id'], $_POST['identifiant'], $_POST['email'], $_POST['pseudo'], $_POST['sexe'], $_POST['admin'], $_POST['nom'], $_POST['prenom'], $_POST['naissance'], $_POST['date_inscription'], $_POST['avatar']));
+                    return $this->view($this->utilisateur_repo->modif_user($id, $_POST['identifiant'], $_POST['email'], $_POST['pseudo'], $_POST['sexe'], $_POST['admin'], $_POST['nom'], $_POST['prenom'], $_POST['naissance'], $_POST['date_inscription'], $_POST['avatar']));
                 }
                 return $this->view($user_model);
     }
@@ -221,17 +225,17 @@ class Admin_controller extends Controller{
                 $page_model = $this->page_repo->GetById($id);
                 if (isset($_POST['titre']))
                 {
-                    $titre = $this->bdd->secure($_POST['titre']);
-                    $contenu = $this->bdd->secure($_POST['contenu']);
-                    $url = $this->bdd->secure($_POST['url']);
+                    $titre = $_POST['titre'];
+                    $contenu = $_POST['contenu'];
+                    $url = $_POST['url'];
                     if(isset($_POST['Connexion'])){
-                        $connect = $this->bdd->secure($_POST['Connexion']);
+                        $connect = $_POST['Connexion'];
                         $connect=1;
                     }
                     else 
                         $connect=0;
                     if(isset($_POST['admin'])){
-                        $admin = $this->bdd->secure($_POST['admin']);
+                        $admin = $_POST['admin'];
                         $admin=1;
                     }
                         else 

@@ -13,7 +13,7 @@
             <!-- Page Heading -->
             <?php
             $msg = "";
-
+            if(!empty($data)){
              if($data[0]=="#new_delete_succes" || $data[0]=="#new_delete_fail" || $data[0]=="#add_new_success" || $data[0]=="#news_NonInserted")
              {
                $msg = $data[0];
@@ -25,6 +25,7 @@
                $news = $data;
               
              }
+            }
             $txtManager->DisplayText($msg);?>
             <div class="table-responsive">
               <table border="1" width="100%" class="table table-hover table-dark">
@@ -34,19 +35,21 @@
                   <th >Contenu</th>
                 </tr>
                 <?php 
+                if(isset($news)){
                   foreach ($news as $card)
                   { 
                 ?>
                 <tr>
                   <td ><?php echo $card->ID ?></td>
                   <td ><?php echo $card->titre ?></td>
-                  <td ><?php echo $card->contenu ?></td>
+                  <td ><?php echo htmlspecialchars_decode($card->contenu) ?></td>
                   <td ><?php echo "<a href='/admin/edit_new/".$card->ID."'class='lien-nav'><i class='fas li_menu fa-pencil-alt'></i><span class='menu_e'>Modifier</span></a>" ?>
                   <td ><?php echo "<a href='/admin/delete_new/".$card->ID."'class='lien-nav' onclick='AskDelete(".$card->ID.",event)'><i class='far li_menu fa-trash-alt'></i><span class='menu_e'>Supprimer</span></a>" ?>
                 </tr>
               
                 <?php 
                 }
+              }
                 ?>
               </table>
             </div>

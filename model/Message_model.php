@@ -13,7 +13,7 @@ class Message_model
         $this->bdd = new BDD();
         $this->ID = $arrayInfos[0];
         $this->autheur = $arrayInfos[1];
-        $this->message = $arrayInfos[2];
+        $this->message = $this->bdd->secure($arrayInfos[2]);
         $this->date = $arrayInfos[3];
     }
 }

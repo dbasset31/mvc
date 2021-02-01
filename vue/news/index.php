@@ -26,7 +26,7 @@
                                         <h4><?php echo $card->titre ?></h4>
                                     </div>
                                     <div class="card-body">
-                                        <p class="card-text"><?php echo $card->contenu ?></p>
+                                        <p class="card-text"><?php echo htmlspecialchars_decode($card->contenu) ?></p>
                                     </div>
                                     <p class="d-flex justify-content-end date-news">Le : <?php echo $card->date."<br>"; ?></p>
                                     <?php 

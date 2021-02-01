@@ -4,12 +4,12 @@ class BDD
 {
     function getBDD()
     {
-        $user = "c11_dark";
-        $pass = "Darkmoi260316!";
+        $user = "root";
+        $pass = "";
         $db = null;
         try 
         {
-            $db = new PDO('mysql:host=dns01.topheberge.fr;dbname=c11_cms', $user, $pass);
+            $db = new PDO('mysql:host=localhost;dbname=mvc', $user, $pass);
         } 
         catch (PDOException $e) 
         {

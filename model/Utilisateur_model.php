@@ -70,18 +70,16 @@ class Utilisateur_model
 
     function SetUser($identifiant, $email, $pseudo, $sexe, $adm, $nom, $prenom, $naissance, $inscription, $avatar) 
     {
-      
-        //var_dump($identifiant);
         $userIdentifiant = $this->bdd->secure($identifiant);
         $userEmail = $this->bdd->secure($email);
         $userPseudo = $this->bdd->secure($pseudo);
         $userSexe = $this->bdd->secure($sexe);        
         $userNom = $this->bdd->secure($nom);
         $userPrenom = $this->bdd->secure($prenom);
-        $userNaissance = $naissance;
-        $userInscription = $inscription;
-        $userAdmin = $adm;
-        $userAvatar = $avatar;
+        $userNaissance = $this->bdd->secure($naissance);
+        $userInscription = $this->bdd->secure($inscription);
+        $userAdmin = $this->bdd->secure($adm);
+        $userAvatar = $this->bdd->secure($avatar);
             $db = $this->bdd;
             $sqlUpdate = "UPDATE users SET identifiant=? , email=? , pseudo=? , sexe=? , admin=? , nom=? , prenom=? , naissance=? , date_inscription=? , avatar=? WHERE id= ?";
             $result = $db->Request($sqlUpdate,array($userIdentifiant,$userEmail,$userPseudo,$userSexe,$adm,$userNom,$userPrenom,$userNaissance,$userInscription,$userAvatar, $this->ID));

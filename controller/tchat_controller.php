@@ -4,7 +4,7 @@ include_once "model/Utilisateur_model.php";
 include_once "model/Message_model.php";
 include_once "repository/utilisateurs_repo.php";
 
-class Tchat_controller {
+class Tchat_controller extends Controller {
     private $bdd;
     function __construct()
     {
@@ -50,7 +50,7 @@ class Tchat_controller {
         session_start();
         $idUser = $_SESSION['Connected']->ID;
         $user = $this->user_repo->GetById($idUser);
-        $message = $this->bdd->secure($message);
+        $message = $message;
         $InsertMess = "INSERT INTO message (autheur,message,date) VALUE(?,?,?)";
         $date = date("j/m/y H:i:s");
         $result = $this->bdd->Request($InsertMess,array($user->pseudo,$message,$date));

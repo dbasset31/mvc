@@ -27,7 +27,7 @@
             <?php $txtManager->DisplayText($msg); ?>
             <form method="POST" action="/admin/edit_user/<?= $user->ID ?>">
             <label for="titre">ID :</label>
-            <input type="text" name="id" value="<?= $user->ID ?>">
+            <?= $user->ID ?>
             
             <br>
             <label for="titre">nom utilisateur :</label>

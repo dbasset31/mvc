@@ -9,25 +9,34 @@ class Pages_model
     public $url;
     public $admin;
     public $connected;
+    private $tabSearch;
+    private $tabRepl;
+    private $secure;
+
 
     function __construct($arrayInfos)
     {
+        $tabSearch = array("&lt;p&gt;&amp;lt;script&amp;gt;","&amp;lt;/script&amp;gt;&lt;br&gt;&lt;/p&gt;","<script>","</script>","&lt;script&gt;","&lt;/script&gt;");
+        $tabRepl = array("[REMOVED]","[/REMOVED]","[REMOVED]","[/REMOVED]","[REMOVED]","[/REMOVED]");
+        $secure = str_replace($tabSearch, $tabRepl, $arrayInfos[2]);
         $this->bdd = new BDD();
         $this->ID = $arrayInfos[0];
-        $this->titre = htmlspecialchars_decode($arrayInfos[1]);
-        $this->contenu = htmlspecialchars_decode($arrayInfos[2]);
-        $this->url = htmlspecialchars_decode($arrayInfos[3]);
-        $this->admin = htmlspecialchars_decode($arrayInfos[4]);
-        $this->connected = htmlspecialchars_decode($arrayInfos[5]);
+        $this->titre = $arrayInfos[1];
+        $this->contenu = $secure;
+        $this->url = $arrayInfos[3];
+        $this->admin = $arrayInfos[4];
+        $this->connected = $arrayInfos[5];
     }
 
     function SetNew($page_titre, $page_contenu, $page_url, $page_connect,$page_admin) 
     {
-        $pageTitre = $this->bdd->secure($page_titre);
-        $pageContenu = $this->bdd->secure($page_contenu);
-        $pageurl = $this->bdd->secure($page_url);
-        $pageAdmin = $this->bdd->secure($page_admin);
-        $pageConnect = $this->bdd->secure($page_connect);
+        $tabSearch = array("&lt;p&gt;&amp;lt;script&amp;gt;","&amp;lt;/script&amp;gt;&lt;br&gt;&lt;/p&gt;","<script>","</script>","&lt;script&gt;","&lt;/script&gt;");
+        $tabRepl = array("[REMOVED]","[/REMOVED]","[REMOVED]","[/REMOVED]","[REMOVED]","[/REMOVED]");
+        $pageTitre = str_replace($tabSearch, $tabRepl, $page_titre);
+        $pageContenu = str_replace($tabSearch, $tabRepl, $page_titre);
+        $pageurl = str_replace($tabSearch, $tabRepl, $page_url);
+        $pageAdmin = str_replace($tabSearch, $tabRepl, $page_admin);
+        $pageConnect = str_replace($tabSearch, $tabRepl, $page_connect);
             $db = $this->bdd;
             $sqlUpdate = "UPDATE pages SET titre= ? , contenu=?, url=?, admin=?,connected=? WHERE id= ?";
             $result = $db->Request($sqlUpdate,array($pageTitre,$pageContenu,$pageurl,$pageAdmin,$pageConnect, $this->ID));
