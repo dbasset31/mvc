@@ -4,12 +4,12 @@ class BDD
 {
     function getBDD()
     {
-        $user = "root";
-        $pass = "";
+        $user = "c11_dark";
+        $pass = "Darkmoi260316!";
         $db = null;
         try 
         {
-            $db = new PDO('mysql:host=localhost;dbname=mvc', $user, $pass);
+            $db = new PDO('mysql:host=dns01.topheberge.fr;dbname=c11_cms', $user, $pass);
         } 
         catch (PDOException $e) 
         {
@@ -23,7 +23,16 @@ class BDD
 
     function secure($var)
     {
-        $var = strip_tags($var);
+        $var = str_replace("<script>","[Removed]",$var);
+        $var = str_replace("</script>","[/Removed]",$var);
+        $var = stripslashes($var);
+        $var = trim($var);
+        $var = htmlspecialchars($var);
+        return $var;
+    }
+    function secure_adm($var)
+    {
+        $var = stripslashes($var);
         $var = htmlspecialchars($var);
         return $var;
     }

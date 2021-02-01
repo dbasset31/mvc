@@ -41,14 +41,20 @@ class Pages_repo
     }
     function modif($id, $titre, $contenu, $url, $connect, $admin) 
     {     
+        $titre = $this->bdd->secure($titre);
+        $contenu = $this->bdd->secure($contenu);
+        $url = $this->bdd->secure($url);
+        $connect = $this->bdd->secure($connect);
+        $admin = $this->bdd->secure($admin);
           $db = $this->bdd;
           $sqlSelect = "SELECT * FROM pages WHERE id= ?";
           $result = $this->bdd->Request($sqlSelect, array($id));
           $check_page = $result->fetchALL();
+          $$check_page = $this->bdd->secure($check_page);
             if ($result->rowCount() > 0)
             {
                 $page = new Pages_model($check_page[0]);
-                $page->SetNew($titre, $contenu, $url, $admin, $connect);
+                $page->SetNew($titre, $contenu, $url, $connect, $admin);
                 return array("#page_modif_ok",$page);
             }
             else

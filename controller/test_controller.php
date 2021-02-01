@@ -1,5 +1,5 @@
 <?php
-class Test_controller extends controller{
+class Test_controller extends Controller{
     function __construct(){
     }
     function index() {

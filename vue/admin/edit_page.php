@@ -27,7 +27,7 @@
             <label for="titre" class="center">Titre:</label>
             <input type="text" name="titre" value="<?= $page->titre ?>">
             <br>
-            <label for="url" class="center">Url:</label>
+            <label for="url" class="center">Url: <?= "/page/vue/" ?></label>
 
             <input type="text" name="url" value="<?= $page->url ?>">
             <br>
@@ -46,7 +46,7 @@
             </div>
             <label for="titre">Contenu:</label>
             
-            <textarea id="summernote" name="contenu"><?= $page->contenu ?></textarea>
+            <textarea id="summernote" name="contenu"><?=  htmlspecialchars_decode($page->contenu) ?></textarea>
 
             <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Valider</button>
             </div>

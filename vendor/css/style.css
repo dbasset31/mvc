@@ -3,7 +3,7 @@
     src: url("/vendor/font/LTInternet-Regular.ttf");
   }
     * :not(.fas, .far, .fa) {
-    /* border: 1px dashed red !important; */
+     /* border: 1px dashed red !important;  */
     font-family: "Internet Regular" !important;
 }
 

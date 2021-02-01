@@ -1,7 +1,7 @@
 <?php
 include_once "model/item_model.php";
 include_once "repository/boutique_repo.php";
-class Boutique_controller extends controller{
+class Boutique_controller extends Controller{
      private $boutique_repo=null;
     function __construct(){
         // $this->admin_repo = new Admin_repo();

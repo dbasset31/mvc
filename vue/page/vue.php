@@ -13,9 +13,9 @@
                 <div class = "pr-0 pl-0 mt-5 col-lg-7 col-md-12 mb-5 ">
                     <div class="ombre">
                         <div class="carte-head w-100">
-                        <h1><?php echo $data->titre; ?></h1>
+                        <h1><?php echo  $data->titre; ?></h1>
                         </div>
-                        <div class="carte pt-2 d-flex column">
+                        <div class="carte pt-2 d-flex">
                             <?php echo $data->contenu; ?>
                         </div>
                     </div>

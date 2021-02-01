@@ -11,17 +11,18 @@
         <main>
             <div class="container-fluid ">
                 <div class="row justify-content-around">
-                    <div class="pr-0 pl-0 mt-5 mb-5 col-lg-7 col-md-12">
+                    <div class="pr-0 pl-0 mt-5 mb-5 col-lg-7 col-md-7">
                         <div class="ombre">
-                            <div class="w-100 carte-head">
+                            <div class="w-100 carte-head mb-0">
                                 <h2>News</h2>
                             </div>
+                            <div class="carte mt-0">
                             <?php 
                             foreach ($data[0] as $card)
                             { ?>
-                            <div class="carte">    
-                                <div class="card text-white bg-dark mb-3 mt-3 " style="max-width: 100%;">
-                                    <div class="card-header text-center"> 
+                                
+                                <div class="card text-white bg-dark mb-5 mt-2" style="max-width: 100%;">
+                                    <div class="card-header text-center mt-2"> 
                                         <h4><?php echo $card->titre ?></h4>
                                     </div>
                                     <div class="card-body">
@@ -33,13 +34,17 @@
                                         {
                                             if ($_SESSION['Connected']->admin)
                                             {
-                                                echo "<a href='/admin/edit_new/".$card->ID."' class='lien-nav'>modifier</a>" ; 
+                                                echo "<div><a href='/admin/edit_new/".$card->ID."' class='lien-nav'>modifier</a></div>" ; 
                                             }
                                         }
                                         else
+                                        {}
                                         ?>
                                 </div>
-                                <?php }
+                                    <?php }?>
+                                
+                                
+                                <?php
                                 if($data[4]==1){}
                                 else 
                                 {
@@ -52,13 +57,11 @@
                                     }?>
                             </div>
                         </div>
-                        
-                       
                     </div>
-                    <div class="col-lg-3 col-md-12 mb-5">
+                    <div class="col-lg-3 col-md-3 mb-5">
                     <?php include "tchat.php"; ?>
-                    </div>                      
-                </div>                    
+                    </div>
+                </div>
             </div>
         </main>
 

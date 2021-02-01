@@ -1,5 +1,6 @@
 <?php
 //$indexToCall = "vue/".$controller."/".$methode.".php";
+include_once "config/bdd.php";
 include_once "repository/admin_repo.php";
 include_once "model/Utilisateur_model.php";
 include_once "repository/news_repo.php";
@@ -9,9 +10,11 @@ include_once "repository/settings_repo.php";
 include_once "model/settings_model.php";
 include_once "repository/page_repo.php";
 
-class Admin_controller extends controller{
+class Admin_controller extends Controller{
     private $admin_repo=null;
+    private $bdd;
     function __construct(){
+        $this->bdd = new BDD();
         $this->admin_repo = new Admin_repo();
         $this->news_repo = new News_repo();
         $this->utilisateur_repo = new Utilisateur_repo();
@@ -215,19 +218,25 @@ class Admin_controller extends controller{
 
     function edit_page($id)
     {
-
                 $page_model = $this->page_repo->GetById($id);
                 if (isset($_POST['titre']))
                 {
-                    if($_POST['Connexion'] == "on")
+                    $titre = $this->bdd->secure($_POST['titre']);
+                    $contenu = $this->bdd->secure($_POST['contenu']);
+                    $url = $this->bdd->secure($_POST['url']);
+                    if(isset($_POST['Connexion'])){
+                        $connect = $this->bdd->secure($_POST['Connexion']);
                         $connect=1;
+                    }
                     else 
                         $connect=0;
-                    if($_POST['admin'] == "on")
+                    if(isset($_POST['admin'])){
+                        $admin = $this->bdd->secure($_POST['admin']);
                         $admin=1;
+                    }
                         else 
                             $admin=0;
-                    return $this->view($this->page_repo->modif($id, $_POST['titre'], $_POST['contenu'],$_POST['url'],$admin,$connect));
+                    return $this->view($this->page_repo->modif($id, $titre, $contenu,$url,$connect,$admin));
                 }
                 return $this->view($page_model);
     }

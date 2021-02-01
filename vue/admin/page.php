@@ -6,7 +6,7 @@
   <!-- Page Wrapper -->
   <div id="wrapper">
         <!-- End of Topbar -->
-    <?php include_once "vue/admin/menu.php" ?>
+    <?php include_once "vue/Admin/menu.php" ?>
         <!-- Begin Page Content -->
         <div class="container-fluid">
           <div id="content">
@@ -20,7 +20,7 @@
       <!-- End of Main Content -->
 
       <!-- Footer -->
-     <?php include_once "vue/admin/footer.php" ?>
+     <?php include_once "vue/Admin/footer.php" ?>
 </body>
 
 </html>

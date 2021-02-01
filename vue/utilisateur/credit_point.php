@@ -10,7 +10,7 @@
         </header>
         <main>
             <div class="container-fluid row justify-content-around">
-                <div class = "pr-0 pl-0 mt-5 col-lg-7 col-md-7 mb-5">
+                <div class = "pr-0 pl-0 mt-5 credit col-lg-7 col-md-12 mb-5">
                     <div class="ombre">
                         <div class="carte-head w-100">
                             <h2>Cediter le compte</h2>

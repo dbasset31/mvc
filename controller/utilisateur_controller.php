@@ -2,7 +2,7 @@
 //$indexToCall = "vue/".$controller."/".$methode.".php";
 include_once "repository/utilisateurs_repo.php";
 include_once "model/utilisateur_model.php";
-class Utilisateur_controller extends controller{
+class Utilisateur_controller extends Controller{
     private $utilisateurs_repo = null;
     protected $bdd=null;
     function __construct(){

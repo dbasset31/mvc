@@ -3,7 +3,7 @@
 include_once "repository/news_repo.php";
 include_once "model/News_model.php";
 
-class News_controller extends controller{
+class News_controller extends Controller{
     private $news_repo =null;
     function __construct(){
         $this->news_repo = new News_repo();

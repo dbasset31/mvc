@@ -1,6 +1,6 @@
 <?php
 include_once "repository/forum_repo.php";
-class Forum_controller extends controller{
+class Forum_controller extends Controller{
     private $forum_repo=null;
     function __construct(){
         // $this->admin_repo = new Admin_repo();

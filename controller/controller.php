@@ -1,6 +1,6 @@
 <?php
 include_once "model/Utilisateur_model.php";
-class Controller{
+class Controller {
     
     protected function view($args=null){
         $viewName = debug_backtrace()[1]['function'];

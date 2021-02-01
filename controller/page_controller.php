@@ -7,7 +7,7 @@ include_once "model/News_model.php";
 include_once "repository/utilisateurs_repo.php";
 include_once "repository/page_repo.php";
 include_once "model/Pages_model.php";
-class Page_controller extends controller
+class Page_controller extends Controller
 {
     private $admin_repo=null;
     function __construct()

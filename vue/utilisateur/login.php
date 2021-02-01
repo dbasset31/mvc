@@ -10,11 +10,11 @@
         </header>
         <main>
         <?php include_once "header.php";?>
-          <div class="container flex-grow-1">
-            <div class="row">
-              <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
-                <div class="card card-signin my-5">
-                  <div class="card-body ombre">
+          <div class="container d-flex">
+            <div class="row w-100">
+              <div class="col-sm-9 col-md-7 col-lg-5 mx-auto ">
+                <div class="card card-signin my-5 ">
+                  <div class="card-body ombre align-items-center">
                     <h4 class="card-title text-center">Sign In</h4>
                     <?php if($data == "#register_success") { ?><p class="so_succ"><?php $txtManager->DisplayText($data)?></p>
                       <?php } else { ?><p class="so_fail"><?php $txtManager->DisplayText($data);};?></p>

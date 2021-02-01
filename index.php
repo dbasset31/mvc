@@ -31,7 +31,7 @@ $styles = $dataStyle->style();
 $url = $_SERVER['REQUEST_URI'];
 $testurl = explode("/", $url);
 $methode = "index";
-$controller = "home";
+$controller = "News";
 $args = "";
 unset($testurl[0]);
 if (count($testurl) >= 1){
@@ -60,10 +60,8 @@ if (file_exists ($controllerToCall))
     
     if(method_exists($home,$methode))
     {
-       
         $viewInfo = $home ->$methode($args);
-        
-        $vueDemandee = $viewInfo->viewName; 
+        $vueDemandee = strtolower($viewInfo->viewName); 
         if (file_exists($vueDemandee))
         {
             $data = $viewInfo->data;
@@ -75,13 +73,13 @@ if (file_exists ($controllerToCall))
     }
     else 
     {
-        // header('location: /error/perdu');
+        header('location: /error/perdu');
     }
     
 }
 else 
 {
-    // header('location: /error/perdu');
+    header('location: /error/perdu');
 }
 
 ?>
