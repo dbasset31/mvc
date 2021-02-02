@@ -49,7 +49,11 @@ class Admin_controller extends Controller{
 
     function edit_new($id)
     {
-                $news_model = $this->news_repo->GetById($id);
+        if($id != "")
+        {
+            $news_model = $this->news_repo->GetById($id);
+            if($news_model !=null)
+            {
                 if (isset($_POST['titre']))
                 {
                     $tabSearch = array("&lt;p&gt;&amp;lt;script&amp;gt;","&amp;lt;/script&amp;gt;&lt;br&gt;&lt;/p&gt;","<script>","</script>","&lt;script&gt;","&lt;/script&gt;");
@@ -59,34 +63,49 @@ class Admin_controller extends Controller{
                     return $this->view($this->news_repo->modif($id, $nouvelleTitre, $nouvelleContenu));
                 }
                 return $this->view($news_model);
+            }
+            header('location: /admin/liste_news');
+        }
+        return $this->otherView("liste_news",$this->admin_repo->liste_news());
     }
 
     function edit_user($id)
     {
-                $user_model = $this->utilisateur_repo->GetById($id);
+        if($id !="")
+        {
+            $user_model = $this->utilisateur_repo->GetById($id);
+            if($user_model !=null){
                 if (isset($_POST['identifiant']))
                 {
                     return $this->view($this->utilisateur_repo->modif_user($id, $_POST['identifiant'], $_POST['email'], $_POST['pseudo'], $_POST['sexe'], $_POST['admin'], $_POST['nom'], $_POST['prenom'], $_POST['naissance'], $_POST['date_inscription'], $_POST['avatar']));
                 }
                 return $this->view($user_model);
+            }
+            else
+            {
+            header('location: /admin/utilisateurs');
+            }
+        }
+        header('location: /admin/utilisateurs');
     }
 
     function delete_user($id)
     {
         global $txtManager;
         if($this->utilisateur_repo->GetById($id) != null)
-            $result = $this->utilisateur_repo->delete($id);
-        else
         {
-            return $this->otherView("utilisateurs",$this->admin_repo->utilisateurs());
+            $result = $this->utilisateur_repo->delete($id);
+            if($result == null){
+                header('location:/admin/utilisateurs');
+            }
+            else{
+                if ($txtManager->Compare($result,"#user_delete_succes") || $txtManager->Compare($result,"#user_delete_fail") )
+                {                    
+                    return $this->otherView("utilisateurs", array($result, $this->admin_repo->utilisateurs()));
+                }
+            }
         }
-        
-        if ($txtManager->Compare($result,"#user_delete_succes"))
-        {                    
-            return $this->otherView("utilisateurs", array($result, $this->admin_repo->utilisateurs()));
-        }
-        else 
-        header('location: /admin/utilisateurs');
+        header('location:/admin/utilisateurs');
     }
 
     function delete_new($id)
@@ -151,7 +170,6 @@ class Admin_controller extends Controller{
 
         $result = $this->admin_repo->utilisateurs($data);
         return $this->view($result);
-    
     }
     
     function create_page() 
@@ -223,25 +241,29 @@ class Admin_controller extends Controller{
     function edit_page($id)
     {
                 $page_model = $this->page_repo->GetById($id);
-                if (isset($_POST['titre']))
+                if($page_model != null)
                 {
-                    $titre = $_POST['titre'];
-                    $contenu = $_POST['contenu'];
-                    $url = $_POST['url'];
-                    if(isset($_POST['Connexion'])){
-                        $connect = $_POST['Connexion'];
-                        $connect=1;
-                    }
-                    else 
-                        $connect=0;
-                    if(isset($_POST['admin'])){
-                        $admin = $_POST['admin'];
-                        $admin=1;
-                    }
+                    if (isset($_POST['titre']))
+                    {
+                        $titre = $_POST['titre'];
+                        $contenu = $_POST['contenu'];
+                        $url = $_POST['url'];
+                        if(isset($_POST['Connexion'])){
+                            $connect = $_POST['Connexion'];
+                            $connect=1;
+                        }
                         else 
-                            $admin=0;
-                    return $this->view($this->page_repo->modif($id, $titre, $contenu,$url,$connect,$admin));
+                            $connect=0;
+                        if(isset($_POST['admin'])){
+                            $admin = $_POST['admin'];
+                            $admin=1;
+                        }
+                            else 
+                                $admin=0;
+                        return $this->view($this->page_repo->modif($id, $titre, $contenu,$url,$connect,$admin));
+                    }
+                    return $this->view($page_model);
                 }
-                return $this->view($page_model);
+                header('location:/admin/liste_page');
     }
 }

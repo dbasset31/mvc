@@ -43,7 +43,7 @@
                   ?>
                   <tr>
                       <td ><?php echo $card->ID ?></td>
-                      <td ><?php echo "<a href='".$_SERVER[]."/page/vue/".$card->url."'>".$_SERVER['HTTP_HOST']."/page/vue/".$card->url ?></td>
+                      <td ><?php echo "<a href='/page/vue/".$card->url."'>".$_SERVER['HTTP_HOST']."/page/vue/".$card->url ?></td>
                       <td><?php echo $card->titre ?></td>
                       <td><?php echo $card->contenu ?></td>
                       <td><?php echo "<a href='/admin/edit_page/".$card->ID."'class='lien-nav'><i class='fas li_menu fa-pencil-alt'></i><span class='menu_e'>Modifier</span></a>" ?>

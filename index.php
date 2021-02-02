@@ -68,7 +68,7 @@ if (file_exists ($controllerToCall))
             include_once $vueDemandee;
         }
         else {
-            header('location: /error/perdu');
+            include_once $vueDemandee;
         }
     }
     else 

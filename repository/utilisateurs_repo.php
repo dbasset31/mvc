@@ -10,6 +10,7 @@ class Utilisateur_repo
     {
         $this->bdd = new BDD();
     }
+
     function login($identifiant,$pass) 
     {
         $identifiant = $identifiant;
@@ -37,8 +38,9 @@ class Utilisateur_repo
         }
     }
 
-    function register($identifiant,$pass,$pass_conf,$nom,$prenom,$naissance, $email,$pseudo, $sexe) 
+    function register($identifiant,$pass,$pass_conf,$nom,$prenom,$naissance, $email,$pseudo, $sexe,$token,$ip_user) 
     {
+        
         $identifiant = $this->bdd->secure($identifiant);
         $pass = $this->bdd->secure($pass);
         $pass_conf = $this->bdd->secure($pass_conf);
@@ -51,33 +53,68 @@ class Utilisateur_repo
         $sqlSelect = "SELECT * FROM users WHERE identifiant= ?";
         $result = $this->bdd->Request($sqlSelect, array($identifiant));
         $check_user = $result->fetchALL();
+
         if (count($check_user) == 0)
         {
-            if ($pass == $pass_conf)
+            $sqlSelectp = "SELECT * FROM users_pending WHERE identifiant= ?";
+            $resultp = $this->bdd->Request($sqlSelectp, array($identifiant));
+            $check_userp = $resultp->fetchALL();
+            if (count($check_userp) == 0)
             {
-                $db = $this->bdd;
-                $pass_hache = password_hash($pass, PASSWORD_DEFAULT);
-                $sqlInsert = "INSERT INTO users (identifiant, mdp, email, pseudo, sexe, admin, nom, prenom, naissance, date_inscription, avatar, connected) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
-                $result = $db->Request($sqlInsert,array($identifiant, $pass_hache, $email, $pseudo, $sexe, 0, $nom, $prenom, $naissance, date("d M Y H:i:s"), '/uploads/avatars/unnamed.jpg', 1));
-                $check_insert = $result->rowCount();
-                if ($check_insert != 1)
+                if ($pass == $pass_conf)
                 {
-                    return "#register_userNonInserted";
+                    $db = $this->bdd;
+                    $pass_hache = password_hash($pass, PASSWORD_DEFAULT);
+                    $sqlInsert = "INSERT INTO users_pending (identifiant, mdp, email, pseudo, sexe, admin, nom, prenom, naissance, date_inscription,token,last_ip) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
+                    $result = $db->Request($sqlInsert,array($identifiant, $pass_hache, $email, $pseudo, $sexe, 0, $nom, $prenom, $naissance, date("d M Y H:i:s"),$token,$ip_user));
+                    $check_insert = $result->rowCount();
+                    if ($check_insert != 1)
+                    {
+                        return "#register_userNonInserted";
+                    }
+                    return array("#register_success",$email,$identifiant,$nom,$prenom);
                 }
-                return "#register_success";
+                return "#register_passwordDoesntMatch";
             }
-            return "#register_passwordDoesntMatch";
+            return "#register_userExist";
         }
         return "#register_userExist";
     } 
+    function activate($token) {
+        $sqlSelect = "SELECT * FROM users_pending WHERE token=?";
+        $result = $this->bdd->Request($sqlSelect,array($token));
+        $check_user = $result->fetch();
+        if($check_user['token']== $token)
+        {
+            $sqlInsert = "INSERT INTO users (id,identifiant, mdp, email, pseudo, sexe, nom, prenom, naissance, date_inscription,avatar,last_ip) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
+            $result = $this->bdd->Request($sqlInsert,array($check_user['id'],$check_user['identifiant'], $check_user['mdp'], $check_user['email'], $check_user['pseudo'], $check_user['sexe'], $check_user['nom'], $check_user['prenom'], $check_user['naissance'], $check_user['date_inscription'],"/uploads/avatars/unnamed.jpg",$check_user['last_ip']));
+            $check_inser = $result->rowCount();
+            if($check_inser == 1) {
+                $sqlDelete = "DELETE FROM users_pendig WHERE token=?";
+                $result= $this->bdd->Request($sqlDelete,array($token));
+                if($result->rowCount() > 0)
+                return "#user_activate_succes";
+            }
+            else{
+                $sqlSelect = "SELECT * FROM users WHERE identifiant=?";
+                $result = $this->bdd->Request($sqlSelect,array($check_user['identifiant']));
+                $check = $result->fetch();
+                // if($check['identifiant'])
+            }
+            
+        }
+
+    }
 
     function GetById($args)
     {
         $sql = "SELECT * FROM users WHERE id=?";
         $result = $this->bdd->Request($sql,array($args));
         $donnees = $result->fetchALL();
-
-        return new utilisateur_model($donnees[0]);
+        if($donnees[0] != null){
+            return new utilisateur_model($donnees[0]);
+        }
+        return null;
     }
 
     function modif($pseudo) 
@@ -124,7 +161,6 @@ class Utilisateur_repo
         $users = str_replace($tabSearch, $tabRepl, $check_user[0]);
         if ($result->rowCount() > 0)
         {
-           var_dump($check_user[0]);
             $userModel = new Utilisateur_model($users);
             $userModel->SetUser($user, $email, $pseudo, $sexe, $adm, $nom, $prenom, $naissance, $inscription, $avatar);
             return array("#user_modif_ok",$userModel);

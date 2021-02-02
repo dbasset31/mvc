@@ -10,7 +10,6 @@
               
               $msg = "";
               $page = $data;
-              var_dump($page);
               if (is_array($data))
               {
                 $msg= $data[0];

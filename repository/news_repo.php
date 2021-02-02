@@ -47,10 +47,12 @@ class News_repo
         $result = $this->bdd->Request($sql,array($args));
         $donnees = $result->fetchALL();
         if($result->rowCount() > 0)
-        $tabSearch = array("&lt;p&gt;&amp;lt;script&amp;gt;","&amp;lt;/script&amp;gt;&lt;br&gt;&lt;/p&gt;","<script>","</script>","&lt;script&gt;","&lt;/script&gt;");
-        $tabRepl = array("[REMOVED]","[/REMOVED]","[REMOVED]","[/REMOVED]","[REMOVED]","[/REMOVED]");
-        $nouvellecontenu = str_replace($tabSearch, $tabRepl, $donnees[0]);
+        {
+            $tabSearch = array("&lt;p&gt;&amp;lt;script&amp;gt;","&amp;lt;/script&amp;gt;&lt;br&gt;&lt;/p&gt;","<script>","</script>","&lt;script&gt;","&lt;/script&gt;");
+            $tabRepl = array("[REMOVED]","[/REMOVED]","[REMOVED]","[/REMOVED]","[REMOVED]","[/REMOVED]");
+            $nouvellecontenu = str_replace($tabSearch, $tabRepl, $donnees[0]);
             return new News_model($nouvellecontenu);
+        }
         return null;
     }
 

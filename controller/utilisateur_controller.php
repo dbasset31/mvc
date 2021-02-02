@@ -149,10 +149,24 @@ class Utilisateur_controller extends Controller{
         if(isset($_SESSION["Connected"]))
             header('Location: /utilisateur/compte');
         if (isset($_POST['login'])){
-            $result = $this->utilisateurs_repo->register($_POST['login'],$_POST['password'],$_POST['conf_password'],$_POST['nom'],$_POST['prenom'],$_POST['naissance'], $_POST['email'],$_POST['pseudo'],$_POST['sexe']);
-            if ($txtManager->Compare($result,"#register_success"))
+            $token = $this->token32();
+            $ip_user = $_SERVER['REMOTE_ADDR'];
+            $result = $this->utilisateurs_repo->register($_POST['login'],$_POST['password'],$_POST['conf_password'],$_POST['nom'],$_POST['prenom'],$_POST['naissance'], $_POST['email'],$_POST['pseudo'],$_POST['sexe'],$token,$ip_user);
+            if ($txtManager->Compare($result[0],"#register_success"))
             {
-                return $this->otherView("login", $result);
+                $sqlSelec="SELECT Contenu FROM mails_template WHERE fonction='register'";
+                $requ=$this->bdd->Request($sqlSelec);
+                $contenu= $requ->fetch();
+                $contenu = str_replace("&ugrave;&ugrave;&ugrave;",$result[2],$contenu);
+                $object="test";
+                // $contenu = "Nous vous remerciiont de vous être inscrit chez nous.".$result[2]." ".$result[3]." ".$result[4];
+                $mail= $this->sendMail($result[1],$object,$contenu[0]);
+                if($mail == "#Mail_send")
+                {
+                    return $this->otherView("login", $result[0]);
+                }
+                else 
+                    return $this->otherView("login", "#Echec_SendMail");
             }
             else
             {
@@ -160,6 +174,12 @@ class Utilisateur_controller extends Controller{
             }   
         }
             return $this->view();
+    }
+    function activate($args){
+        if($args !=null)
+        {
+            $activate = $this->utilisateurs_repo->activate($args);
+        }
     }
     function credit_point()
     {

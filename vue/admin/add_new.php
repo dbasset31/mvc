@@ -13,11 +13,11 @@
             <form method="POST" action="/admin/add_new/">
             <div class="container">
             <label for="titre" class="center">Titre:</label>
-            <br>
+            
             <input type="text" name="titre" value="">
             
             <br>
-            <label for="titre">Contenu:</label>
+            <label for="titre" class="mt-4">Contenu:</label>
             
             <textarea id="summernote" name="contenu"></textarea>
             
