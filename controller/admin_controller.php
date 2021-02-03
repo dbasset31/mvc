@@ -9,6 +9,7 @@ include_once "repository/utilisateurs_repo.php";
 include_once "repository/settings_repo.php";
 include_once "model/settings_model.php";
 include_once "repository/page_repo.php";
+include_once "repository/mail_repo.php";
 
 class Admin_controller extends Controller{
     private $admin_repo=null;
@@ -20,6 +21,7 @@ class Admin_controller extends Controller{
         $this->utilisateur_repo = new Utilisateur_repo();
         $this->settings_repo = new Settings_repo();
         $this->page_repo = new Pages_repo();
+        $this->mail_repo = new Mails_repo();
       
        
         $this->CheckAdmin();
@@ -265,5 +267,32 @@ class Admin_controller extends Controller{
                     return $this->view($page_model);
                 }
                 header('location:/admin/liste_page');
+    }
+    function mail() {
+        
+        $result = $this->admin_repo->liste_mail();
+        return $this->view($result);
+    }
+
+    function edit_mail($id)
+    {
+        if($id != "")
+        {
+            $mail_model = $this->mail_repo->GetById($id);
+            if($mail_model !=null)
+            {
+                if (isset($_POST['sujet']))
+                {
+                    $tabSearch = array("&lt;p&gt;&amp;lt;script&amp;gt;","&amp;lt;/script&amp;gt;&lt;br&gt;&lt;/p&gt;","<script>","</script>","&lt;script&gt;","&lt;/script&gt;");
+                    $tabRepl = array("[REMOVED]","[/REMOVED]","[REMOVED]","[/REMOVED]","[REMOVED]","[/REMOVED]");
+                    $mailSujet = str_replace($tabSearch, $tabRepl, $_POST['sujet']);
+                    $mailContenu = str_replace($tabSearch, $tabRepl, $_POST['contenu']);
+                    return $this->view($this->mail_repo->modif($id, $mailSujet, $mailContenu));
+                }
+                return $this->view($mail_model);
+            }
+            header('location: /admin/mail');
+        }
+        return $this->otherView("mail",$this->admin_repo->liste_mail());
     }
 }

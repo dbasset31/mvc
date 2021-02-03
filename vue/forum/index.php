@@ -9,14 +9,6 @@
 
         </header>
         <main>
-
-            <?php
-            global $categ;
-            global $forums;
-            if(isset($data))
-            {$forums=$data[1]; 
-            $categ=$data[0];}var_dump($data);var_dump($forums);?>
-            
             <div class="container-fluid">
                 <div class="row justify-content-around">
                     <div class="card mt-5 col-lg-9 col-md-12">
@@ -25,11 +17,14 @@
                         </div>
                         <div class="card-body">
                         <?php 
-                        if(isset($forums))
+                        var_dump($data);
+
+                        foreach($data as $categorie)
                         {
-                            foreach ($forums as $forum)
+                            echo $categorie->nom."</br>";
+                            foreach($categorie->forums as $forum)
                             {
-                                echo $forum->nom_cat;
+                                echo "&nbsp;-<a href='".strtolower(str_replace(" ","-",$forum->nom))."'>".$forum->nom."</a><br>";
                             }
                         }
                         ?>

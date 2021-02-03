@@ -16,7 +16,7 @@
                 <div class="card card-signin my-5 ">
                   <div class="card-body ombre align-items-center">
                     <h4 class="card-title text-center">Sign In</h4>
-                    <?php if($data == "#register_success") { ?><p class="so_succ"><?php $txtManager->DisplayText($data)?></p>
+                    <?php if($data == "#register_success" || $data="#user_activate_succes") { ?><p class="so_succ"><?php $txtManager->DisplayText($data)?></p>
                       <?php } else { ?><p class="so_fail"><?php $txtManager->DisplayText($data);};?></p>
                     <form class="form-signin" method="post" action="/utilisateur/login">
                       <div class="form-label-group">

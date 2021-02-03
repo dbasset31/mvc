@@ -157,10 +157,15 @@ class Utilisateur_controller extends Controller{
                 $sqlSelec="SELECT Contenu FROM mails_template WHERE fonction='register'";
                 $requ=$this->bdd->Request($sqlSelec);
                 $contenu= $requ->fetch();
-                $contenu = str_replace("&ugrave;&ugrave;&ugrave;",$result[2],$contenu);
+                $sqlSelec="SELECT Sujet FROM mails_template WHERE fonction='register'";
+                $requ=$this->bdd->Request($sqlSelec);
+                $Sujet= $requ->fetch();
+                $contenu = str_replace("{COMPTE}",$result[2],$contenu);
+                $contenu = str_replace("{MDP}",$result[3],$contenu);
+                $contenu = str_replace("{ADDRESS}",$_SERVER['SERVER_NAME'],$contenu);
+                $contenu = str_replace("{TOKEN}",$result[4],$contenu);
                 $object="test";
-                // $contenu = "Nous vous remerciiont de vous être inscrit chez nous.".$result[2]." ".$result[3]." ".$result[4];
-                $mail= $this->sendMail($result[1],$object,$contenu[0]);
+                $mail= $this->sendMail($result[1],$Sujet['Sujet'],$contenu[0]);
                 if($mail == "#Mail_send")
                 {
                     return $this->otherView("login", $result[0]);
@@ -179,6 +184,7 @@ class Utilisateur_controller extends Controller{
         if($args !=null)
         {
             $activate = $this->utilisateurs_repo->activate($args);
+            return $this->otherView("login",$activate);
         }
     }
     function credit_point()

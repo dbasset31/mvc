@@ -91,8 +91,8 @@ class Controller {
             ##########################
             $mail->isHTML(true);                                      // email au format HTML
             $mail->Subject = utf8_decode($objet);      // Objet du message (éviter les accents là, sauf si utf8_encode)
-            $mail->Body    = $contenu;          // corps du message en HTML - Mettre des slashes si apostrophes
-            $mail->AltBody = $contenu; // ajout facultatif de texte sans balises HTML (format texte)
+            $mail->Body    = utf8_decode($contenu);          // corps du message en HTML - Mettre des slashes si apostrophes
+            $mail->AltBody = utf8_decode($contenu); // ajout facultatif de texte sans balises HTML (format texte)
 
             $mail->send();
             return "#Mail_send";

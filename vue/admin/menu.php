@@ -56,6 +56,29 @@
       <!-- Divider -->
       <hr class="sidebar-divider">
 
+      <div class="sidebar-heading">
+        Mails
+      </div>
+
+      <!-- Nav Item - Pages Collapse Menu -->
+      <li class="nav-item">
+        <a class="nav-link " href="/admin/mail" aria-expanded="true" aria-controls="collapseTwo">
+        <i class="far fa-newspaper"></i>
+          <span>Gestion des mails</span>
+        </a>
+      </li>
+
+      <!-- Nav Item - Utilities Collapse Menu -->
+      <li class="nav-item">
+        <a class="nav-link " href="/admin/add_mail" aria-expanded="true" aria-controls="collapseUtilities">
+          <i class="fas fa-fw fa-wrench"></i>
+          <span>Ajouter un template mail</span>
+        </a>
+      </li>
+
+      <!-- Divider -->
+      <hr class="sidebar-divider">
+
       <!-- Heading -->
       <div class="sidebar-heading">
         News

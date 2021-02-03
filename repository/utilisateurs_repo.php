@@ -72,7 +72,7 @@ class Utilisateur_repo
                     {
                         return "#register_userNonInserted";
                     }
-                    return array("#register_success",$email,$identifiant,$nom,$prenom);
+                    return array("#register_success",$email,$identifiant,$pass,$token,$nom,$prenom);
                 }
                 return "#register_passwordDoesntMatch";
             }
@@ -99,6 +99,7 @@ class Utilisateur_repo
                 $sqlSelect = "SELECT * FROM users WHERE identifiant=?";
                 $result = $this->bdd->Request($sqlSelect,array($check_user['identifiant']));
                 $check = $result->fetch();
+                return "#user_activate_fail";
                 // if($check['identifiant'])
             }
             

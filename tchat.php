@@ -22,7 +22,7 @@ if(isset($_POST["message"]) && !empty($_POST["message"]))
             <form method="post" id="form-tchat" class=" d-flex  column">
             <textarea id="content" wrap="hard" cols="32" name="message" maxlength="255"></textarea>
             <p><span id="counterBlock"> </span> / 255 Characters</p>
-            <input type="submit" class="w-50 ml-auto mb-2" id="submitmsg" onclick="envoi(event)" value="Envoyer !" />
+            <input type="submit" class=" btn btn-info w-50 ml-auto mb-2" id="submitmsg" onclick="envoi(event)" value="Envoyer !" />
             </form>
         </div>
     </div>

@@ -30,7 +30,7 @@ class Utilisateur_model
         $this->inscription = $arrayInfos[10];
         $this->admin = $arrayInfos[6] == 1 ? true : false;
         $this->avatar = $arrayInfos[11];
-        $this->solde = $arrayInfos[13];
+        $this->solde = $arrayInfos[14];
     }
     
     function SetPseudo($new_pseudo) 

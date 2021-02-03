@@ -1,0 +1,49 @@
+mysql> select * from forum_categorie;
++--------+-----------------+-----------+
+| cat_id | cat_nom         | cat_ordre |
++--------+-----------------+-----------+
+|      1 | Official Forums |         1 |
+|      2 | Public          |         2 |
+|      3 | XenForo         |         3 |
++--------+-----------------+-----------+
+3 rows in set
+
+mysql> select * from forum_forum where forum_cat_id = 3;
++----------+--------------+---------------------+------------+-------------+--------------+
+| forum_id | forum_cat_id | forum_name          | forum_desc | forum_ordre | id_auth_post |
++----------+--------------+---------------------+------------+-------------+--------------+
+|        5 |            3 | Bug report of       | female     |           1 | NULL         |
+|        6 |            3 | Importer bug report | no idea    |           2 | NULL         |
++----------+--------------+---------------------+------------+-------------+--------------+
+2 rows in set
+
+mysql> select * from forum_topic where forum_id = 5;
++----------+----------+-------------+--------------------+-------------------+----------+---------------------+
+| topic_id | forum_id | topic_titre | topic_contenu      | topic_id_createur | topic_vu | topic_time          |
++----------+----------+-------------+--------------------+-------------------+----------+---------------------+
+|        2 |        5 | bite        | bite bite reported | NULL              |        0 | 2021-02-18 17:17:24 |
++----------+----------+-------------+--------------------+-------------------+----------+---------------------+
+1 row in set
+
+mysql> select * from forum_post where topic_id = 2;
++---------+------------------+------------+---------------------+----------+
+| post_id | post_id_createur | post_texte | post_time           | topic_id |
++---------+------------------+------------+---------------------+----------+
+|       1 | NULL             | ca bug wlh | 2021-02-10 17:19:09 |        2 |
++---------+------------------+------------+---------------------+----------+
+1 row in set
+
+mysql> select * from forum_categorie, forum_forum where cat_id = forum_cat_id;
++--------+-----------------+-----------+----------+--------------+-------------------------+------------+-------------+--------------+
+| cat_id | cat_nom         | cat_ordre | forum_id | forum_cat_id | forum_name              | forum_desc | forum_ordre | id_auth_post |
++--------+-----------------+-----------+----------+--------------+-------------------------+------------+-------------+--------------+
+|      1 | Official Forums |         1 |        1 |            1 | Announcements           | ma bite    |           1 | NULL         |
+|      1 | Official Forums |         1 |        2 |            1 | Have you seen           | ma bite 2  |           2 | NULL         |
+|      2 | Public          |         2 |        3 |            2 | Xenforo pre sales of    | ma bite    |           1 | NULL         |
+|      2 | Public          |         2 |        4 |            2 | Xenforo suggestions for | ma bite    |           2 | NULL         |
+|      3 | XenForo         |         3 |        5 |            3 | Bug report of           | female     |           1 | NULL         |
+|      3 | XenForo         |         3 |        6 |            3 | Importer bug report     | no idea    |           2 | NULL         |
++--------+-----------------+-----------+----------+--------------+-------------------------+------------+-------------+--------------+
+6 rows in set
+
+mysql> 

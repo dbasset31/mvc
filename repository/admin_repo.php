@@ -3,6 +3,7 @@ include_once "config/bdd.php";
 include_once "model/Utilisateur_model.php";
 include_once "model/News_model.php";
 include_once "model/Pages_model.php";
+include_once "model/Mails_model.php";
 
 class Admin_repo
 {
@@ -90,6 +91,19 @@ class Admin_repo
         foreach ($donnes as $ob)
         {
             array_push($objects, new Pages_model($ob));
+        }
+        return $objects;
+    }
+
+    function liste_mail() 
+    {
+        $sql = "SELECT * FROM mails_template";
+        $result = $this->bdd->Request($sql,null);
+        $donnes = $result->fetchALL();
+        $objects = array();
+        foreach ($donnes as $ob)
+        {
+            array_push($objects, new Mails_model($ob));
         }
         return $objects;
     }
