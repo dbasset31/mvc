@@ -12,10 +12,13 @@ class Forum_controller extends Controller{
         //  $this->forum_model = new Forums_model();
         // $this->categorie = new Categorie_model();
     }
-
-    function index($args=null) {
-
-        if($args == null){
+    function index($args=null){
+            header('location:/forum/forums');
+    }
+    function forums($args=null) {
+        $url = explode('/', $_SERVER['REQUEST_URI']);
+        var_dump($url);
+        if(empty($url[3])){
             $sqlCat = "select * from forum_categorie";
             $manager = $this->bdd->Request($sqlCat);
             $result = $manager->fetchAll();
@@ -27,16 +30,34 @@ class Forum_controller extends Controller{
             }
             return $this->view($tabCategories);
         }
-        $args=str_replace("-"," ",$args);
-        $args=ucfirst($args);
-        $select = "SELECT * from forum_forum WHERE forum_name = ?";
-         $manager = $this->bdd->Request($select,array($args));
-         $result = $manager->fetchAll();
-        var_dump($result[0]);
-        // // die();
-         $forum = new Forums_model($result[0]);
-         var_dump($forum->ChargerTopics());
-         return $this->view($forum->ChargerTopics());
+        if(isset($url[3])){
+            $args=str_replace("-"," ",$args);
+            $args=ucfirst($args);
+            $topic = explode('/', $_SERVER['REQUEST_URI']);
+            $topic= str_replace("-"," ",$topic);
+            $forum_name = $topic[3];
+            $select = "SELECT * from forum_forum WHERE forum_name = ?";
+            $manager = $this->bdd->Request($select,array($forum_name));
+            $result = $manager->fetchAll();
+            $forum = new Forums_model($result[0]);
+            $chargeTopics= $forum->ChargerTopics();
+            if(!empty($topic[4])){
+                $topic_name = str_replace("-"," ",$topic[4]);
+                var_dump(str_replace("-"," ",$topic));
+
+                    $sql = "SELECT * from forum_topic WHERE topic_titre=?";
+                    $manager = $this->bdd->Request($sql,array($topic_name));
+                    var_dump($manager);
+                    $result = $manager->fetchALL();
+
+                    $top = new Topics_model($result[0]);
+                    var_dump($top->ChargerPosts());
+                    return $this->view(array($top->ChargerPosts(),$forum_name,$topic_name));
+            }
+            return $this->view(array($forum->ChargerTopics(),$forum_name));
+            
+        }
+
         // var_dump($forum);
         // die();
         //  $topics = $this->forum_model->ChargerTopics($result);

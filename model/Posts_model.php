@@ -2,22 +2,22 @@
 include_once "config/bdd.php";
 class Posts_model{
 
-    private $id;
-    public $titre;
-    public $contenu;
-    public $createur;
-    public $vue;
-    public $time;
+    private $id_post;
+    public $text_post;
+    public $createur_post;
+    public $date_poste;
+    public $titre_post;
+    public $topic_id;
     private $bdd;
     function __construct($args)
     {
         $this->bdd = new BDD();
-        $this->id = $args[0];
-        $this->titre = $args[2];
-        $this->contenu = $args[3];
-        $this->createur = $args[4];
-        $this->vue = $args[5];
-        $this->time = $args[6];
+        $this->id_post = $args[0];
+        $this->titre_post = $args[2];
+        $this->text_post = $args[3];
+        $this->createur_post = $args[1];
+        $this->date_poste = $args[4];
+        $this->topic_id = $args[5];
     }
 
     function ChargerPosts()

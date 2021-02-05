@@ -12,11 +12,11 @@
             <div class="container-fluid ">
                 <div class="row justify-content-around">
                     <div class="pr-0 pl-0 mt-5 mb-5 col-lg-7 col-md-7">
-                        <div class="ombre">
+                        <div class="ombre carte">
                             <div class="w-100 carte-head mb-0">
                                 <h2>News</h2>
                             </div>
-                            <div class="carte mt-0">
+                            <div class=" mt-0">
                             <?php 
                             foreach ($data[0] as $card)
                             { ?>
