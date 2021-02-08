@@ -3,7 +3,7 @@
     src: url("/vendor/font/LTInternet-Regular.ttf");
   }
     * :not(.fas, .far, .fa) {
-     /* border: 1px dashed red !important;  */
+     /* border: 1px dashed red !important;   */
     font-family: "Internet Regular" !important;
 }
 
@@ -147,13 +147,22 @@ footer {
     -moz-box-shadow: 7px 5px 52px 6px rgba(145,140,145,1);
     box-shadow: 7px 5px 52px 6px rgba(145,140,145,1);
 }
-#content{
+ #content{
     resize: none !important;
- min-width : 200px !important;
+ /* min-width : 200px !important;
  min-height : 20px !important;
  max-width : 200px !important;
- max-height : 20px !important;
-}
+ max-height : 20px !important; */
+} 
 .btn {
     color:rgba(34, 34, 34, 0.529) !important;
+}
+
+.carte-head-forum {
+    border: 1px solid rgba(0,0,0,.125) !important;
+    padding-left : 1.25rem;
+    margin-top: 10px;
+    border-radius: calc(.25rem - 1px) calc(.25rem - 1px) 0 0;
+    background-color: rgba(0,0,0,.03);
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
 }

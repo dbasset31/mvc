@@ -84,27 +84,38 @@ class Utilisateur_repo
         $sqlSelect = "SELECT * FROM users_pending WHERE token=?";
         $result = $this->bdd->Request($sqlSelect,array($token));
         $check_user = $result->fetch();
-        if($check_user['token']== $token)
+        if(isset($check_user['token']))
         {
-            $sqlInsert = "INSERT INTO users (id,identifiant, mdp, email, pseudo, sexe, nom, prenom, naissance, date_inscription,avatar,last_ip) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
-            $result = $this->bdd->Request($sqlInsert,array($check_user['id'],$check_user['identifiant'], $check_user['mdp'], $check_user['email'], $check_user['pseudo'], $check_user['sexe'], $check_user['nom'], $check_user['prenom'], $check_user['naissance'], $check_user['date_inscription'],"/uploads/avatars/unnamed.jpg",$check_user['last_ip']));
-            $check_inser = $result->rowCount();
-            if($check_inser == 1) {
-                $sqlDelete = "DELETE FROM users_pendig WHERE token=?";
-                $result= $this->bdd->Request($sqlDelete,array($token));
-                if($result->rowCount() > 0)
-                return "#user_activate_succes";
-            }
-            else{
-                $sqlSelect = "SELECT * FROM users WHERE identifiant=?";
-                $result = $this->bdd->Request($sqlSelect,array($check_user['identifiant']));
-                $check = $result->fetch();
-                return "#user_activate_fail";
+            if($check_user['token']== $token)
+            {
+                $sqlInsert = "INSERT INTO users (id,identifiant, mdp, email, pseudo, sexe, nom, prenom, naissance, date_inscription,avatar,last_ip) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
+                $result = $this->bdd->Request($sqlInsert,array($check_user['id'],$check_user['identifiant'], $check_user['mdp'], $check_user['email'], $check_user['pseudo'], $check_user['sexe'], $check_user['nom'], $check_user['prenom'], $check_user['naissance'], $check_user['date_inscription'],"/uploads/avatars/unnamed.jpg",$check_user['last_ip']));
+                $check_inser = $result->rowCount();
+                if($check_inser == 1) 
+                {
+                    $sqlDelete = "DELETE FROM users_pending WHERE token=?";
+                    $result1= $this->bdd->Request($sqlDelete,array($token));
+                    if($result1->rowCount() > 0)
+                    {
+                        return "#user_activate_succes";
+                    }
+
+                }
+            else
+            {
+
                 // if($check['identifiant'])
             }
-            
-        }
+            }
 
+        }
+        $sqlSelect = "SELECT * FROM users WHERE identifiant=?";
+        $result = $this->bdd->Request($sqlSelect,array($check_user['identifiant']));
+        $check = $result->fetch();
+        if($check == 1)
+        {
+            return "#user_already_activate";
+        }
     }
 
     function GetById($args)

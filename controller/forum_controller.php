@@ -17,7 +17,6 @@ class Forum_controller extends Controller{
     }
     function forums($args=null) {
         $url = explode('/', $_SERVER['REQUEST_URI']);
-        var_dump($url);
         if(empty($url[3])){
             $sqlCat = "select * from forum_categorie";
             $manager = $this->bdd->Request($sqlCat);
@@ -43,15 +42,10 @@ class Forum_controller extends Controller{
             $chargeTopics= $forum->ChargerTopics();
             if(!empty($topic[4])){
                 $topic_name = str_replace("-"," ",$topic[4]);
-                var_dump(str_replace("-"," ",$topic));
-
                     $sql = "SELECT * from forum_topic WHERE topic_titre=?";
                     $manager = $this->bdd->Request($sql,array($topic_name));
-                    var_dump($manager);
                     $result = $manager->fetchALL();
-
                     $top = new Topics_model($result[0]);
-                    var_dump($top->ChargerPosts());
                     return $this->view(array($top->ChargerPosts(),$forum_name,$topic_name));
             }
             return $this->view(array($forum->ChargerTopics(),$forum_name));

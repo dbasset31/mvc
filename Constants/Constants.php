@@ -74,6 +74,9 @@ $txtManager->AddTxt("#register_userExist", "Le nom de compte est déjà utilisé
 $txtManager->AddTxt("#login_userNotEx", "L'utilisateur n'existe pas.");
 $txtManager->AddTxt("#login_pwdFail", "le mot de passe est incorrecte.");
 ///////////////////////////////////////////////////////////END LOGIN/////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////Activate Account /////////////////////////////////////////////////////
+$txtManager->AddTxt("#user_activate_succes", "Votre compte a été activé avec succès. Vous pouvez dès à présent vous connecter.");
+$txtManager->AddTxt("#user_already_activate", "Votre compte est déjà activé, vous pouvez vous connecter.");
 //////////////////////////////////////////////////////////Modif Profil//////////////////////////////////////////////////
 $txtManager->AddTxt("#pseudo_modif_ok", "Pseudo modifié avec succès !.");
 $txtManager->AddTxt("#pseudo_crit_fail", "Impossible de modifier le pseudo, veuillez réessayer, si le problème persiste, contactez un administrateur.");

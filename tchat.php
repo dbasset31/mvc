@@ -18,9 +18,9 @@ if(isset($_POST["message"]) && !empty($_POST["message"]))
     <?php if(isset($_SESSION['Connected']))
     { ?>
     <div class="container d-flex align-items-center">
-        <div class="container mt-4 d-flex align-items-center">
-            <form method="post" id="form-tchat" class="d-flex column">
-            <textarea id="content" class="d-flex justify-content-center align-items-center" wrap="hard" cols="5" name="message" maxlength="255"></textarea>
+        <div class="container mt-4 d-flex  justify-content-center align-items-center w-100">
+            <form method="post" id="form-tchat" class="d-flex column w-75">
+            <textarea id="content" class="d-flex justify-content-center align-items-center" wrap="hard" name="message" maxlength="255"></textarea>
             <p><span id="counterBlock"> </span> / 255 Characters</p>
             <input type="submit" class=" btn btn-info w-50 ml-auto mb-2" id="submitmsg" onclick="envoi(event)" value="Envoyer !" />
             </form>

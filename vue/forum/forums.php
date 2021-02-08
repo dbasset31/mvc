@@ -16,17 +16,16 @@
                             <div class="w-100 carte-head mb-0">
                                 <h2>Forum</h2>
                             </div>
-
+                            <div class="d-flex column">
                                 <?php
                                     $url = explode('/', $_SERVER['REQUEST_URI']);
-                                    var_dump($url);
                                 if (!isset($url[3])){;
                                     foreach($data as $categorie)
                                     {
-                                        echo $categorie->nom."</br>";
+                                        echo "<div class='carte-head-forum'><h3>".$categorie->nom."</h3></div>";
                                         foreach($categorie->forums as $forum)
                                         {
-                                            echo "&nbsp;-<a href='/forum/forums/".strtolower(str_replace(" ","-",$forum->nom))."'>".$forum->nom."</a>";
+                                            echo "<div>&nbsp; -<a href='/forum/forums/".strtolower(str_replace(" ","-",$forum->nom))."'>".$forum->nom."</a></div>";
                                         }
                                     }
                                 }
@@ -55,7 +54,7 @@
                                 }
 
                                 ?>
-
+                            </div>
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-12">
