@@ -36,11 +36,11 @@
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
       <!-- Sidebar - Brand -->
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+      <a class="sidebar-brand d-flex align-items-center justify-content-center a-admin" href="/admin">
         <div class="sidebar-brand-icon rotate-n-15">
          
         </div>
-        <div class="sidebar-brand-text mx-3">Panel Admin</div>
+        <div class="sidebar-brand-text mx-3 ">Panel Admin</div>
       </a>
 
       <!-- Divider -->
@@ -48,7 +48,7 @@
 
       <!-- Nav Item - Dashboard -->
       <li class="nav-item">
-        <a class="nav-link" href="/admin">
+        <a class="nav-link a-admin <?php if(isset($page) && $page == 'admin') echo 'page-active';?>" href="/admin">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Configuration Générale</span></a>
       </li>
@@ -62,7 +62,7 @@
 
       <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item">
-        <a class="nav-link " href="/admin/mail" aria-expanded="true" aria-controls="collapseTwo">
+        <a class="nav-link a-admin <?php if(isset($page) && $page == 'mail') echo 'page-active';?>" href="/admin/mail" aria-expanded="true" aria-controls="collapseTwo">
         <i class="far fa-newspaper"></i>
           <span>Gestion des mails</span>
         </a>
@@ -70,7 +70,7 @@
 
       <!-- Nav Item - Utilities Collapse Menu -->
       <li class="nav-item">
-        <a class="nav-link " href="/admin/add_mail" aria-expanded="true" aria-controls="collapseUtilities">
+        <a class="nav-link a-admin <?php if(isset($page) && $page == 'add_mail') echo 'page-active';?>" href="/admin/add_mail" aria-expanded="true" aria-controls="collapseUtilities">
           <i class="fas fa-fw fa-wrench"></i>
           <span>Ajouter un template mail</span>
         </a>
@@ -86,7 +86,7 @@
 
       <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item">
-        <a class="nav-link " href="/admin/liste_news" aria-expanded="true" aria-controls="collapseTwo">
+        <a class="nav-link a-admin <?php if(isset($page) && $page == 'liste_news') echo 'page-active';?>" href="/admin/liste_news" aria-expanded="true" aria-controls="collapseTwo">
         <i class="far fa-newspaper"></i>
           <span>Gestion des news</span>
         </a>
@@ -94,7 +94,7 @@
 
       <!-- Nav Item - Utilities Collapse Menu -->
       <li class="nav-item">
-        <a class="nav-link " href="/admin/add_new" aria-expanded="true" aria-controls="collapseUtilities">
+        <a class="nav-link a-admin <?php if(isset($page) && $page == 'add_new') echo 'page-active';?>" href="/admin/add_new" aria-expanded="true" aria-controls="collapseUtilities">
           <i class="fas fa-fw fa-wrench"></i>
           <span>Ajouter une news</span>
         </a>
@@ -110,7 +110,7 @@
 
       <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item">
-        <a class="nav-link" href="/admin/utilisateurs" aria-expanded="true" aria-controls="collapseTwo">
+        <a class="nav-link a-admin <?php if(isset($page) && $page == 'utilisateurs') echo 'page-active';?>" href="/admin/utilisateurs" aria-expanded="true" aria-controls="collapseTwo">
         <i class="fas fa-list-ol"></i>
           <span>Gerer les utilisateurs</span>
         </a>
@@ -126,11 +126,11 @@
 
 <!-- Nav Item - Pages Collapse Menu -->
 <li class="nav-item">
-<a class="nav-link" href="/admin/liste_page" aria-expanded="true" aria-controls="collapseTwo">
+<a class="nav-link a-admin <?php if(isset($page) && $page == 'liste_page') echo 'page-active';?>" href="/admin/liste_page" aria-expanded="true" aria-controls="collapseTwo">
 <i class="fas fa-list-ol"></i>
     <span>Liste des pages</span>
   </a>
-  <a class="nav-link" href="/admin/create_page" aria-expanded="true" aria-controls="collapseTwo">
+  <a class="nav-link a-admin <?php if(isset($page) && $page == 'create_page') echo 'page-active';?>" href="/admin/create_page" aria-expanded="true" aria-controls="collapseTwo">
   <i class="fas fa-folder-plus"></i>
     <span>Créer une page</span>
   </a>

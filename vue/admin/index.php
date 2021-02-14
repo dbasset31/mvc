@@ -1,7 +1,11 @@
 <!DOCTYPE html>
 <html>
 <div id="wrapper">
-<?php include_once "vue/admin/menu.php" ?>
+<?php
+              $page = explode("/",$_SERVER['REQUEST_URI']);
+              $page= $page[1];
+              include_once "vue/admin/menu.php" 
+?>
 <body id="page-top">
   <!-- Page Wrapper -->
   
@@ -16,9 +20,9 @@
           <div id="content" class="col-md-3">
             <form method="POST" action="/admin">
               <fieldset class="border p-2">
-                <legend  class="w-auto">News</legend>
+                <legend  class="w-25">News</legend>
                 <label>Nombre de News sur la page d'accueil :</label>
-                <p><input name="nbNews" value="<?php echo $data[1]->nbNews; ?>"></p>
+                <input class="form-control" name="nbNews" value="<?php echo $data[1]->nbNews; ?>">
                 <button type="submit">Valider</button>
               </fieldset>
             </form>
@@ -39,15 +43,15 @@
                       <label>Couleur des titres H4 :</label>
                       <input type="color" id="h4" name="h4" value="<?php echo $data[1]->couleur_h4; ?>">
                       </div>
-                      <div class="col-md-3">
+                      <div class="col-md-6">
                       <label>Couleur des liens :</label>
-                      <input type="color" id="lien" name="lien" value="<?php echo $data[1]->couleur_lien; ?>">
+                      <input type="color" id="lien" name="lien" value="<?php echo $data[1]->couleur_lien; ?>"><br>
                       <label>Couleur des paragraphes :</label>
-                      <input type="color" id="text" name="text" value="<?php echo $data[1]->couleur_text; ?>">
+                      <input type="color" id="text" name="text" value="<?php echo $data[1]->couleur_text; ?>"><br>
                       <label>Couleur des labels :</label>
-                      <input type="color" id="label" name="label" value="<?php echo $data[1]->label; ?>">
+                      <input type="color" id="label" name="label" value="<?php echo $data[1]->label; ?>"><br>
                       <label>Couleur du header :</label>
-                      <input type="color" id="header_color" name="header_color" value="<?php echo $data[1]->header_color; ?>">
+                      <input type="color" id="header_color" name="header_color" value="<?php echo $data[1]->header_color; ?>"><br>
                       <label>Couleur du footer :</label>
                       <input type="color" id="footer_color" name="footer_color" value="<?php echo $data[1]->footer_color; ?>">
                       </div>

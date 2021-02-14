@@ -77,6 +77,7 @@ $txtManager->AddTxt("#login_pwdFail", "le mot de passe est incorrecte.");
 //////////////////////////////////////////////////////////Activate Account /////////////////////////////////////////////////////
 $txtManager->AddTxt("#user_activate_succes", "Votre compte a été activé avec succès. Vous pouvez dès à présent vous connecter.");
 $txtManager->AddTxt("#user_already_activate", "Votre compte est déjà activé, vous pouvez vous connecter.");
+$txtManager->AddTxt("#dont_activate", "Echec de l'activation du compte.");
 //////////////////////////////////////////////////////////Modif Profil//////////////////////////////////////////////////
 $txtManager->AddTxt("#pseudo_modif_ok", "Pseudo modifié avec succès !.");
 $txtManager->AddTxt("#pseudo_crit_fail", "Impossible de modifier le pseudo, veuillez réessayer, si le problème persiste, contactez un administrateur.");
@@ -142,4 +143,8 @@ $txtManager->AddTxt("#mail_not_empty", "Le sujet ou le contenu du mail n'est pas
 $txtManager->AddTxt("#mail_delete_succes", "Mail supprimé avec succès ! ");
 $txtManager->AddTxt("#mail_delete_fail", "Echec de la suppression !");
 ////////////////////////////////////////////////////////END Delete Mails /////////////////////////////////////////////////////
+////////////////////////////////////////////////////////Reset password /////////////////////////////////////////////////////
+$txtManager->AddTxt("#not_found_user","Le nom d'utilisateur ou l'adresse email est introuvable");
+$txtManager->AddTxt("#mail_reset_send","Un email vous a été envoyé afin de procéder a la réinitialisation du mot de passe.");
+$txtManager->AddTxt("#success_reset_pwd","Votre mot de passe a été modifié.");
 ?>

@@ -21,7 +21,7 @@
                             foreach ($data[0] as $card)
                             { ?>
                                 
-                                <div class="card text-white bg-dark mb-5 mt-2" style="max-width: 100%;">
+                                <div class="card mx-2 text-white bg-dark mb-5 mt-2" style="max-width: 100%;">
                                     <div class="card-header text-center mt-2"> 
                                         <h4><?php echo $card->titre ?></h4>
                                     </div>
@@ -48,7 +48,7 @@
                                 if($data[4]==1){}
                                 else 
                                 {
-                                    echo "<div>";
+                                    echo "<div class='m-2'>";
                                     for($i=1;$i<=$data[4]; $i++)
                                     {
                                         echo "<a class='anews' href='/news/index/$i'>$i</a>";

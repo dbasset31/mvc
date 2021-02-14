@@ -3,7 +3,10 @@
   <!-- Page Wrapper -->
   <div id="wrapper">
         <!-- End of Topbar -->
-    <?php include_once "vue/admin/menu.php" ?>
+    <?php 
+    $page = explode("/",$_SERVER['REQUEST_URI']);
+    $page= $page[2];
+    include_once "vue/admin/menu.php" ?>
         <!-- Begin Page Content -->
         <?php 
 

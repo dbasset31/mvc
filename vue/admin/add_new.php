@@ -3,13 +3,18 @@
   <!-- Page Wrapper -->
   <div id="wrapper">
         <!-- End of Topbar -->
-    <?php include_once "vue/admin/menu.php" ?>
+    <?php 
+    $page = explode("/",$_SERVER['REQUEST_URI']);
+    $page= $page[2];
+    include_once "vue/admin/menu.php" ?>
         <!-- Begin Page Content -->
         <div class="container-fluid">
           <div id="content">
             <!-- Page Heading -->
             
-            <?php $txtManager->DisplayText($data); ?>
+            <?php
+            $page = $_SERVER['REQUEST_URI'];
+             $txtManager->DisplayText($data); ?>
             <form method="POST" action="/admin/add_new/">
             <div class="container">
             <label for="titre" class="center">Titre:</label>

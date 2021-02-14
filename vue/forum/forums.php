@@ -11,8 +11,8 @@
         <main>
             <div class="container-fluid">
                 <div class="row justify-content-around">
-                    <div class="mt-5 col-lg-7 col-md-7">
-                        <div class="ombre">
+                    <div class="mt-5 col-lg-9 col-md-9">
+                        <div class="ombre mb-5">
                             <div class="w-100 carte-head mb-0">
                                 <h2>Forum</h2>
                             </div>
@@ -25,7 +25,7 @@
                                         echo "<div class='carte-head-forum'><h3>".$categorie->nom."</h3></div>";
                                         foreach($categorie->forums as $forum)
                                         {
-                                            echo "<div>&nbsp; -<a href='/forum/forums/".strtolower(str_replace(" ","-",$forum->nom))."'>".$forum->nom."</a></div>";
+                                            echo "<div class='mt-3'><a class='ml-4' href='/forum/forums/".strtolower(str_replace(" ","-",$forum->nom))."'>".$forum->nom."</a><hr class='mb-0'></div>";
                                         }
                                     }
                                 }
@@ -34,7 +34,7 @@
                                         $nom_forum=$data[1];
                                         foreach($data[0] as $topics)
                                         {
-                                            echo "<div class='carte'><a href='/forum/forums/".strtolower(str_replace(" ","-",$nom_forum))."/".str_replace(" ","-",$topics->titre_topic)."'>".$topics->titre_topic."</a> ".$topics->createur." ".$topics->vue." ".$topics->time."</div></br>";
+                                            echo "<div class='carte mt-3'><a class='ml-4' href='/forum/forums/".strtolower(str_replace(" ","-",$nom_forum))."/".str_replace(" ","-",$topics->titre_topic)."'>".$topics->titre_topic."</a> ".$topics->createur." ".$topics->vue." ".$topics->time."</div></br>";
                                             // "&nbsp;-<a href='/forum/forums/".strtolower(str_replace(" ","-",$forum->nom))."'>".$forum->nom."</a><br>";
                                             //  foreach($categorie->forums as $forum)
                                             //  {

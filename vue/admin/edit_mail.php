@@ -6,14 +6,15 @@
   <!-- Page Wrapper -->
   <div id="wrapper">
         <!-- End of Topbar -->
-    <?php include_once "vue/admin/menu.php" ?>
+    <?php $page = explode("/",$_SERVER['REQUEST_URI']);
+    $page= $page[2];
+    include_once "vue/admin/menu.php" ?>
         <!-- Begin Page Content -->
         <div class="container-fluid">
           <div id="content">
             <!-- Page Heading -->
             <?php 
-
-              
+            $page = $_SERVER['REQUEST_URI'];
               $msg = "";
               $mails = $data;
               if (is_array($data))
@@ -22,7 +23,6 @@
                 $mails=$data[1];
               }
       ?>
-    
             <?php $txtManager->DisplayText($msg); ?>
             <form method="POST" action="/admin/edit_mail/<?= $mails->ID ?>">
             <label for="titre">Sujet:</label>

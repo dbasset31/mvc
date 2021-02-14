@@ -2,13 +2,16 @@
 include_once "config/bdd.php";
 include_once "model/Utilisateur_model.php";
 include_once "model/settings_model.php";
+include_once "model/Mails_model.php";
 
 class Utilisateur_repo
 {
     protected $bdd = null;
+    protected $controller;
     function __construct()
     {
         $this->bdd = new BDD();
+        $this->controller = new Controller();
     }
 
     function login($identifiant,$pass) 
@@ -109,13 +112,7 @@ class Utilisateur_repo
             }
 
         }
-        $sqlSelect = "SELECT * FROM users WHERE identifiant=?";
-        $result = $this->bdd->Request($sqlSelect,array($check_user['identifiant']));
-        $check = $result->fetch();
-        if($check == 1)
-        {
-            return "#user_already_activate";
-        }
+            return "#dont_activate";
     }
 
     function GetById($args)
@@ -281,6 +278,56 @@ class Utilisateur_repo
         else
         return "#update_solde_fail";
         
+    }
+
+    function insert_token($id){
+        $token = $this->controller->token32();
+        $SqlInsert = "INSERT INTO reset_password (token,id_user) VALUES (?,?)";
+        $result = $this->bdd->Request($SqlInsert,array($token,$id));
+    }
+
+    function recup_mail(){
+        $SqlSelect = "SELECT * FROM mails_template WHERE fonction = ?";
+        $fonction = "reset_pwd";
+        $result = $this->bdd->Request($SqlSelect,array($fonction));
+        $check_mail = $result->fetch();
+        if($check_mail !=null) {
+            $mail_obj = new Mails_model($check_mail);
+            return $mail_obj;
+        }
+    }
+
+    function resetpwd($compte) {
+        $sqlSelect = "SELECT * FROM users WHERE identifiant=?";
+        $result = $this->bdd->Request($sqlSelect,array($compte));
+        $check_user = $result->fetch();
+        if($check_user != false)
+        {   
+            $user_obj = new Utilisateur_model($check_user);
+           $this->insert_token($user_obj->ID);
+           $mail = $this->recup_mail();
+           var_dump($mail);
+           $this->controller->sendMail($user_obj->email,$mail->sujet,$mail->contenu);
+        }
+        else {
+            $sqlSelect = "SELECT * FROM users WHERE email=?";
+            $result = $this->bdd->Request($sqlSelect,array($compte));
+            $check_mail = $result->fetch();
+            if($check_mail != false)
+            {
+                $user_obj = new Utilisateur_model($check_mail);
+                $this->insert_token($user_obj->ID);
+                $mail = $this->recup_mail();
+                $this->controller->sendMail($user_obj->email,$mail_obj->Sujet,$mail_obj->contenu);
+
+                
+            }
+            else {
+                return "#not_found_user";
+            }
+        }
+        
+            
     }
 }
 

@@ -160,9 +160,10 @@ class Utilisateur_controller extends Controller{
                 $sqlSelec="SELECT Sujet FROM mails_template WHERE fonction='register'";
                 $requ=$this->bdd->Request($sqlSelec);
                 $Sujet= $requ->fetch();
+                $address = $this->siteURL();
                 $contenu = str_replace("{COMPTE}",$result[2],$contenu);
                 $contenu = str_replace("{MDP}",$result[3],$contenu);
-                $contenu = str_replace("{ADDRESS}",$_SERVER['SERVER_NAME'],$contenu);
+                $contenu = str_replace("{ADDRESS}",$address,$contenu);
                 $contenu = str_replace("{TOKEN}",$result[4],$contenu);
                 $object="test";
                 $mail= $this->sendMail($result[1],$Sujet['Sujet'],$contenu[0]);
@@ -207,6 +208,19 @@ class Utilisateur_controller extends Controller{
             {
                 return $this->view($result);
             }
+        }
+        return $this->view();
+    }
+
+    function resetpwd($data) { 
+        global $txtManager;
+        if(isset($_SESSION['Connected']))
+            header('Location: /utilisateur/compte');
+        if (isset($_POST['login']))
+        {
+            $user = $this->bdd->secure($_POST['login']);
+            $result = $this->utilisateurs_repo->resetpwd($user);
+            
         }
         return $this->view();
     }
