@@ -282,8 +282,26 @@ class Utilisateur_repo
 
     function insert_token($id){
         $token = $this->controller->token32();
+        $SqlSelect = "SELECT * FROM reset_password WHERE id_user=?";
+        $result= $this->bdd->Request($SqlSelect,array($id));
+        $check_id = $result->fetch();
+        if ($check_id != null)
+        {
+            $SqlUpdate= "UPDATE token SET token=? WHERE id_user=?";
+            $result = $this->bdd->Request($SqlUpdate,array($token,$id));
+            
+
+        }
+        else{
         $SqlInsert = "INSERT INTO reset_password (token,id_user) VALUES (?,?)";
-        $result = $this->bdd->Request($SqlInsert,array($token,$id));
+        $result = $this->bdd->Request($SqlInsert,array($token,$id));}
+    }
+    function recup_token($id){
+        $sqlSelect = "SELECT * FROM reset_password WHERE id_user=?";
+        $result = $this->bdd->Request($sqlSelect, array($id));
+        $check_token = $result->fetch();
+        if($check_token !=null)
+            return $check_token;
     }
 
     function recup_mail(){
@@ -304,10 +322,9 @@ class Utilisateur_repo
         if($check_user != false)
         {   
             $user_obj = new Utilisateur_model($check_user);
-           $this->insert_token($user_obj->ID);
-           $mail = $this->recup_mail();
-           var_dump($mail);
-           $this->controller->sendMail($user_obj->email,$mail->sujet,$mail->contenu);
+            $this->insert_token($user_obj->ID);
+            $send = $this->send_mail_rcv($user_obj);
+
         }
         else {
             $sqlSelect = "SELECT * FROM users WHERE email=?";
@@ -315,12 +332,10 @@ class Utilisateur_repo
             $check_mail = $result->fetch();
             if($check_mail != false)
             {
+                // var_dump($)
                 $user_obj = new Utilisateur_model($check_mail);
                 $this->insert_token($user_obj->ID);
-                $mail = $this->recup_mail();
-                $this->controller->sendMail($user_obj->email,$mail_obj->Sujet,$mail_obj->contenu);
-
-                
+                $send = $this->send_mail_rcv($user_obj);
             }
             else {
                 return "#not_found_user";
@@ -328,6 +343,16 @@ class Utilisateur_repo
         }
         
             
+    }
+    function send_mail_rcv($compte){
+                $mail = $this->recup_mail();
+                $recup_token = $this->recup_token($compte->ID);
+                var_dump($recup_token);
+                die();
+                $mail->contenu = str_replace("{TOKEN}",$recup_token[1],$mail->contenu);
+                $address = $this->controller->siteURL();
+                $mail->contenu = str_replace("{ADDRESS}",$address,$mail->contenu);
+                $this->controller->sendMail($compte->email,$mail->sujet,$mail->contenu);
     }
 }
 

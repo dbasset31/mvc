@@ -26,8 +26,6 @@ class Style
 }
 $dataStyle = new Style();
 $styles = $dataStyle->style();
-?>
-<?php
 $url = $_SERVER['REQUEST_URI'];
 $testurl = explode("/", $url);
 $methode = "index";

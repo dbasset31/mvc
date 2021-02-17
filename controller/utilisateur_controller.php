@@ -1,7 +1,6 @@
 <?php
 //$indexToCall = "vue/".$controller."/".$methode.".php";
 include_once "repository/utilisateurs_repo.php";
-include_once "model/utilisateur_model.php";
 class Utilisateur_controller extends Controller{
     private $utilisateurs_repo = null;
     protected $bdd=null;
@@ -220,7 +219,6 @@ class Utilisateur_controller extends Controller{
         {
             $user = $this->bdd->secure($_POST['login']);
             $result = $this->utilisateurs_repo->resetpwd($user);
-            
         }
         return $this->view();
     }

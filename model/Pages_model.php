@@ -33,7 +33,7 @@ class Pages_model
         $tabSearch = array("&lt;p&gt;&amp;lt;script&amp;gt;","&amp;lt;/script&amp;gt;&lt;br&gt;&lt;/p&gt;","<script>","</script>","&lt;script&gt;","&lt;/script&gt;");
         $tabRepl = array("[REMOVED]","[/REMOVED]","[REMOVED]","[/REMOVED]","[REMOVED]","[/REMOVED]");
         $pageTitre = str_replace($tabSearch, $tabRepl, $page_titre);
-        $pageContenu = str_replace($tabSearch, $tabRepl, $page_titre);
+        $pageContenu = str_replace($tabSearch, $tabRepl, $page_contenu);
         $pageurl = str_replace($tabSearch, $tabRepl, $page_url);
         $pageAdmin = str_replace($tabSearch, $tabRepl, $page_admin);
         $pageConnect = str_replace($tabSearch, $tabRepl, $page_connect);

@@ -73,7 +73,7 @@ function envoi(e) {
             },
             error: function(xhr,textStatus,error)
             {
-                alert("error");
+                console.log("error");
             }
         }
     );
@@ -100,11 +100,11 @@ function init()
             },
             error: function(xhr,textStatus,error)
             {
-                alert("error");
+                console.log("error");
             }
         }
     );
-    }, 1000);
+    }, 5000);
     }
 
 $("#content").keypress(function (e) {
