@@ -28,10 +28,8 @@ class Utilisateur_controller extends Controller{
                 }
                 else
                 {
-                    //return $this->otherViewAndController("admin", "index",$result);
                 header('Location: /utilisateur/compte');
                 }
-                    /* return $this->otherView("compte", $result); */
             }
             else 
             {

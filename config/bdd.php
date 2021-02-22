@@ -39,12 +39,10 @@ class BDD
 
     function Request($requete,$values=null,$debug = false)
     {
-
         $db = $this->getBDD();
         if($db != null){
             $db->beginTransaction();
             $manager = $db->prepare($requete);
-            
             try
             {
                 if($values==null)

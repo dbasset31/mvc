@@ -4,3 +4,12 @@ RewriteEngine on
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^.*$ /index.php [L,QSA]
+ServerSignature Off
+# Empêcher l'accès au fichier .htaccess
+<Files .htaccess>
+order allow,deny
+deny from all
+</Files>
+
+# Empêcher l'accès à la liste des répertoires et à la liste des fichiers
+Options All -Indexes

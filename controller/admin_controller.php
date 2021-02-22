@@ -22,8 +22,6 @@ class Admin_controller extends Controller{
         $this->settings_repo = new Settings_repo();
         $this->page_repo = new Pages_repo();
         $this->mail_repo = new Mails_repo();
-      
-       
         $this->CheckAdmin();
     }
 

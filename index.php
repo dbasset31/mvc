@@ -26,6 +26,7 @@ class Style
 }
 $dataStyle = new Style();
 $styles = $dataStyle->style();
+/////////////////////////////Start routeur /////////////////
 $url = $_SERVER['REQUEST_URI'];
 $testurl = explode("/", $url);
 $methode = "index";
@@ -54,26 +55,19 @@ if (file_exists ($controllerToCall))
 { 
     session_start();
     include_once $controllerToCall;
-    $home = new $controller();
+    $contollerObj = new $controller();
     
-    if(method_exists($home,$methode))
+    if(method_exists($contollerObj,$methode))
     {
-        $viewInfo = $home ->$methode($args);
-        $vueDemandee = strtolower($viewInfo->viewName); 
-        if (file_exists($vueDemandee))
-        {
-            $data = $viewInfo->data;
-            include_once $vueDemandee;
-        }
-        else {
-            include_once $vueDemandee;
-        }
+        $viewInfo = $contollerObj ->$methode($args);
+        $vueDemandee = strtolower($viewInfo->viewName);
+        $data = $viewInfo->data;
+        include_once $vueDemandee;
     }
     else 
     {
         header('location: /error/perdu');
     }
-    
 }
 else 
 {
