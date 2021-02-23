@@ -287,10 +287,8 @@ class Utilisateur_repo
         $check_id = $result->fetch();
         if ($check_id != null)
         {
-            $SqlUpdate= "UPDATE token SET token=? WHERE id_user=?";
+            $SqlUpdate= "UPDATE reset_password SET token=? WHERE id_user=?";
             $result = $this->bdd->Request($SqlUpdate,array($token,$id));
-            
-
         }
         else{
         $SqlInsert = "INSERT INTO reset_password (token,id_user) VALUES (?,?)";
@@ -324,7 +322,7 @@ class Utilisateur_repo
             $user_obj = new Utilisateur_model($check_user);
             $this->insert_token($user_obj->ID);
             $send = $this->send_mail_rcv($user_obj);
-
+            return '#success_found_user';
         }
         else {
             $sqlSelect = "SELECT * FROM users WHERE email=?";
@@ -336,19 +334,43 @@ class Utilisateur_repo
                 $user_obj = new Utilisateur_model($check_mail);
                 $this->insert_token($user_obj->ID);
                 $send = $this->send_mail_rcv($user_obj);
+                return '#success_found_user';
             }
             else {
                 return "#not_found_user";
             }
         }
-        
-            
+    }    
+    function update_pwd($token){
+        $sqlSelect = "SELECT * FROM reset_password WHERE token=?";
+        $result = $this->bdd->Request($sqlSelect, array($token));
+        $token_check = $result->fetch();
+        if($token_check != false)
+        {
+            $_SESSION['token']= $token;
+            return array('true',$token_check[2]);
+        }
+        else 
+        return 'false';   
     }
+
+    function set_newmdp($mdp,$cmdp,$token){
+        if($mdp == $cmdp){
+            $mdp_hache = password_hash($mdp, PASSWORD_DEFAULT);
+            $sqlSelect = "SELECT id_user FROM reset_password WHERE token=?";
+            $result = $this->bdd->Request($sqlSelect,array($token));
+            $check_token = $result->fetch();
+            $sqlUpdate = "UPDATE users SET mdp=? WHERE id=?";
+            $result = $this->bdd->Request($sqlUpdate,array($mdp_hache,$check_token[0]));
+            return '#success_reset_pwd';
+        }
+        else
+            return '#register_passwordDoesntMatch';
+    }
+
     function send_mail_rcv($compte){
                 $mail = $this->recup_mail();
                 $recup_token = $this->recup_token($compte->ID);
-                var_dump($recup_token);
-                die();
                 $mail->contenu = str_replace("{TOKEN}",$recup_token[1],$mail->contenu);
                 $address = $this->controller->siteURL();
                 $mail->contenu = str_replace("{ADDRESS}",$address,$mail->contenu);

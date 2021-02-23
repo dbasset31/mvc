@@ -147,4 +147,7 @@ $txtManager->AddTxt("#mail_delete_fail", "Echec de la suppression !");
 $txtManager->AddTxt("#not_found_user","Le nom d'utilisateur ou l'adresse email est introuvable");
 $txtManager->AddTxt("#mail_reset_send","Un email vous a été envoyé afin de procéder a la réinitialisation du mot de passe.");
 $txtManager->AddTxt("#success_reset_pwd","Votre mot de passe a été modifié.");
+$txtManager->AddTxt("#success_found_user","Un email vous a été envoyé afin de procéder à la réinitialisation du mot de passe");
+/////////////////////////////////////////////////////// END RESET PASSWORD //////////////////////////////////////////////
+
 ?>

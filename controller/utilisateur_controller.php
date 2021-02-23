@@ -217,6 +217,30 @@ class Utilisateur_controller extends Controller{
         {
             $user = $this->bdd->secure($_POST['login']);
             $result = $this->utilisateurs_repo->resetpwd($user);
+            if($result == "#success_found_user")
+                return $this->otherView("login",$result);
+            else
+                return $this->view($result);
+        }
+        if($data != null)
+        {
+            $data = $this->bdd->secure($data);
+            $result = $this->utilisateurs_repo->update_pwd($data);
+            if($result[0] == 'true'){
+                return $this->view($result[0]);
+            }
+            else
+            return $this->otherView('login');
+        }
+        if(isset($_POST['mdp']) && isset($_POST['cmdp']) && $_POST['mdp'] != null && $_POST['cmdp'] != null){
+            $mdp = $this->bdd->secure($_POST['mdp']);
+            $cmdp = $this->bdd->secure($_POST['cmdp']);
+            $result = $this->utilisateurs_repo->set_newmdp($mdp,$cmdp,$_SESSION['token']);
+            if($result=="#register_passwordDoesntMatch"){
+                return $this->view($result);
+            } 
+            session_destroy();
+            return $this->otherView("login",$result);
         }
         return $this->view();
     }
