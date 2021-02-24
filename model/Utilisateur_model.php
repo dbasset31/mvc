@@ -68,7 +68,7 @@ class Utilisateur_model
         return false;
     }
 
-    function SetUser($identifiant, $email, $pseudo, $sexe, $adm, $nom, $prenom, $naissance, $inscription, $avatar) 
+    function SetUser($identifiant, $email, $pseudo, $sexe, $nom, $prenom, $naissance) 
     {
         $userIdentifiant = $this->bdd->secure($identifiant);
         $userEmail = $this->bdd->secure($email);
@@ -77,12 +77,11 @@ class Utilisateur_model
         $userNom = $this->bdd->secure($nom);
         $userPrenom = $this->bdd->secure($prenom);
         $userNaissance = $this->bdd->secure($naissance);
-        $userInscription = $this->bdd->secure($inscription);
-        $userAdmin = $this->bdd->secure($adm);
-        $userAvatar = $this->bdd->secure($avatar);
+        $date = date_create($userNaissance);
+        $userNaissance = date_format($date, "Y-m-d");
             $db = $this->bdd;
-            $sqlUpdate = "UPDATE users SET identifiant=? , email=? , pseudo=? , sexe=? , admin=? , nom=? , prenom=? , naissance=? , date_inscription=? , avatar=? WHERE id= ?";
-            $result = $db->Request($sqlUpdate,array($userIdentifiant,$userEmail,$userPseudo,$userSexe,$adm,$userNom,$userPrenom,$userNaissance,$userInscription,$userAvatar, $this->ID));
+            $sqlUpdate = "UPDATE users SET identifiant=? , email=? , pseudo=? , sexe=? , nom=? , prenom=? , naissance=? WHERE id= ?";
+            $result = $db->Request($sqlUpdate,array($userIdentifiant,$userEmail,$userPseudo,$userSexe,$userNom,$userPrenom,$userNaissance, $this->ID));
             $check_insert = $result->rowCount();
             if ($check_insert > 0)
             {
@@ -90,13 +89,9 @@ class Utilisateur_model
                 $this->email = $userEmail;
                 $this->nom = $userNom;
                 $this->prenom = $userPrenom;
-                $this->admin = $adm;
                 $this->sexe = $userSexe;
                 $this->pseudo = $userPseudo;
                 $this->naissance = $userNaissance;
-                $this->inscription = $userInscription;
-                $this->admin = $userAdmin;
-                $this->avatar = $userAvatar;
                 return true;
             }
             return false;

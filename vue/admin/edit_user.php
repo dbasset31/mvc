@@ -46,12 +46,23 @@
             
             <br>
             <label for="titre">sexe :</label>
-            <input type="text" name="sexe" value="<?= $user->sexe ?>">
-            
+            <?php if($user->sexe == "Homme"){ ?>
+                  <select name="sexe" id="Sexe-select" class="form-control w-25" required>
+                    <option value="Homme"><?= $user->sexe ?></option>
+                    <option value="Femme">Femme</option>
+                  </select>
+              <?php }
+              else {
+                ?>
+                <select name="sexe" id="Sexe-select" class="form-control w-25" required>
+                <option value="Femme"><?= $user->sexe ?></option>
+                <option value="Homme">Homme</option>
+              </select>
+             <?php } ?>
             <br>
         
             <label for="titre">admin :</label>
-            <input type="text" name="admin" value="<?= $adm ?>">
+            <?php if($adm == 0) echo "n'est pas administrateur"; else echo 'est administrateur'; ?>
             
             <br>
             <label for="titre">nom :</label>
@@ -62,23 +73,23 @@
             <input type="text" name="prenom" value="<?= $user->prenom ?>">
             
             <br>
-
+            <?php $date = date_create($user->naissance); ?>
             <label for="titre">date de naissance :</label>
-            <input type="text" name="naissance" value="<?= $user->naissance ?>">
+            <input type="text" name="naissance" value= '<?= date_format($date, "d M Y");?>'>
             
             <br>
 
             <label for="titre">date d'inscription :</label>
-            <input type="text" name="date_inscription" value="<?= $user->inscription ?>">
+            <?= $user->inscription ?>
             
             <br>
 
             <label for="titre">avatar :</label>
-            <input type="text" name="avatar" value="<?= $user->avatar ?>">
+            <img class="avatar-img" src='<?= $user->avatar ?>'/>
             
             <br>
 
-            <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Valider</button>
+            <button class="btn btn-lg btn-primary btn-block text-uppercase w-25 mt-5" type="submit">Valider</button>
             </form>
 
             <?php  ?>

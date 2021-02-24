@@ -43,7 +43,6 @@ class Utilisateur_repo
 
     function register($identifiant,$pass,$pass_conf,$nom,$prenom,$naissance, $email,$pseudo, $sexe,$token,$ip_user) 
     {
-        
         $identifiant = $this->bdd->secure($identifiant);
         $pass = $this->bdd->secure($pass);
         $pass_conf = $this->bdd->secure($pass_conf);
@@ -56,30 +55,36 @@ class Utilisateur_repo
         $sqlSelect = "SELECT * FROM users WHERE identifiant= ?";
         $result = $this->bdd->Request($sqlSelect, array($identifiant));
         $check_user = $result->fetchALL();
-
         if (count($check_user) == 0)
         {
-            $sqlSelectp = "SELECT * FROM users_pending WHERE identifiant= ?";
-            $resultp = $this->bdd->Request($sqlSelectp, array($identifiant));
-            $check_userp = $resultp->fetchALL();
-            if (count($check_userp) == 0)
+            $SelectSql = "SELECT email FROM users WHERE email=?";
+            $result = $this->bdd->Request($SelectSql, array($email));
+            $check_mail = $result->fetchALL();
+            if(count($check_mail) == 0)
             {
-                if ($pass == $pass_conf)
+                $sqlSelectp = "SELECT * FROM users_pending WHERE identifiant= ?";
+                $resultp = $this->bdd->Request($sqlSelectp, array($identifiant));
+                $check_userp = $resultp->fetchALL();
+                if (count($check_userp) == 0)
                 {
-                    $db = $this->bdd;
-                    $pass_hache = password_hash($pass, PASSWORD_DEFAULT);
-                    $sqlInsert = "INSERT INTO users_pending (identifiant, mdp, email, pseudo, sexe, admin, nom, prenom, naissance, date_inscription,token,last_ip) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
-                    $result = $db->Request($sqlInsert,array($identifiant, $pass_hache, $email, $pseudo, $sexe, 0, $nom, $prenom, $naissance, date("d M Y H:i:s"),$token,$ip_user));
-                    $check_insert = $result->rowCount();
-                    if ($check_insert != 1)
+                    if ($pass == $pass_conf)
                     {
-                        return "#register_userNonInserted";
+                        $db = $this->bdd;
+                        $pass_hache = password_hash($pass, PASSWORD_DEFAULT);
+                        $sqlInsert = "INSERT INTO users_pending (identifiant, mdp, email, pseudo, sexe, admin, nom, prenom, naissance, date_inscription,token,last_ip) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
+                        $result = $db->Request($sqlInsert,array($identifiant, $pass_hache, $email, $pseudo, $sexe, 0, $nom, $prenom, $naissance, date("d M Y H:i:s"),$token,$ip_user));
+                        $check_insert = $result->rowCount();
+                        if ($check_insert != 1)
+                        {
+                            return "#register_userNonInserted";
+                        }
+                        return array("#register_success",$email,$identifiant,$pass,$token,$nom,$prenom);
                     }
-                    return array("#register_success",$email,$identifiant,$pass,$token,$nom,$prenom);
+                    return "#register_passwordDoesntMatch";
                 }
-                return "#register_passwordDoesntMatch";
+                return "#register_userExist";
             }
-            return "#register_userExist";
+            return "#register_emailExist"; 
         }
         return "#register_userExist";
     } 
@@ -157,7 +162,7 @@ class Utilisateur_repo
     
     }
 
-    function modif_user($id, $user, $email, $pseudo, $sexe, $adm, $nom, $prenom, $naissance, $inscription, $avatar) 
+    function modif_user($id, $user, $email, $pseudo, $sexe, $nom, $prenom, $naissance) 
     {     
        // var_dump($id, $user, $email, $pseudo, $sexe, $admin, $nom, $prenom, $naissance, $inscription, $avatar);
         
@@ -171,7 +176,7 @@ class Utilisateur_repo
         if ($result->rowCount() > 0)
         {
             $userModel = new Utilisateur_model($users);
-            $userModel->SetUser($user, $email, $pseudo, $sexe, $adm, $nom, $prenom, $naissance, $inscription, $avatar);
+            $userModel->SetUser($user, $email, $pseudo, $sexe, $nom, $prenom, $naissance);
             return array("#user_modif_ok",$userModel);
         }
         else
@@ -362,6 +367,8 @@ class Utilisateur_repo
             $check_token = $result->fetch();
             $sqlUpdate = "UPDATE users SET mdp=? WHERE id=?";
             $result = $this->bdd->Request($sqlUpdate,array($mdp_hache,$check_token[0]));
+            $sqlDelete = "DELETE FROM reset_password WHERE token=?";
+            $result_Delete = $this->bdd->Request($sqlDelete, array($token));
             return '#success_reset_pwd';
         }
         else

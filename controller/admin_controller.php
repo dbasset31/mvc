@@ -77,7 +77,7 @@ class Admin_controller extends Controller{
             if($user_model !=null){
                 if (isset($_POST['identifiant']))
                 {
-                    return $this->view($this->utilisateur_repo->modif_user($id, $_POST['identifiant'], $_POST['email'], $_POST['pseudo'], $_POST['sexe'], $_POST['admin'], $_POST['nom'], $_POST['prenom'], $_POST['naissance'], $_POST['date_inscription'], $_POST['avatar']));
+                    return $this->view($this->utilisateur_repo->modif_user($id, $_POST['identifiant'], $_POST['email'], $_POST['pseudo'], $_POST['sexe'], $_POST['nom'], $_POST['prenom'], $_POST['naissance']));
                 }
                 return $this->view($user_model);
             }

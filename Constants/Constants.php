@@ -69,6 +69,7 @@ $txtManager->AddTxt("#register_userNonInserted", "Il y a eu une problème lors d
 $txtManager->AddTxt("#register_success", "Compte créer avec succès");
 $txtManager->AddTxt("#register_passwordDoesntMatch", "les mots de passe ne correspondent pas.");
 $txtManager->AddTxt("#register_userExist", "Le nom de compte est déjà utilisé");
+$txtManager->AddTxt("#register_emailExist", "l'addresse email est déjà utilisé. Veuillez vous connecter avec votre compte.");
 ////////////////////////////////////////////////////////////END REGISTER////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////LOGIN////////////////////////////////////////////////////////
 $txtManager->AddTxt("#login_userNotEx", "L'utilisateur n'existe pas.");
