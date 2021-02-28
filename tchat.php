@@ -32,7 +32,7 @@ if(isset($_POST["message"]) && !empty($_POST["message"]))
         <div class="container">
         <div class="container mt-4 ">
             <form method="post" class=" d-flex  column">
-            <textarea id="content" name="message" maxlength="255" placeholder="Vous devez être connecter pour poster un message !!" disabled></textarea>
+            <textarea id="content" name="message" maxlength="255" placeholder="Vous devez être connecté pour poster un message !!" disabled></textarea>
             <p><span id="counterBlock"> </span> / 255 Characters</p>
             </form>
         </div>
@@ -113,10 +113,6 @@ $("#content").keypress(function (e) {
         if(!e.shiftKey) {        
             envoi(e);
         }
-        else{
-            // $("#content").val($("#content").val()+"\r\n");
-        }
-        // e.preventDefault();
     }
 });
 init();

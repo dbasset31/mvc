@@ -47,14 +47,13 @@ class Utilisateur_controller extends Controller{
     
      function modifier() {
         $this->CheckConnect();
-        if (isset($_SESSION['Connected']))
+        if (isset($_POST['pseudo']) || isset($_POST['email']) || isset($_POST['naissance']))
         {
-             if (isset($_POST['pseudo']))
-                return $this->view($this->utilisateurs_repo->modif($_POST['pseudo']));
-            return $this->view($_SESSION['Connected']->pseudo);
+            if(empty($_POST['pseudo']) || empty($_POST['email']) || empty($_POST['naissance']))
+                return $this->view("#Empty_field_modif");
+            return $this->view($this->utilisateurs_repo->modif($_POST['pseudo'],$_POST['naissance'],$_POST['email']));
         }
-        else
-            return $this->otherView("login");
+        return $this->view();
      }
 
     function avatar() 

@@ -179,3 +179,14 @@ footer {
     color: rgba(255, 255, 255, 0.946) !important;
     font-weight: bold;
 }
+
+.hr-vertical{ 
+  
+    border-left:    1px solid hsla(200, 10%, 50%,100) !important;
+    height:         100vh !important;
+    width:          3px !important;       
+}
+
+.td {
+    border-right : 1px solid rgba(135,135,135,0.81) !important;
+}

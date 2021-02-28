@@ -36,7 +36,7 @@ class Tchat_controller extends Controller {
             <div class="carte-head container ">
                 <div class="carte-head px-1">
                     <p class="mt-0"><?php echo $message->autheur; ?> dit : </p>
-                    <p class="d-flex bg-message justify-content-start w-100 flex-wrap carte-mess py-2" style=""><?php echo $message->message; ?></p>
+                    <p class="d-flex bg-message justify-content-start w-100 flex-wrap carte-mess py-2" style=""><?php echo htmlspecialchars_decode($message->message); ?></p>
                     <p class="d-flex justify-content-end mb-0"><?php echo "à : ".$message->date; ?></p>
                 </div>
             </div>

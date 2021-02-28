@@ -131,22 +131,78 @@ class Utilisateur_repo
         return null;
     }
 
-    function modif($pseudo) 
+    function modif($pseudo, $naissance,$email) 
     {
         $db = $this->bdd;
-        $sqlSelect = "SELECT * FROM users WHERE pseudo= ?";
-        $result = $this->bdd->Request($sqlSelect, array($pseudo));
-        $check_pseudo = $result->fetchALL();
-        if (count($check_pseudo) == 0)
+        if($pseudo == $_SESSION['Connected']->pseudo && $email == $_SESSION['Connected']->email && $naissance == $_SESSION['Connected']->naissance)
         {
-            if ($_SESSION['Connected']->SetPseudo($pseudo))
-                return "#pseudo_modif_ok";
-            else
-                return "#pseudo_crit_fail";
+            return "#no_change";
         }
-        else 
+        if($pseudo != $_SESSION['Connected']->pseudo && $email == $_SESSION['Connected']->email && $naissance == $_SESSION['Connected']->naissance)
         {
-            return "#pseudo_exist";
+            $sqlSelect = "SELECT * FROM users WHERE pseudo = ?";
+            $result = $this->bdd->Request($sqlSelect, array($pseudo));
+            $check_pseudo = $result->fetchALL();
+            if (count($check_pseudo) == 0)
+            {
+                if ($_SESSION['Connected']->SetPseudo($pseudo))
+                    return "#pseudo_modif_ok";
+                else
+                    return "#pseudo_crit_fail";
+            }
+            else 
+            {
+                return "#pseudo_exist";
+            }
+        }
+        if($pseudo == $_SESSION['Connected']->pseudo && $email != $_SESSION['Connected']->email && $naissance == $_SESSION['Connected']->naissance)
+        {
+            $sqlSelect = "SELECT * FROM users WHERE email = ?";
+            $result = $this->bdd->Request($sqlSelect, array($email));
+            $check_email = $result->fetchALL();
+            if (count($check_email) == 0)
+            {
+                if ($_SESSION['Connected']->SetEmail($email))
+                    return "#email_modif_ok";
+                else
+                    return "#email_crit_fail";
+            }
+            else 
+            {
+                return "#email_exist";
+            }
+        }
+        if($pseudo == $_SESSION['Connected']->pseudo && $email == $_SESSION['Connected']->email && $naissance != $_SESSION['Connected']->naissance)
+        {
+                if ($_SESSION['Connected']->SetNaissance($naissance))
+                    return "#naissance_modif_ok";
+                else
+                    return "#naissance_crit_fail";
+        }
+        if($pseudo != $_SESSION['Connected']->pseudo && $email != $_SESSION['Connected']->email && $naissance != $_SESSION['Connected']->naissance)
+        {
+            $sqlSelect = "SELECT * FROM users WHERE pseudo = ?";
+            $result = $this->bdd->Request($sqlSelect, array($pseudo));
+            $check_pseudo = $result->fetchALL();
+            if (count($check_pseudo) == 0)
+            {
+                $sqlSelect = "SELECT * FROM users WHERE email = ?";
+                $result = $this->bdd->Request($sqlSelect, array($email));
+                $check_email = $result->fetchALL();
+                if (count($check_email) == 0)
+                {
+                    $edit_profil = $_SESSION['Connected']->SetProfil($pseudo,$naissance, $email);
+                }
+                else
+                {
+                    return "#email_exist";
+                }
+            }
+            else
+            {
+                return "#pseudo_exist";
+            }
+            return "#profil_edit_ok";
         }
     }
 

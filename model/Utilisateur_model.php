@@ -48,6 +48,43 @@ class Utilisateur_model
             return false;
     }
 
+    function SetNaissance($new_naissance) 
+    {
+        $naissanceNew = $this->bdd->secure($new_naissance);
+            $db = $this->bdd;
+            $sqlUpdate = "UPDATE users SET naissance= ? WHERE id= ?";
+            $result = $db->Request($sqlUpdate,array($naissanceNew, $this->ID));
+            $check_insert = $result->rowCount();
+            if ($check_insert > 0)
+            {
+                $this->naissance = $naissanceNew;
+                return true;
+            }
+            return false;
+    }
+    function SetEmail($new_email) 
+    {
+        $emailNew = $this->bdd->secure($new_email);
+            $db = $this->bdd;
+            $sqlUpdate = "UPDATE users SET email= ? WHERE id= ?";
+            $result = $db->Request($sqlUpdate,array($emailNew, $this->ID));
+            $check_insert = $result->rowCount();
+            if ($check_insert > 0)
+            {
+                $this->email = $emailNew;
+                return true;
+            }
+            return false;
+    }
+
+    function SetProfil($new_pseudo, $new_naissance, $new_email) 
+    {
+        $this->SetPseudo($new_pseudo);
+        $this->SetNaissance($new_naissance);
+        $this->SetEmail($new_email);
+    }
+
+
     function SetAvatar($new_avatar)
     {
         $avatar_new = $new_avatar;

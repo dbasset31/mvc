@@ -80,9 +80,18 @@ $txtManager->AddTxt("#user_activate_succes", "Votre compte a été activé avec 
 $txtManager->AddTxt("#user_already_activate", "Votre compte est déjà activé, vous pouvez vous connecter.");
 $txtManager->AddTxt("#dont_activate", "Echec de l'activation du compte.");
 //////////////////////////////////////////////////////////Modif Profil//////////////////////////////////////////////////
-$txtManager->AddTxt("#pseudo_modif_ok", "Pseudo modifié avec succès !.");
+$txtManager->AddTxt("#pseudo_modif_ok", "Pseudo modifié avec succès !");
+$txtManager->AddTxt("#profil_edit_ok", "Profil modifié avec succès !");
+$txtManager->AddTxt("#email_modif_ok", "Adresse email modifié avec succès !");
 $txtManager->AddTxt("#pseudo_crit_fail", "Impossible de modifier le pseudo, veuillez réessayer, si le problème persiste, contactez un administrateur.");
 $txtManager->AddTxt("#pseudo_exist", "Le pseudonyme est déjà pris.");
+$txtManager->AddTxt("#email_exist", "L'adresse email est déjà utilisée.");
+$txtManager->AddTxt("#Empty_field_modif", "Veuillez remplir tous les champs.");
+$txtManager->AddTxt("#no_change", "Aucun changement n'a été effectué.");
+$txtManager->AddTxt("#profil_edit_ok", "Profil modifié avec succès.");
+$txtManager->AddTxt("#naissance_modif_ok", "Date de naissance modifiée avec succès !");
+$txtManager->AddTxt("#naissance_crit_fail", "Impossible de modifier la date de naissance, veuillez réessayer, si le problème persiste, contactez un administrateur.");
+$txtManager->AddTxt("#email_crit_fail", "Impossible de modifier l'adresse email', veuillez réessayer, si le problème persiste, contactez un administrateur.");
 ////////////////////////////////////////////////////////END MODIF PROFIL////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////Modif nouvelle /////////////////////////////////////////////////////
 $txtManager->AddTxt("#new_modif_ok", "Nouvelle modifiée avec succès !");
