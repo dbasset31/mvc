@@ -77,7 +77,6 @@ function envoi(e) {
             }
         }
     );
-    //  alert(data);
 }
 
 function refresh(data){
@@ -104,7 +103,7 @@ function init()
             }
         }
     );
-    }, 5000);
+    }, 1500);
     }
 
 $("#content").keypress(function (e) {

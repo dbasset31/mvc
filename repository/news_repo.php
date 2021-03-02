@@ -30,7 +30,7 @@ class News_repo
            $nbNews =  $id * $newsPerPage -$newsPerPage;
         }
         
-        $sql = "SELECT id, titre, contenu, date FROM news ORDER BY date DESC LIMIT ".$nbNews.",$newsPerPage";
+        $sql = "SELECT id, titre, contenu, date FROM news ORDER BY id DESC LIMIT ".$nbNews.",$newsPerPage";
         $result = $this->bdd->Request($sql);
         $donnes = $result->fetchALL();
         $objects = array();

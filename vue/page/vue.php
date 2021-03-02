@@ -15,7 +15,7 @@
                         <div class="carte-head w-100">
                         <h1><?php echo  $data->titre; ?></h1>
                         </div>
-                        <div class="carte pt-2 d-flex">
+                        <div class="carte py-5 px-5 container">
                             <?php echo $data->contenu; ?>
                         </div>
                     </div>

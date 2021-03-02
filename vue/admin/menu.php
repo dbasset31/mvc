@@ -21,7 +21,16 @@
             p{color: <?php echo $styles[0]->couleur_text ?> !important;}
             label{color: <?php echo $styles[0]->label ?> !important;}
       </style>
-<title>Admin Panel - Accueil</title>
+      <?php
+            $url = explode('/', $_SERVER['REQUEST_URI']);
+            if($_SERVER['REQUEST_URI'] == "/admin")
+            {
+                $url[2] = "Accueil";
+            }
+                if(isset($url[2]))
+                    $titre = str_replace("_"," ",ucfirst($url[2]));
+        ?>
+<title>Admin Panel - <?= $titre ?></title>
 
 <!-- Custom fonts for this template-->
 <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">

@@ -16,8 +16,8 @@ class Pages_model
 
     function __construct($arrayInfos)
     {
-        $tabSearch = array("&lt;p&gt;&amp;lt;script&amp;gt;","&amp;lt;/script&amp;gt;&lt;br&gt;&lt;/p&gt;","<script>","</script>","&lt;script&gt;","&lt;/script&gt;");
-        $tabRepl = array("[REMOVED]","[/REMOVED]","[REMOVED]","[/REMOVED]","[REMOVED]","[/REMOVED]");
+        $tabSearch = array("&lt;script&gt;","&lt;/script&gt;");
+        $tabRepl = array("[REMOVED]","[/REMOVED]");
         $secure = str_replace($tabSearch, $tabRepl, $arrayInfos[2]);
         $this->bdd = new BDD();
         $this->ID = $arrayInfos[0];
@@ -30,8 +30,8 @@ class Pages_model
 
     function SetNew($page_titre, $page_contenu, $page_url, $page_connect,$page_admin) 
     {
-        $tabSearch = array("&lt;p&gt;&amp;lt;script&amp;gt;","&amp;lt;/script&amp;gt;&lt;br&gt;&lt;/p&gt;","<script>","</script>","&lt;script&gt;","&lt;/script&gt;");
-        $tabRepl = array("[REMOVED]","[/REMOVED]","[REMOVED]","[/REMOVED]","[REMOVED]","[/REMOVED]");
+        $tabSearch = array("&lt;script&gt;","&lt;/script&gt;","&lt;/script&gt;");
+        $tabRepl = array("[REMOVED]","[/REMOVED]");
         $pageTitre = str_replace($tabSearch, $tabRepl, $page_titre);
         $pageContenu = str_replace($tabSearch, $tabRepl, $page_contenu);
         $pageurl = str_replace($tabSearch, $tabRepl, $page_url);

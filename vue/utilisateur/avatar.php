@@ -15,7 +15,7 @@
                         <div class="carte-head w-100">
                             <h2>Modifier Avatar</h2>
                         </div>
-                        <div class="carte">
+                        <div class="carte p-5">
                             <?php if(isset($data)){
                                     if($data == "#avatar_modif_ok")
                                     { ?>

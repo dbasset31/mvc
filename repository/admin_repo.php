@@ -65,7 +65,6 @@ class Admin_repo
         $titre = $titre;
         $db = $this->bdd;
         $titre = $this->bdd->secure($titre);
-        $contenu = $this->bdd->secure($contenu);
         $url = $this->bdd->secure($url);
         $admin = $this->bdd->secure($admin);
         $connect = $this->bdd->secure($connect);

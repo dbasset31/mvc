@@ -53,6 +53,14 @@ class Utilisateur_controller extends Controller{
                 return $this->view("#Empty_field_modif");
             return $this->view($this->utilisateurs_repo->modif($_POST['pseudo'],$_POST['naissance'],$_POST['email']));
         }
+        if(isset($_POST['mdp']) || isset($_POST['nmdp']) || isset($_POST['cnmdp'])){
+            if(empty($_POST['mdp'])|| empty($_POST['nmdp']) || empty($_POST['cnmdp']))
+                return $this->view("#Empty_field_pwd");
+            if($_POST['nmdp'] != $_POST['cnmdp'])
+                return $this->view("#pwd_not_match");
+            $changePass = $this->utilisateurs_repo->ChangePwd($_POST['mdp'],$_POST['nmdp']);
+                return $this->view($changePass);
+        }
         return $this->view();
      }
 

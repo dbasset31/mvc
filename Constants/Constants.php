@@ -87,11 +87,16 @@ $txtManager->AddTxt("#pseudo_crit_fail", "Impossible de modifier le pseudo, veui
 $txtManager->AddTxt("#pseudo_exist", "Le pseudonyme est déjà pris.");
 $txtManager->AddTxt("#email_exist", "L'adresse email est déjà utilisée.");
 $txtManager->AddTxt("#Empty_field_modif", "Veuillez remplir tous les champs.");
+$txtManager->AddTxt("#Empty_field_pwd", "Veuillez remplir tous les champs.");
 $txtManager->AddTxt("#no_change", "Aucun changement n'a été effectué.");
+$txtManager->AddTxt("#no_change_pwd", "Mot de passe identique à l'actuel, veuillez entrer un mot de passe différent.");
 $txtManager->AddTxt("#profil_edit_ok", "Profil modifié avec succès.");
 $txtManager->AddTxt("#naissance_modif_ok", "Date de naissance modifiée avec succès !");
 $txtManager->AddTxt("#naissance_crit_fail", "Impossible de modifier la date de naissance, veuillez réessayer, si le problème persiste, contactez un administrateur.");
 $txtManager->AddTxt("#email_crit_fail", "Impossible de modifier l'adresse email', veuillez réessayer, si le problème persiste, contactez un administrateur.");
+$txtManager->AddTxt("#pwd_fail", "Mot de passe incorrect !");
+$txtManager->AddTxt("#pwd_not_match", "Les mot de passe ne correspondent pas !");
+$txtManager->AddTxt("#Pwd_success", "Le mot de passe a été modifié.");
 ////////////////////////////////////////////////////////END MODIF PROFIL////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////Modif nouvelle /////////////////////////////////////////////////////
 $txtManager->AddTxt("#new_modif_ok", "Nouvelle modifiée avec succès !");

@@ -32,24 +32,29 @@
                                 if(isset($url[3]))
                                     if(!isset($url[4]) || empty($url[4])){
                                         $nom_forum=$data[1];
+                                        
+                                        if(empty($data[0])){
+                                            echo "<div class='carte p-3 pt-3'><h4>Il n'y a actuellement aucun topic dans cette catégorie.</h4></div></br>";
+                                        }
+                                        else{
                                         foreach($data[0] as $topics)
                                         {
-                                            echo "<div class='carte mt-3'><a class='ml-4' href='/forum/forums/".strtolower(str_replace(" ","-",$nom_forum))."/".str_replace(" ","-",$topics->titre_topic)."'>".$topics->titre_topic."</a> ".$topics->createur." ".$topics->vue." ".$topics->time."</div></br>";
+                                            echo "<div class='carte p-3 pt-3'><h4><a class='ml-4' href='/forum/forums/".strtolower(str_replace(" ","-",$nom_forum))."/".str_replace(" ","-",$topics->titre_topic)."'>".$topics->titre_topic."</a></h4></div></br>";
                                             // "&nbsp;-<a href='/forum/forums/".strtolower(str_replace(" ","-",$forum->nom))."'>".$forum->nom."</a><br>";
                                             //  foreach($categorie->forums as $forum)
                                             //  {
                                             //     //  echo "&nbsp;-<a href='".strtolower(str_replace(" ","-",$forum->nom))."'>".$forum->nom."</a><br>";
                                             //  }
-                                        }
+                                        }}
                                 }
                                 if(!empty($url[4])){
                                     $forum_name = $data[1];
                                     $topic_name = $data[2];
                                     foreach($data[0] as $posts)
                                     {
-                                        ?><h3><?php echo $posts->titre_post;?></h3>
-                                        <div class="carte"><?php echo $posts->text_post; ?></div>
-                                        <!-- echo $posts->titre_post."<br>".$posts->text_post."<br>".$posts->createur_post." ".$posts->date_poste."</br>"; -->
+                                        ?><h3 class="pl-4 pt-3"><?php echo $posts->titre_post;?></h3>
+                                        <div class="carte py-3 px-5"><?php echo $posts->text_post; ?><div class="pt-4 d-flex justify-content-end"><?php echo $posts->date_poste."</br>"; ?></div></div>
+                                        
                                     <?php }
                                 }
 

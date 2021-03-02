@@ -206,6 +206,24 @@ class Utilisateur_repo
         }
     }
 
+    function ChangePwd($mdp, $new_mdp){
+        $sqlSelect = "SELECT mdp FROM users WHERE id=?";
+        $result = $this->bdd->Request($sqlSelect, array($_SESSION['Connected']->ID));
+        $check_pwd = $result->fetch();
+        if(password_verify($mdp,$check_pwd["mdp"]))
+        {
+            $pwd_hache = password_hash($new_mdp, PASSWORD_DEFAULT);
+            if(password_verify($new_mdp, $check_pwd["mdp"]))
+                return "#no_change_pwd";
+            $sqlUpdate = "UPDATE users SET mdp =? WHERE id =?";
+            $result = $this->bdd->Request($sqlUpdate,array($pwd_hache,$_SESSION['Connected']->ID));
+            return "#Pwd_success";
+        }
+        else { return "#pwd_fail";}
+        var_dump($check_pwd["mdp"]);
+        die();
+    }
+
     function modif_avatar($avatar)
     {
         $db = $this->bdd;
